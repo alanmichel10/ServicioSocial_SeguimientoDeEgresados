@@ -1,0 +1,155 @@
+{% extends 'panelPrincipal/panelAdmin/basePanelAdmin.html' %}
+
+{%block contenido%}
+
+<div class="container-resumen">
+  <div class="filtros-resumen">
+    <button class="btn2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+      aria-controls="offcanvasWithBothOptions">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter" width="40" height="40"
+        viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" />
+      </svg>
+      Filtrar
+    </button>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header asideBar">
+        <p class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+          Filtros
+        </p>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <span class="linea-negra"></span>
+      <div class="offcanvas-body contenedor__filtros">
+        <div class="form-check filtros">
+          <label class="form-check-label" for="titulado"> Titulado </label>
+          <input class="form-check-input filtros--entrada" type="checkbox" value="" id="titulado" />
+        </div>
+        <div class="form-check filtros">
+          <label class="form-check-label" for="pagado"> Pagado </label>
+          <input class="form-check-input filtros--entrada" type="checkbox" value="" id="pagado" />
+        </div>
+        <div class="form-check filtros">
+          <label class="form-check-label" for="empleo"> Empleo Formal </label>
+          <input class="form-check-input filtros--entrada" type="checkbox" value="" id="empleo" />
+        </div>
+        <div class="filtros--texto">
+          <label class="form-check-label" for="nombre"> Nombre(s) </label>
+          <input class="filtros--entrada--texto" type="text" value="" id="nombre" />
+        </div>
+        <div class="filtros--texto">
+          <label class="form-check-label" for="apellidoP">
+            Apellido Paterno
+          </label>
+          <input class="filtros--entrada--texto" type="text" value="" id="apellidoP" />
+        </div>
+        <div class="filtros--texto">
+          <label class="form-check-label" for="correo"> Correo </label>
+          <input class="filtros--entrada--texto" type="text" value="" id="correo" />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="boton-resumen">
+    <!-- Button de descargar excel-->
+    <button type="button" class="btn-excel" onclick="window.location.href='/registros'">
+      Descargar excel
+    </button>
+
+  </div>
+</div>
+
+<div class="vermas-1">
+  <div class="container-rd">
+    <div class="datos-vermas">
+      <h3>Aspirantes</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre(s)</th>
+          <th scope="col">Apellido paterno</th>
+          <th scope="col">Apellido materno</th>
+          <th scope="col">Numero de telefono</th>
+          <th scope="col">Correo electronico</th>
+          <th scope="col">Nivel de ingles</th>
+          <th scope="col">Genero</th>
+          <th scope="col">Posgrado al que aspira</th>
+          <th scope="col">Ver informacio completa</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for form in form %}
+        <tr>
+          <td>{{ form.nombre }}</td>
+          <td>{{ form.apellidoP }}</td>
+          <td>{{ form.apellidoM }}</td>
+          <td>{{ form.telefono }}</td>
+          <td>{{ form.correoElectronico }}</td>
+          <td>{{ form.ingles }}</td>
+          <td>{{ form.sexo }}</td>
+          <td>{{ form.posgrado }}</td>
+          <td>
+            <a href="{{ url_for('vermas', id=form.id) }}">
+              <button>Ver más</button>
+            </a>
+          </td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+
+<div class="contenedor-estadisticas">
+  <div class="estadistica">
+    <div class="estadistica__icono">
+      <h3>Aspirantes</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users icono--aspirante" width="100"
+        height="100" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+      </svg>
+    </div>
+    <div class="estadistica__cifra">
+      {% if form %}
+      <p>{{ form|length }}</p>
+      {% else %}
+      <p>No se encontraron registros.</p>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="estadistica">
+    <div class="estadistica__icono">
+      <h3>Titulados</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-certificate" width="100"
+        height="100" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5" />
+        <path d="M6 14m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5" />
+      </svg>
+    </div>
+    <div class="estadistica__cifra">
+      <p>{{titulados}}</p>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

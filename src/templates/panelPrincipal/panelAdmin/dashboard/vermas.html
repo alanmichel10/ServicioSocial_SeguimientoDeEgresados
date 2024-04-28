@@ -1,0 +1,136 @@
+{% extends 'panelPrincipal/panelAdmin/basePanelAdmin.html' %} {%block
+contenido%}
+
+
+  <div class="boton-resumen">
+    <!-- Button de descargar excel-->
+    <button type="button" class="btn-excel" onclick="window.location.href='/registros/id?id={{ id }}'">
+      Descargar excel
+    </button>
+
+  </div>
+
+<div class="vermas-2">
+  <div class="container-datos">
+    <div class="datos-vermas">
+      <h3>Datos generales:</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre(s)</th>
+          <th scope="col">Apellido paterno</th>
+          <th scope="col">Apellido materno</th>
+          <th scope="col">Correo electronico</th>
+          <th scope="col">Sexo</th>
+          <th scope="col">CURP</th>
+          <th scope="col">Codigo postal</th>
+          <th scope="col">Codigo estudiante</th>
+          <th scope="col">Estado civil</th>
+          <th scope="col">Fecha de nacimiento</th>
+          <th scope="col">Lugar de nacimiento</th>
+          <th scope="col">Numero de Telefono</th>
+          <th scope="col">Posgrado al que aspira</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        
+        <tr>
+          <td>{{ form.nombre }}</td>
+          <td>{{ form.apellidoP or '' }}</td>
+          <td>{{ form.apellidoM or '' }}</td>
+          <td>{{ form.correoElectronico or '' }}</td>
+          <td>{{ form.sexo or '' }}</td>
+          <td>{{ general.curp or '' }}</td>
+          <td>{{ general.codigoPostal or '' }}</td>
+          <td>{{ general.codigoEstudiante or '' }}</td>
+          <td>{{ general.estadoCivil or '' }}</td>
+          <td>{{ general.fecha or '' }}</td>
+          <td>{{ general.lugarNacimiento or '' }}</td>
+          <td>{{ general.numeroTelefono or '' }}</td>
+          <td>{{ form.posgrado or '' }}</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-estudios">
+    <div class="datos-vermas">
+      <h3>Estudios:</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Centro Universitario / Escuela de prosedencia</th>
+          <th scope="col">Carrera(s)</th>
+          <th scope="col">Ciclo escolar de egreso</th>
+          <th scope="col">Nivel de ingles</th>
+          <th scope="col">Titulado</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% if estudios %}
+        <tr>
+          <td>{{ estudios.centro or '' }}</td>
+          <td>{{ estudios.carrera or '' }}</td>
+          <td>{{ estudios.ciclo or '' }}</td>
+          <td>{{ estudios.ingles or '' }}</td>
+          <td>{{ estudios.titulado or '' }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container-infolabo">
+    <div class="datos-vermas">
+      <h3>Informacion laboral:</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Tenia o tiene un empleo formal?</th>
+          <th scope="col">Nombre de la empresa</th>
+          <th scope="col">Ubicacion de la empresa</th>
+          <th scope="col">Descripción de las Responsabilidades Laborales</th>
+          <th scope="col">
+            Cuánto tiempo tenía laborando en la institución u organización
+          </th>
+          <th scope="col">Cuántas horas trabaja?</th>
+        </tr>
+      </thead>
+      {% if trabajo %}
+      <tr>
+        <td>{{ trabajo.estatus }}</td>
+        <td>{{ trabajo.nombre or '' }}</td>
+        <td>{{ trabajo.ubicacion or '' }}</td>
+        <td>{{ trabajo.descripcion or '' }}</td>
+        <td>{{ trabajo.antiguedad or '' }}</td>
+        <td>{{ trabajo.jornada or '' }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {% endif %}
+    </table>
+  </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,62 @@
+:root{
+    --blanco: #ffffff;
+    --azul: #284C76;
+    --azulOscuro: #023a7a;
+    --negro: #000000;
+    --gris: #EAEAEA;
+    --gris-oscuro: #575757;
+    --fuente: 'Krub', sans-serif;
+}
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+body{
+    font-family: var(--fuente);
+    font-size: 16px;                /*1rem = 10px*/
+    background-color: var(--gris);
+    align-items: center;
+    justify-content: center;
+}
+h1, h2, h3, h4, h5{
+    font-family: var(--fuente);
+    font-weight: 700;
+}
+.encabezado{
+
+    padding: 1rem;
+}
+.informacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente en el centro del contenedor */
+    justify-content: center; /* Centra verticalmente en el centro del contenedor */
+    width: 100%;
+    height: 100vh; /* 100% de la altura de la ventana */
+  }
+  
+  .informacion input {
+    width: 30rem; /* Ajusta el ancho de los input según tus preferencias */
+    padding: 1rem;
+    margin: 0.1rem 5rem;
+    border: 1px solid var(--gris-oscuro);
+    border-radius: .5rem;
+    font-family: var(--fuente);
+    font-size: 1.8rem;
+  }
+
+  
+  
+  .contenedor{
+    background-color: var(--blanco);
+    padding: 5rem; /* Ajusta el espaciado interno según tus necesidades */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+    }
+.contenedor label{
+    background-color: var(--gris);
+    padding: 1rem;
+}

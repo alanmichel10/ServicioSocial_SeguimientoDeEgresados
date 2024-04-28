@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!--Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!--Css personalizado-->
+    {% block customCSS %} {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+       <img
+            src="{{ url_for('static', filename='img/Logo_cut.jpg') }}"
+            alt=""
+            
+        />
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse perfil-bar" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('inicio') }}">Perfil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('general') }}">Informacion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('tablon') }}">Tablon de anuncios</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav me-md-5 mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">Cerrar Sesion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ url_for('inicio') }}">{{ current_user.nombre }}</a>
+            </li>
+            <li>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-user icono"
+                width="50"
+                height="50"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#ffffff"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+            </li>
+          </ul>
+          
+          </span>
+        </div>
+      </div>
+    </nav>
+    <span class="linea-azul"></span>
+    {% block body %} {% endblock %}
+
+    <footer>
+      <div class="pie">
+        <section>
+          <img
+            src="{{ url_for('static', filename='img/Logo_udg.png') }}"
+            alt=""
+            width="90"
+          />
+          <div>
+            <h5>Universidad de Guadalajara</h5>
+            <h5>Centro Universitario de Tonalá</h5>
+            <h5>Secretaría académica</h5>
+          </div>
+        </section>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

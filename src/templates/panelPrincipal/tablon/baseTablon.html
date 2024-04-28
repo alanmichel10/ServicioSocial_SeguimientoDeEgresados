@@ -1,0 +1,15 @@
+{% extends 'panelPrincipal/basePanel.html' %} {% block title %}tablon{%
+  endblock %} {% block useractivo %}{{ current_user.nombre }}{% endblock %} 
+  {% block customCSS %}
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}"
+  />
+  {% endblock %}
+ {% block body %}
+  
+      {%block contenido%} 
+      {%endblock%}
+      
+  {% endblock %}
+  

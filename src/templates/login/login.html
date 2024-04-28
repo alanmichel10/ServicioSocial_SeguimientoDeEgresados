@@ -1,0 +1,51 @@
+{% extends 'login/baseLogin.html' %}
+{% block title %}Login{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+<form class="form-signin" action="/login" method="POST">
+  
+    {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    <br />
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% endwith %}
+<div class="form-1">
+    <h1 class="h2 mb-3 fw-normal">Inicio de sesión</h1>
+    <span class="line"></span>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="form-floating">
+      <input type="email" class=" iniciose form-control" id="floatingInput" name="correo" placeholder="name@example.com">
+      <label for="floatingInput">Correo electronico</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="iniciose form-control" id="floatingPassword" name="clave" placeholder="Password">
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+
+    <button class="btn" type="submit" >Iniciar sesión</button>
+
+    <div class="form-check text-center my-4">
+      <a class="link link-offset-1 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover " href="{{ url_for('crearCuenta') }}">
+        Crear cuenta
+      </a>
+    </div>
+    
+  </div>
+
+    <p class=" c cmt-4 mb-2 ">&copy;  Universidad de Guadalajara 2023</p>
+  </form>
+{% endblock %}

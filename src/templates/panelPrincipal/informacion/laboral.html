@@ -1,0 +1,106 @@
+{% extends 'panelPrincipal/informacion/baseInformacion.html' %} {%block
+contenido%}
+<div class="contenedor-info">
+  <a class="nav-info" href="{{ url_for('general') }}">General</a>
+  <a class="nav-info" href="{{ url_for('estudios') }}">Estudios</a>
+  <div class="nav-activo">
+    <a class="nav-info-activo" href="{{ url_for('laboral') }}">Laboral</a>
+    <span class="linea-azul"></span>
+  </div>
+</div>
+<span class="linea-negra"></span>
+<span></span>
+<form class="form-general" action="/informacion/laboral" method="POST">
+  {% with messages = get_flashed_messages() %}
+
+  {% if messages %}
+  <br />
+  {% for message in messages %}
+  <div class="alert alert-primary alert-dismissible" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% endwith %}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <fieldset>
+    <div class="contenedor-campos">
+      <div class="campos">
+        <label for="">¿Ténia o tiene empleo formal?: </label>
+        <div class="opciones">
+          <input
+            class="input-text radio"
+            type="radio"
+            name="estatus"
+            value="Si"
+            {% if form and form.estatus == 'Si' %} checked {% endif %}
+          /><label>Si</label>
+          <input
+            class="input-text radio"
+            type="radio"
+            name="estatus"
+            value="No".
+            {% if form and form.estatus == 'No' %} checked {% endif %}
+          /><label>No</label>
+        </div>
+      </div>
+      <div class="campos">
+        <label for="nombreEmpresa">Nombre de empresa: </label>
+        <input class="input-text" type="text" id="nombreEmpresa" name="nombre" value="{% if form and form.nombre %}{{ form.nombre }}{% endif %}"/>
+      </div>
+      <div class="campos">
+        <label for="ubicacionEmpresa">Ubicación de la empresa: </label>
+        <input class="input-text" type="text" id="ubicacionEmpresa" name="ubicacion" value="{% if form and form.ubicacion %}{{ form.ubicacion }}{% endif %}"/>
+      </div>
+      <div class="campos">
+        <label for="descripcionResponsabilidades"
+          >Descripcion de las responsabilidades laborales:
+        </label>
+        <textarea class="input-text" id="descripcionResponsabilidades" name="descripcion" >{% if form and form.descripcion %}{{ form.descripcion }}{% endif %}
+        </textarea>
+      </div>
+      <div class="campos">
+        <label for="tiempoLaborado"
+          >Cuánto tiempo tenia laborando en la institución u
+          organización:
+        </label>
+        <input class="input-text" type="text" id="tiempoLaborado" name="antiguedad" value="{% if form and form.antiguedad %}{{ form.antiguedad }}{% endif %}"/>
+      </div>
+
+      <div class="campos">
+        <label for="horasTrabajo"
+          >Cuántas horas trabaja?
+        </label>
+        <input class="input-text" type="text" id="horasTrabajo" name="jornada" value="{% if form and form.jornada %}{{ form.jornada }}{% endif %}"/>
+      </div>
+    </div>
+      <!-- Button trigger modal -->
+   <button type="button" class="btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Actualizar
+  </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar informacion</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <b>¿Esta seguro de actualizar la informacion?</b>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn3" data-bs-dismiss="modal">Cerrar</button>
+    <button type="submit" class="btn3 ">Guardar cambios</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+  </fieldset>
+</form>
+
+{%endblock%}

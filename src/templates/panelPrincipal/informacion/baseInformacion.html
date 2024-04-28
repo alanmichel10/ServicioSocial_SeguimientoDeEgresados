@@ -1,0 +1,14 @@
+{% extends 'panelPrincipal/basePanel.html' %} {% block title %}Informacion{%
+endblock %} {% block useractivo %}{{ current_user.nombre }}{% endblock %} {%
+block customCSS %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/style.css') }}"
+/>
+{% endblock %} {% block body %}
+<div class="info-p">
+    {%block contenido%} 
+    {%endblock%}
+</div>
+
+{% endblock %}

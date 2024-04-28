@@ -1,0 +1,79 @@
+{% extends 'panelPrincipal/basePanel.html' %}
+
+{% block title %}Inicio{% endblock %}
+{% block useractivo %}{{ current_user.nombre }}{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="cuerpo">
+  <div class="foto-perfil">
+    <div>
+      <p>Foto de perfil</p>
+    </div>
+    <span class="linea-negra"></span>
+    <div class="foto-perfil-img">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="200" height="200"
+        viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+      </svg>
+    </div>
+    <div class="subir-archivo">
+      <label class="custom-file-upload"><input type="file" />Subir archivo</label>
+    </div>
+  </div>
+  <div class="info">
+    <div>
+      <p>Ajustes</p>
+    </div>
+    <span class="linea-negra"></span>
+    <div>
+      <form class="form-general" action="/ajustes" method="POST">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <fieldset>
+          <div class="contenedor-campos">
+            <div class="campos">
+              <label for="">Nombre(s): </label>
+              <input class="input-text" type="text" name="nombre" value="{{ current_user.nombre }}" />
+            </div>
+            <div class="campos">
+              <label for="">Apellido paterno: </label>
+              <input class="input-text" type="text" name="apellidoP" value="{{ current_user.apellidoP}}" />
+            </div>
+            <div class="campos">
+              <label for="">Apellido materno: </label>
+              <input class="input-text" type="text" name="apellidoM" value="{{ current_user.apellidoM }}" />
+            </div>
+            <div class="campos">
+              <label for="">Correo: </label>
+              <input class="input-text" name="correo" type="email" value="{{ current_user.correo }}" />
+            </div>
+          </div>
+          <div class="botones-2">
+            <input class="btn2" type="submit" value="Actualizar" />
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

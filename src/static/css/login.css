@@ -1,0 +1,137 @@
+:root{
+  --blanco: #ffffff;
+  --azul: #284C76;
+  --azulOscuro: #023a7a;
+  --negro: #000000;
+  --gris: #EAEAEA;
+  --gris-oscuro: #575757;
+  --fuente: 'Krub', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 90px;
+    padding-bottom: 30px;
+    background-color:rgb(197, 217, 234 );
+    border-radius: 1rem;
+  }
+
+
+.form-1{
+  padding: 60px 40px 20px 30px;
+  box-shadow: 0 0 10px rgb(0, 40, 50);
+  border-radius: 15px;
+  text-align: center;
+  width: 330px;
+  margin: auto;
+  background-color: var(--blanco);
+}
+
+.line{
+  display: inline-block;
+  width: 8rem;
+  height: 8px;
+  background: linear-gradient(90deg, rgb(52, 155, 97) 20%, rgb(63, 92, 165) 77%);
+  border-radius: 1rem;
+}
+.input-group{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+}
+.iniciose{
+  font-size: 16px;
+  margin-bottom: 15px;
+  margin-top: 1rem;
+
+}
+
+.btn{
+  width: 13rem;
+  background-color: var(--azul);
+  color: var(--blanco);
+  padding: 10px;
+  border-radius: 2.5rem;
+  border: none;
+  margin-top: 1rem;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 1s ease;
+}
+.btn:hover{
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+.form-signin {
+  width: 150%;
+  max-width: 330px;
+  margin: auto;
+}
+
+
+.link{
+  color: var(--negro);
+  margin-right: 1rem;
+}
+
+.c{
+  color: var(--gris-oscuro);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+
+  .b-example-divider {
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  }
+
+  .b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+  }
+
+  .bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+
+  .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
+
+  .nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  .bd-mode-toggle {
+    z-index: 1500;
+  }
+
+  .bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+  }
