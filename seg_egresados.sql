@@ -26,6 +26,9 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `cuenta`
 --
+create database seg_egresados;
+
+use seg_egresados;
 
 CREATE TABLE `cuenta` (
   `idCuenta` int NOT NULL,
