@@ -26,42 +26,47 @@ h1, h2, h3, h4, h5{
     font-weight: 700;
 }
 .hr-nabvar{
-    height: 1rem;
+    height: .2rem;
     background-color: var(--azulOscuro);
 }
-/** Encabezado **/
-.navbar{
-}
+/** Estilos para el NavBar **/
 .button-toggler{
     background-color: var(--blanco);
-    border-radius: 1rem;
-    width: 20rem;
+    width: 8rem;
     border-style: none;
-    transition: 1s ease;
 }
-.button-toggler:hover{
-    width: 22rem;
+.bar:hover{
+    width: 5rem;
+    height: 5rem;
 }
-.button-toggler::selection{
-    outline-style: none;
-}
+/** Logo del CUT **/
 .navbar-img{
     border-radius: 1rem;
-    width: 100%;
+    width: 18rem;
     object-fit: contain;
 }
+/** Termina Estilos para el NavBar **/
+
 /** Estilos para el OffCanvas **/
 .offcanvas{
     width: 20%;
-    background-color: #002046e8;
+    background-color: #011c3df5;
     color: var(--blanco);
+    border-radius: 1rem;
 }
 .offcanvas a{
     color: var(--blanco);
     font-size: 2rem;
+    text-decoration: none;
+    margin: auto 0;
 }
 .offcanvas li{
     width: 100%;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+.offcanvas li:hover{
+    background-color: #00142df9;
 }
 .usuario{
     font-size: 2.5rem;
