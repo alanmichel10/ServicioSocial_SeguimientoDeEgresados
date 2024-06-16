@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5{
     font-family: var(--fuente);
     font-weight: 700;
 }
-.hr-nabvar{
+.hr-navbar{
     height: .2rem;
     background-color: var(--azulOscuro);
 }
@@ -145,4 +145,19 @@ input[type="file"] {
     border-width: .1rem;
     border-color: #4ba6db;
 }
+/************************************** Termina Estilos para Inicio************************************/
+
+/************************************** Estilos para Cuestionario ************************************/
+.cuestionario{
+    background-color: #002c6328;
+    border-radius: 1rem;
+}
+.nav-cuestionario{
+    text-decoration: none;
+    color: #000000;
+}
+.nav-cuestionario:hover{
+    color: var(--azulOscuro);
+}
+
 /************************************** Termina Estilos para Inicio************************************/

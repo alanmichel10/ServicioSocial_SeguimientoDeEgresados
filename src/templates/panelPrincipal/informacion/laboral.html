@@ -1,15 +1,5 @@
 {% extends 'panelPrincipal/informacion/baseInformacion.html' %} {%block
 contenido%}
-<div class="contenedor-info">
-  <a class="nav-info" href="{{ url_for('general') }}">General</a>
-  <a class="nav-info" href="{{ url_for('estudios') }}">Estudios</a>
-  <div class="nav-activo">
-    <a class="nav-info-activo" href="{{ url_for('laboral') }}">Laboral</a>
-    <span class="linea-azul"></span>
-  </div>
-</div>
-<span class="linea-negra"></span>
-<span></span>
 <form class="form-general" action="/informacion/laboral" method="POST">
   {% with messages = get_flashed_messages() %}
 
