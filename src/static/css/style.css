@@ -54,7 +54,11 @@ h1, h2, h3, h4, h5{
 .offcanvas{
     background-color: #011c3df5;
     color: var(--blanco);
-    border-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+.btn-cerrar{
+    color: #be4040;
 }
 .offcanvas a{
     color: var(--blanco);
