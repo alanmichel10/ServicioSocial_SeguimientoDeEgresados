@@ -21,7 +21,7 @@
             <path
               d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
           </svg>
-          <label class="custom-file-upload my-3"><input type="file" />Subir archivo</label>
+          <label class="custom-file-upload my-3 btn-fotoPerfil col-4 mx-auto"><input type="file"/>Subir archivo</label>
         </div>
       </div>
     </div>
@@ -50,23 +50,23 @@
               <div class="container ">
                 <div class="col-12 my-5">
                   <label class="text-start col-lg-3 col-md-3 col-12" for="">Nombre(s): </label>
-                  <input class="col-lg-8 col-md-8 col-12" type="text" name="nombre" value="{{ current_user.nombre }}" />
+                  <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" name="nombre" value="{{ current_user.nombre }}" />
                 </div>
                 <div class="col-12 my-5">
                   <label class="text-start col-lg-3 col-md-3 col-12" for="">Apellido paterno: </label>
-                  <input class="col-lg-8 col-md-8 col-12" type="text" name="apellidoP" value="{{ current_user.apellidoP}}" />
+                  <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" name="apellidoP" value="{{ current_user.apellidoP}}" />
                 </div>
                 <div class="col-12 my-5">
                   <label class="text-start col-lg-3 col-md-3 col-12" for="">Apellido materno: </label>
-                  <input class="col-lg-8 col-md-8 col-12" type="text" name="apellidoM" value="{{ current_user.apellidoM }}" />
+                  <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" name="apellidoM" value="{{ current_user.apellidoM }}" />
                 </div>
                 <div class="col-12 my-5">
                   <label class="text-start col-lg-3 col-md-3 col-12" for="">Correo: </label>
-                  <input class="col-lg-8 col-md-8 col-12" name="correo" type="email" value="{{ current_user.correo }}" />
+                  <input class="campo-datos col-lg-8 col-md-8 col-12" name="correo" type="email" value="{{ current_user.correo }}" />
                 </div>
               </div>
-              <div class="botones-2">
-                <input class="btn2" type="submit" value="Actualizar" />
+              <div class="text-center">
+                <input class="btn-actualizar" type="submit" value="Actualizar" />
               </div>
             </fieldset>
           </form>
