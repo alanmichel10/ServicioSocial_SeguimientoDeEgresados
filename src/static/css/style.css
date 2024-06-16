@@ -159,5 +159,31 @@ input[type="file"] {
 .nav-cuestionario:hover{
     color: var(--azulOscuro);
 }
-
+.card-header{
+    background-color: transparent;
+}
+.form-cuestionario{
+    width: min(75rem, 100%);
+    margin: auto 0;
+    font-size: 2rem;
+}
+.text-label{
+    font-weight: bold;
+}
+.curp{
+    text-transform: uppercase;
+}
+button{
+    background-color: transparent;
+    border-style: none;
+}
+.btn-guardar{
+    color: #7ab876;
+}
+.btn-guardar:hover{
+    color: #5c8f59;
+}
+.apartado{
+    font-size: 3rem;
+}
 /************************************** Termina Estilos para Inicio************************************/

@@ -1,181 +1,222 @@
 {% extends 'panelPrincipal/informacion/baseInformacion.html' %} {%block
 contenido%}
 
-<form class="form-general" action="/informacion/general" method="POST">
-  {% with messages = get_flashed_messages() %}
+<div class="card p-4">
+  <div class="card-body">
+    <div class="card-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-vcard"
+        viewBox="0 0 16 16">
+        <path
+          d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
+        <path
+          d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
+      </svg>
+      <strong class="mx-4 apartado">General</strong>
+    </div>
+    <form class="form-cuestionario mx-auto" action="/informacion/general" method="POST">
+      {% with messages = get_flashed_messages() %}
 
-  {% if messages %}
-  <br />
-  {% for message in messages %}
-  <div class="alert alert-primary alert-dismissible" role="alert">
-    <strong>{{ message }}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      {% if messages %}
+      <br />
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      {% endwith %}
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <fieldset>
+        <div class="container">
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="email">Correo: </label>
+            <input class="campo-datos col-lg-8 col-md-8 col-12" name="email" type="email" id="email"
+              value="{{ current_user.correo }}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="name">Nombre(s): </label>
+            <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" id="name"
+              value="{{ current_user.nombre }}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-4 col-12" for="apellidoPaterno">Apellido paterno: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="apellidoPaterno"
+              value="{{ current_user.apellidoP}}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-4 col-12" for="apellidoMaterno">Apellido materno: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="apellidoMaterno"
+              value="{{ current_user.apellidoM }}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-12 my-2" for="">Sexo: </label>
+            <div class="row">
+              <div class="text-start col-md-4 col-sm-12">
+                <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Hombre" {% if form and
+                  form.sexo=='Hombre' %} checked {% endif %} /><label>Hombre</label>
+              </div>
+              <div class="text-start col-md-4 col-sm-12">
+                <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Mujer" {% if form and
+                  form.sexo=='Mujer' %} checked {% endif %} /><label>Mujer</label>
+              </div>
+              <div class="text-start col-md-4 col-sm-12">
+                <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Otro" {% if form and
+                  form.sexo=='Otro' %} checked {% endif %} /><label>Prefiero no decirlo</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="curp">CURP: </label>
+            <input class="campo-datos col-lg-8 col-md-8 col-12 curp" type="text" id="curp" name="curp"
+              value="{% if form and form.curp %}{{ form.curp }}{% endif %}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="cp">Codigo postal: </label>
+            <input class="campo-datos col-lg-8 col-md-8 col-12 zip" type="text" id="cp" name="codigoPostal"
+              value="{% if form and form.codigoPostal %}{{ form.codigoPostal }}{% endif %}" />
+          </div>
+
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-4 col-12" for="codigoEstudiante">Codigo estudiante: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="texto" id="codigoEstudiante"
+              name="codigoEstudiante"
+              value="{% if form and form.codigoEstudiante %}{{ form.codigoEstudiante }}{% endif %}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="">Estado civil: </label>
+            <select class="campo-datos col-lg-8 col-md-8 col-12" aria-label="Large select example" name="estadoCivil">
+              <option disabled>Seleccione una opción</option>
+              <option value="Soltero" {% if form and form.estadoCivil=='Soltero' %} selected {% endif %}>Soltero/a
+              </option>
+              <option value="Casado" {% if form and form.estadoCivil=='Casado' %} selected {% endif %}>Casado/a</option>
+              <option value="Divorciado" {% if form and form.estadoCivil=='Divorciado' %} selected {% endif %}>
+                Divorciado/a
+              </option>
+              <option value="Viudo" {% if form and form.estadoCivil=='Viudo' %} selected {% endif %}>Viudo/a</option>
+            </select>
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-4 col-12" for="fechaNacimiento">Fecha de nacimiento: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="date" id="fechaNacimiento"
+              value="{% if form and form.fecha %}{{ form.fecha.strftime('%Y-%m-%d') }}{% endif %}"
+              name="fechaNacimiento" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-4 col-12" for="lugarNacimiento">Lugar de nacimiento: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="lugarNacimiento" name="lugarNacimiento"
+              value="{% if form and form.lugarNacimiento %}{{ form.lugarNacimiento }}{% endif %}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="phone">Número de teléfono: </label>
+            <input class="campo-datos col-lg-8 col-md-8 col-12" type="tel" name="telefono" maxlength="10" id="phone"
+              value="{% if form and form.numeroTelefono %}{{ form.numeroTelefono }}{% endif %}" />
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label col-lg-4 col-md-5 col-12" for="">Posgrado al que aspira</label>
+            <select class="campo-datos col-lg-7 col-md-6 col-12" aria-label="Large select example" name="posgrado">
+              <option disabled selected>Seleccione una opción</option>
+              <option value="Maestría en Movilidad Urbana, Transporte y Territorio" {% if form and
+                form.posgrado=="Maestría en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
+                Maestría en Movilidad Urbana, Transporte y Territorio
+              </option>
+              <option value="Maestría en Ingeniería del Agua y la Energía" {% if form and
+                form.posgrado=="Maestría en Ingeniería del Agua y la Energía" %} selected {% endif %}>
+                Maestría en Ingeniería del Agua y la Energía (Profesionalizante)
+              </option>
+              <option value="Maestría en Gestión de Gobiernos Locales" {% if form and
+                form.posgrado=="Maestría en Gestión de Gobiernos Locales" %} selected {% endif %}>
+                Maestría en Gestión de Gobiernos Locales
+              </option>
+              <option value="Maestría en Geología" {% if form and form.posgrado=="Maestría en Geología" %} selected {%
+                endif %}>
+                Maestría en Geología
+              </option>
+              <option value="Maestría en Ciencias en Ingeniería del Agua y la Energía" {% if form and
+                form.posgrado=="Maestría en Ciencias en Ingeniería del Agua y la Energía" %} selected {% endif %}>
+                Maestría en Ciencias en Ingeniería del Agua y la Energía
+                (Investigación)
+              </option>
+              <option value="Maestría en Ciencias Antropológicas" {% if form and
+                form.posgrado=="Maestría en Ciencias Antropológicas" %} selected {% endif %}>
+                Maestría en Ciencias Antropológicas
+              </option>
+              <option value="Maestría en Ciencia de la Ciudad" {% if form and
+                form.posgrado=="Maestría en Ciencia de la Ciudad" %} selected {% endif %}>
+                Maestría en Ciencia de la Ciudad
+              </option>
+              <option value="Maestría en Bioética" {% if form and form.posgrado=="Maestría en Bioética" %} selected {%
+                endif %}>
+                Maestría en Bioética
+              </option>
+              <option value="Doctorado en Movilidad Urbana, Transporte y Territorio" {% if form and
+                form.posgrado=="Doctorado en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
+                Doctorado en Movilidad Urbana, Transporte y Territorio
+              </option>
+              <option value="Doctorado en Investigación Multidisciplinaria en Salud" {% if form and
+                form.posgrado=="Doctorado en Investigación Multidisciplinaria en Salud" %} selected {% endif %}>
+                Doctorado en Investigación Multidisciplinaria en Salud
+              </option>
+              <option value="Doctorado en Geología" {% if form and form.posgrado=="Doctorado en Geología" %} selected {%
+                endif %}>
+                Doctorado en Geología</option>
+              <option value="Doctorado en Derechos Humanos" {% if form and
+                form.posgrado=="Doctorado en Derechos Humanos" %} selected {% endif %}>
+                Doctorado en Derechos Humanos
+              </option>
+              <option value="Doctorado en Agua y Energía" {% if form and form.posgrado=="Doctorado en Agua y Energía" %}
+                selected {% endif %}>
+                Doctorado en Agua y Energía
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn-actualizar my-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Actualizar
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Actualizar informacion
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <b>¿Esta seguro de actualizar la informacion?</b>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="" data-bs-dismiss="modal">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-x-square btn-cerrar" viewBox="0 0 16 16">
+                    <path
+                      d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                    <path
+                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                  </svg>
+                </button>
+                <button type="submit" class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-floppy btn-guardar" viewBox="0 0 16 16">
+                    <path d="M11 2H9v3h2z" />
+                    <path
+                      d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
   </div>
-  {% endfor %}
-  {% endif %}
-
-  {% endwith %}
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  <fieldset>
-    <div class="contenedor-campos">
-      <div class="campos">
-        <label for="email">Correo: </label>
-        <input class="input-text" name="email" type="email" id="email" value="{{ current_user.correo }}" />
-      </div>
-      <div class="campos">
-        <label for="name">Nombre(s): </label>
-        <input class="input-text" type="text" id="name" value="{{ current_user.nombre }}" />
-      </div>
-      <div class="campos">
-        <label for="apellidoPaterno">Apellido paterno: </label>
-        <input class="input-text" type="text" id="apellidoPaterno" value="{{ current_user.apellidoP}}" />
-      </div>
-      <div class="campos">
-        <label for="apellidoMaterno">Apellido materno: </label>
-        <input class="input-text" type="text" id="apellidoMaterno" value="{{ current_user.apellidoM }}" />
-      </div>
-      <div class="campos">
-        <label for="">Sexo: </label>
-        <div class="opciones2">
-          <input class="input-text radio" type="radio" name="sexo" value="Hombre" {% if form and form.sexo=='Hombre' %}
-            checked {% endif %} /><label>Hombre</label>
-          <input class="input-text radio" type="radio" name="sexo" value="Mujer" {% if form and form.sexo=='Mujer' %}
-            checked {% endif %} /><label>Mujer</label>
-          <input class="input-text radio" type="radio" name="sexo" value="Otro" {% if form and form.sexo=='Otro' %}
-            checked {% endif %} /><label>Otro</label>
-        </div>
-      </div>
-      <div class="campos">
-        <label for="curp">CURP: </label>
-        <input class="input-text curp" type="text" id="curp" name="curp"
-          value="{% if form and form.curp %}{{ form.curp }}{% endif %}" />
-      </div>
-      <div class="campos">
-        <label for="cp">Codigo postal: </label>
-        <input class="input-text zip" type="text" id="cp" name="codigoPostal"
-          value="{% if form and form.codigoPostal %}{{ form.codigoPostal }}{% endif %}" />
-      </div>
-
-      <div class="campos">
-        <label for="codigoEstudiante">Codigo estudiante: </label>
-        <input class="input-text" type="texto" id="codigoEstudiante" name="codigoEstudiante"
-          value="{% if form and form.codigoEstudiante %}{{ form.codigoEstudiante }}{% endif %}" />
-      </div>
-      <div class="campos">
-        <label for="">Estado civil: </label>
-        <select class="form-select form-select-lg input-text" aria-label="Large select example" name="estadoCivil">
-          <option disabled>Seleccione una opción</option>
-          <option value="Soltero" {% if form and form.estadoCivil=='Soltero' %} selected {% endif %}>Soltero/a</option>
-          <option value="Casado" {% if form and form.estadoCivil=='Casado' %} selected {% endif %}>Casado/a</option>
-          <option value="Divorciado" {% if form and form.estadoCivil=='Divorciado' %} selected {% endif %}>Divorciado/a
-          </option>
-          <option value="Viudo" {% if form and form.estadoCivil=='Viudo' %} selected {% endif %}>Viudo/a</option>
-        </select>
-      </div>
-      <div class="campos">
-        <label for="fechaNacimiento">Fecha de nacimiento: </label>
-        <input class="input-text" type="date" id="fechaNacimiento"
-          value="{% if form and form.fecha %}{{ form.fecha.strftime('%Y-%m-%d') }}{% endif %}" name="fechaNacimiento" />
-      </div>
-      <div class="campos">
-        <label for="lugarNacimiento">Lugar de nacimiento: </label>
-        <input class="input-text" type="text" id="lugarNacimiento" name="lugarNacimiento"
-          value="{% if form and form.lugarNacimiento %}{{ form.lugarNacimiento }}{% endif %}" />
-      </div>
-      <div class="campos">
-        <label for="phone">Número de teléfono: </label>
-        <input class="input-text" type="tel" name="telefono" maxlength="10" id="phone"
-          value="{% if form and form.numeroTelefono %}{{ form.numeroTelefono }}{% endif %}" />
-      </div>
-      <div class="campos">
-        <label for="">Posgrado al que aspira</label>
-        <select class="form-select form-select-lg input-text" aria-label="Large select example" name="posgrado">
-          <option disabled selected>Seleccione una opción</option>
-          <option value="Maestría en Movilidad Urbana, Transporte y Territorio" {% if form and
-            form.posgrado=="Maestría en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
-            Maestría en Movilidad Urbana, Transporte y Territorio
-          </option>
-          <option value="Maestría en Ingeniería del Agua y la Energía" {% if form and
-            form.posgrado=="Maestría en Ingeniería del Agua y la Energía" %} selected {% endif %}>
-            Maestría en Ingeniería del Agua y la Energía (Profesionalizante)
-          </option>
-          <option value="Maestría en Gestión de Gobiernos Locales" {% if form and
-            form.posgrado=="Maestría en Gestión de Gobiernos Locales" %} selected {% endif %}>
-            Maestría en Gestión de Gobiernos Locales
-          </option>
-          <option value="Maestría en Geología" {% if form and form.posgrado=="Maestría en Geología" %} selected {% endif
-            %}>
-            Maestría en Geología
-          </option>
-          <option value="Maestría en Ciencias en Ingeniería del Agua y la Energía" {% if form and
-            form.posgrado=="Maestría en Ciencias en Ingeniería del Agua y la Energía" %} selected {% endif %}>
-            Maestría en Ciencias en Ingeniería del Agua y la Energía
-            (Investigación)
-          </option>
-          <option value="Maestría en Ciencias Antropológicas" {% if form and
-            form.posgrado=="Maestría en Ciencias Antropológicas" %} selected {% endif %}>
-            Maestría en Ciencias Antropológicas
-          </option>
-          <option value="Maestría en Ciencia de la Ciudad" {% if form and
-            form.posgrado=="Maestría en Ciencia de la Ciudad" %} selected {% endif %}>
-            Maestría en Ciencia de la Ciudad
-          </option>
-          <option value="Maestría en Bioética" {% if form and form.posgrado=="Maestría en Bioética" %} selected {% endif
-            %}>
-            Maestría en Bioética
-          </option>
-          <option value="Doctorado en Movilidad Urbana, Transporte y Territorio" {% if form and
-            form.posgrado=="Doctorado en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
-            Doctorado en Movilidad Urbana, Transporte y Territorio
-          </option>
-          <option value="Doctorado en Investigación Multidisciplinaria en Salud" {% if form and
-            form.posgrado=="Doctorado en Investigación Multidisciplinaria en Salud" %} selected {% endif %}>
-            Doctorado en Investigación Multidisciplinaria en Salud
-          </option>
-          <option value="Doctorado en Geología" {% if form and form.posgrado=="Doctorado en Geología" %} selected {%
-            endif %}>
-            Doctorado en Geología</option>
-          <option value="Doctorado en Derechos Humanos" {% if form and form.posgrado=="Doctorado en Derechos Humanos" %}
-            selected {% endif %}>
-            Doctorado en Derechos Humanos
-          </option>
-          <option value="Doctorado en Agua y Energía" {% if form and form.posgrado=="Doctorado en Agua y Energía" %}
-            selected {% endif %}>
-            Doctorado en Agua y Energía
-          </option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Actualizar
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              Actualizar informacion
-            </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <b>¿Esta seguro de actualizar la informacion?</b>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn3" data-bs-dismiss="modal">
-              Cerrar
-            </button>
-            <button type="submit" class="btn3">Guardar cambios</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-</form>
-
+</div>
 
 {%endblock%}
