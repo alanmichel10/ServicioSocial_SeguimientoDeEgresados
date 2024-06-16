@@ -40,7 +40,14 @@
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
             </svg>
-            <a class="nav-link col-10 usuario" href="{{ url_for('inicio') }}">{{ current_user.nombre }}</a>
+            <a class="nav-link col-8 usuario" href="{{ url_for('inicio') }}">{{ current_user.nombre }}</a>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                class="bi bi-x-square-fill col-2" viewBox="0 0 16 16">
+                <path
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708" />
+              </svg>
+            </button>
           </div>
           <hr class="hr-offcanvas">
           <div class="offcanvas-body">
@@ -95,7 +102,7 @@
   </header>
   <hr class="hr-nabvar opacity-100">
   {% block body %} {% endblock %}
-
+  <hr class="hr-nabvar opacity-100">
   <footer>
     <div class="container my-5">
       <div class="row">
