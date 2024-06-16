@@ -60,6 +60,9 @@ h1, h2, h3, h4, h5{
 .btn-cerrar{
     color: #be4040;
 }
+.btn-cerrar:hover{
+    color: #be4040af;
+}
 .offcanvas a{
     color: var(--blanco);
     font-size: 2rem;
@@ -132,7 +135,7 @@ input[type="file"] {
     border-style: none;
     padding: .8rem;
     border-radius: 1rem;
-    background-color: #dbd24b;
+    background-color: #4ba6db;
     transition: 500ms;
 }
 .btn-fotoPerfil:hover{
@@ -140,6 +143,6 @@ input[type="file"] {
     background-color: var(--blanco);
     border-style: solid;
     border-width: .1rem;
-    border-color: #dbd24b;
+    border-color: #4ba6db;
 }
 /************************************** Termina Estilos para Inicio************************************/
