@@ -1,113 +1,127 @@
 {% extends 'panelPrincipal/informacion/baseInformacion.html' %} {%block
 contenido%}
-<form class="form-general" action="/informacion/estudios" method="POST">
-  {% with messages = get_flashed_messages() %}
-
-  {% if messages %}
-  <br />
-  {% for message in messages %}
-  <div class="alert alert-primary alert-dismissible" role="alert">
-    <strong>{{ message }}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-  </div>
-  {% endfor %}
-  {% endif %}
-
-  {% endwith %}
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  <fieldset>
-    <div class="contenedor-campos">
-      <div class="campos">
-        <label for="">Centro Universitario/Escuela de prosedencia: </label>
-        <input class="input-text" type="text" name="centroUniversitario"value="{% if form and form.centro %}{{ form.centro }}{% endif %}"/>
+<div class="card">
+  <div class="card-body">
+    <div class="card-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-mortarboard"
+          viewBox="0 0 16 16">
+          <path
+            d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z" />
+          <path
+            d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z" />
+        </svg>
+        <strong class="mx-4 apartado">Estudios</strong>
+    </div>
+    <form class="form-cuestionario mx-auto" action="/informacion/estudios" method="POST">
+      {% with messages = get_flashed_messages() %}
+    
+      {% if messages %}
+      <br />
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
       </div>
-      <div class="campos">
-        <label for="carrera">Carrera: </label>
-        <input class="input-text" type="text" id="carrera" name="carrera" value="{% if form and form.carrera %}{{ form.carrera }}{% endif %}"/>
-      </div>
-      <div class="campos">
-        <label for="cicloEgreso">Ciclo escolar de egreso: </label>
-        <input class="input-text" type="text" id="cicloEgreso" name="cicloEscolar" value="{% if form and form.ciclo %}{{ form.ciclo }}{% endif %}"/>
-      </div>
-      <div class="campos">
-        <label for="">Nivel de ingles: </label>
-        <select
-          class="form-select form-select-lg input-text"
-          aria-label="Large select example"
-          name="nivelIngles"
+      {% endfor %}
+      {% endif %}
+    
+      {% endwith %}
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <fieldset>
+        <div class="container">
+          <div class="col-12 my-4">
+            <label class="text-label" for="">Centro Universitario/Escuela de prosedencia: </label>
+            <input class="campo-datos" type="text" name="centroUniversitario"value="{% if form and form.centro %}{{ form.centro }}{% endif %}"/>
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label" for="carrera">Carrera: </label>
+            <input class="campo-datos" type="text" id="carrera" name="carrera" value="{% if form and form.carrera %}{{ form.carrera }}{% endif %}"/>
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label" for="cicloEgreso">Ciclo escolar de egreso: </label>
+            <input class="campo-datos" type="text" id="cicloEgreso" name="cicloEscolar" value="{% if form and form.ciclo %}{{ form.ciclo }}{% endif %}"/>
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label" for="">Nivel de ingles: </label>
+            <select
+              class="form-select form-select-lg campo-datos"
+              aria-label="Large select example"
+              name="nivelIngles"
+            >
+              <option selected>Seleccione una opción</option>
+              <option value="A1-A2" {% if form and form.ingles == 'A1-A2' %} selected {% endif %}>A1-A2</option>
+              <option value="A2-B1" {% if form and form.ingles == 'A2-B1' %} selected {% endif %}>A2-B1</option>
+              <option value="B1" {% if form and form.ingles == 'B1' %} selected {% endif %}>B1</option>
+              <option value="B2" {% if form and form.ingles == 'B2' %} selected {% endif %}>B2</option>
+              <option value="C1-C2" {% if form and form.ingles == 'C1-C2' %} selected {% endif %}>C1-C2</option>
+            </select>
+          </div>
+          <div class="col-12 my-4">
+            <label class="text-label" for="">Titulado: </label>
+            <div class="opciones">
+              <input
+                class="campo-datos radio"
+                type="radio"
+                name="titulado"
+                value="Si"
+                {% if form and form.titulado == 'Si' %} checked {% endif %}
+              /><label class="text-label">Si</label>
+              <input
+                class="campo-datos radio"
+                type="radio"
+                name="titulado"
+                value="En proceso"
+                {% if form and form.titulado == 'En proceso' %} checked {% endif %}
+              /><label class="text-label">En proceso</label>
+            </div>
+          </div>
+        </div>
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn2"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
         >
-          <option selected>Seleccione una opción</option>
-          <option value="A1-A2" {% if form and form.ingles == 'A1-A2' %} selected {% endif %}>A1-A2</option>
-          <option value="A2-B1" {% if form and form.ingles == 'A2-B1' %} selected {% endif %}>A2-B1</option>
-          <option value="B1" {% if form and form.ingles == 'B1' %} selected {% endif %}>B1</option>
-          <option value="B2" {% if form and form.ingles == 'B2' %} selected {% endif %}>B2</option>
-          <option value="C1-C2" {% if form and form.ingles == 'C1-C2' %} selected {% endif %}>C1-C2</option>
-        </select>
-      </div>
-      <div class="campos">
-        <label for="">Titulado: </label>
-        <div class="opciones">
-          <input
-            class="input-text radio"
-            type="radio"
-            name="titulado"
-            value="Si"
-            {% if form and form.titulado == 'Si' %} checked {% endif %}
-          /><label>Si</label>
-          <input
-            class="input-text radio"
-            type="radio"
-            name="titulado"
-            value="En proceso"
-            {% if form and form.titulado == 'En proceso' %} checked {% endif %}
-          /><label>En proceso</label>
-        </div>
-      </div>
-    </div>
-    <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn2"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-    >
-      Actualizar
-    </button>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              Actualizar informacion
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <b>¿Esta seguro de actualizar la informacion?</b>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn3" data-bs-dismiss="modal">
-              Cerrar
-            </button>
-            <button type="submit" class="btn3">Guardar cambios</button>
+          Actualizar
+        </button>
+    
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Actualizar informacion
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <b>¿Esta seguro de actualizar la informacion?</b>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn3" data-bs-dismiss="modal">
+                  Cerrar
+                </button>
+                <button type="submit" class="btn3">Guardar cambios</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </fieldset>
-</form>
+      </fieldset>
+    </form>
+  </div>
+</div>
 
 {%endblock%}
