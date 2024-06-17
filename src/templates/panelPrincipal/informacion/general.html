@@ -30,63 +30,63 @@ contenido%}
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <fieldset>
         <div class="container">
-          <div class="col-12 my-4">
-            <label class="text-label col-lg-3 col-md-3 col-12" for="email">Correo: </label>
-            <input class="campo-datos col-lg-8 col-md-8 col-12" name="email" type="email" id="email"
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-2 col-md-2 col-12" for="email">Correo: </label>
+            <input class="campo-datos col-lg-10 col-md-10 col-12" name="email" type="email" id="email"
               value="{{ current_user.correo }}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-3 col-12" for="name">Nombre(s): </label>
-            <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" id="name"
+            <input class="campo-datos col-lg-9 col-md-9 col-12" type="text" id="name"
               value="{{ current_user.nombre }}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-4 col-12" for="apellidoPaterno">Apellido paterno: </label>
-            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="apellidoPaterno"
+            <input class="campo-datos col-lg-9 col-md-8 col-12" type="text" id="apellidoPaterno"
               value="{{ current_user.apellidoP}}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-4 col-12" for="apellidoMaterno">Apellido materno: </label>
-            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="apellidoMaterno"
+            <input class="campo-datos col-lg-9 col-md-8 col-12" type="text" id="apellidoMaterno"
               value="{{ current_user.apellidoM }}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-12 my-2" for="">Sexo: </label>
-            <div class="row">
-              <div class="text-start col-md-4 col-sm-12">
+            <div class="row justify-content-between">
+              <div class="text-start col-md-3 col-sm-12">
                 <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Hombre" {% if form and
                   form.sexo=='Hombre' %} checked {% endif %} /><label>Hombre</label>
               </div>
-              <div class="text-start col-md-4 col-sm-12">
+              <div class="text-start col-md-3 col-sm-12">
                 <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Mujer" {% if form and
                   form.sexo=='Mujer' %} checked {% endif %} /><label>Mujer</label>
               </div>
-              <div class="text-start col-md-4 col-sm-12">
+              <div class="text-start col-md-6 col-sm-12">
                 <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Otro" {% if form and
                   form.sexo=='Otro' %} checked {% endif %} /><label>Prefiero no decirlo</label>
               </div>
             </div>
           </div>
-          <div class="col-12 my-4">
-            <label class="text-label col-lg-3 col-md-3 col-12" for="curp">CURP: </label>
-            <input class="campo-datos col-lg-8 col-md-8 col-12 curp" type="text" id="curp" name="curp"
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-2 col-md-2 col-12" for="curp">CURP: </label>
+            <input class="campo-datos col-lg-10 col-md-10 col-12 curp" type="text" id="curp" name="curp"
               value="{% if form and form.curp %}{{ form.curp }}{% endif %}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-3 col-12" for="cp">Codigo postal: </label>
-            <input class="campo-datos col-lg-8 col-md-8 col-12 zip" type="text" id="cp" name="codigoPostal"
+            <input class="campo-datos col-lg-9 col-md-9 col-12 zip" type="text" id="cp" name="codigoPostal"
               value="{% if form and form.codigoPostal %}{{ form.codigoPostal }}{% endif %}" />
           </div>
 
-          <div class="col-12 my-4">
-            <label class="text-label col-lg-3 col-md-4 col-12" for="codigoEstudiante">Codigo estudiante: </label>
-            <input class="campo-datos col-lg-8 col-md-7 col-12" type="texto" id="codigoEstudiante"
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-4 col-12" for="codigoEstudiante">Codigo estudiante: </label>
+            <input class="campo-datos col-lg-8 col-md-8 col-12" type="texto" id="codigoEstudiante"
               name="codigoEstudiante"
               value="{% if form and form.codigoEstudiante %}{{ form.codigoEstudiante }}{% endif %}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-3 col-12" for="">Estado civil: </label>
-            <select class="campo-datos col-lg-8 col-md-8 col-12" aria-label="Large select example" name="estadoCivil">
+            <select class="campo-datos col-lg-9 col-md-9 col-12" aria-label="Large select example" name="estadoCivil">
               <option disabled>Seleccione una opción</option>
               <option value="Soltero" {% if form and form.estadoCivil=='Soltero' %} selected {% endif %}>Soltero/a
               </option>
@@ -97,25 +97,25 @@ contenido%}
               <option value="Viudo" {% if form and form.estadoCivil=='Viudo' %} selected {% endif %}>Viudo/a</option>
             </select>
           </div>
-          <div class="col-12 my-4">
-            <label class="text-label col-lg-3 col-md-4 col-12" for="fechaNacimiento">Fecha de nacimiento: </label>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-5 col-12" for="fechaNacimiento">Fecha de nacimiento: </label>
             <input class="campo-datos col-lg-8 col-md-7 col-12" type="date" id="fechaNacimiento"
               value="{% if form and form.fecha %}{{ form.fecha.strftime('%Y-%m-%d') }}{% endif %}"
               name="fechaNacimiento" />
           </div>
-          <div class="col-12 my-4">
-            <label class="text-label col-lg-3 col-md-4 col-12" for="lugarNacimiento">Lugar de nacimiento: </label>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-5 col-12" for="lugarNacimiento">Lugar de nacimiento: </label>
             <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="lugarNacimiento" name="lugarNacimiento"
               value="{% if form and form.lugarNacimiento %}{{ form.lugarNacimiento }}{% endif %}" />
           </div>
-          <div class="col-12 my-4">
-            <label class="text-label col-lg-3 col-md-3 col-12" for="phone">Número de teléfono: </label>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-4 col-12" for="phone">Número de teléfono: </label>
             <input class="campo-datos col-lg-8 col-md-8 col-12" type="tel" name="telefono" maxlength="10" id="phone"
               value="{% if form and form.numeroTelefono %}{{ form.numeroTelefono }}{% endif %}" />
           </div>
-          <div class="col-12 my-4">
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-4 col-md-5 col-12" for="">Posgrado al que aspira</label>
-            <select class="campo-datos col-lg-7 col-md-6 col-12" aria-label="Large select example" name="posgrado">
+            <select class="campo-datos col-lg-8 col-md-7 col-12" aria-label="Large select example" name="posgrado">
               <option disabled selected>Seleccione una opción</option>
               <option value="Maestría en Movilidad Urbana, Transporte y Territorio" {% if form and
                 form.posgrado=="Maestría en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
