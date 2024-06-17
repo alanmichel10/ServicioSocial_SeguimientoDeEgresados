@@ -1,96 +1,119 @@
 {% extends 'panelPrincipal/informacion/baseInformacion.html' %} {%block
 contenido%}
-<form class="form-general" action="/informacion/laboral" method="POST">
-  {% with messages = get_flashed_messages() %}
-
-  {% if messages %}
-  <br />
-  {% for message in messages %}
-  <div class="alert alert-primary alert-dismissible" role="alert">
-    <strong>{{ message }}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+<div class="card p-4">
+  <div class="card-header">
+    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-briefcase"
+      viewBox="0 0 16 16">
+      <path
+        d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
+    </svg>
+    <strong class="mx-4 apartado">Laboral</strong>
   </div>
-  {% endfor %}
-  {% endif %}
+  <div class="card-body">
+    <form class="form-cuestionario mx-auto" action="/informacion/laboral" method="POST">
+      {% with messages = get_flashed_messages() %}
 
-  {% endwith %}
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  <fieldset>
-    <div class="contenedor-campos">
-      <div class="campos">
-        <label for="">¿Ténia o tiene empleo formal?: </label>
-        <div class="opciones">
-          <input
-            class="input-text radio"
-            type="radio"
-            name="estatus"
-            value="Si"
-            {% if form and form.estatus == 'Si' %} checked {% endif %}
-          /><label>Si</label>
-          <input
-            class="input-text radio"
-            type="radio"
-            name="estatus"
-            value="No".
-            {% if form and form.estatus == 'No' %} checked {% endif %}
-          /><label>No</label>
+      {% if messages %}
+      <br />
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      {% endwith %}
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <fieldset>
+        <div class="container">
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label" for="">¿Ténia o tiene empleo formal?: </label>
+            <div class="row my-4 justify-content-between align-items-center">
+              <div class="col-6">
+                <input class="input-text radio" type="radio" name="estatus" value="Si" {% if form and
+                  form.estatus=='Si' %} checked {% endif %} /><label>Si</label>
+              </div>
+              <div class="col-6">
+                <input class="input-text radio" type="radio" name="estatus" value="No" . {% if form and
+                  form.estatus=='No' %} checked {% endif %} /><label>No</label>
+              </div>
+            </div>
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-5 col-12" for="nombreEmpresa">Nombre de empresa: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="nombreEmpresa" name="nombre"
+              value="{% if form and form.nombre %}{{ form.nombre }}{% endif %}" />
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-5 col-md-5 col-12" for="ubicacionEmpresa">Ubicación de la empresa: </label>
+            <input class="campo-datos col-lg-7 col-md-7 col-12" type="text" id="ubicacionEmpresa" name="ubicacion"
+              value="{% if form and form.ubicacion %}{{ form.ubicacion }}{% endif %}" />
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label" for="descripcionResponsabilidades">Descripcion de las responsabilidades laborales:
+            </label>
+            <textarea class="campo-datos" id="descripcionResponsabilidades" name="descripcion">{% if form and form.descripcion %}{{ form.descripcion }}{% endif %}
+            </textarea>
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label" for="tiempoLaborado">Cuánto tiempo tenia laborando en la institución u
+              organización:
+            </label>
+            <input class="campo-datos" type="text" id="tiempoLaborado" name="antiguedad"
+              value="{% if form and form.antiguedad %}{{ form.antiguedad }}{% endif %}" />
+          </div>
+
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-5 col-12" for="horasTrabajo">Cuántas horas trabaja?
+            </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="horasTrabajo" name="jornada"
+              value="{% if form and form.jornada %}{{ form.jornada }}{% endif %}" />
+          </div>
         </div>
-      </div>
-      <div class="campos">
-        <label for="nombreEmpresa">Nombre de empresa: </label>
-        <input class="input-text" type="text" id="nombreEmpresa" name="nombre" value="{% if form and form.nombre %}{{ form.nombre }}{% endif %}"/>
-      </div>
-      <div class="campos">
-        <label for="ubicacionEmpresa">Ubicación de la empresa: </label>
-        <input class="input-text" type="text" id="ubicacionEmpresa" name="ubicacion" value="{% if form and form.ubicacion %}{{ form.ubicacion }}{% endif %}"/>
-      </div>
-      <div class="campos">
-        <label for="descripcionResponsabilidades"
-          >Descripcion de las responsabilidades laborales:
-        </label>
-        <textarea class="input-text" id="descripcionResponsabilidades" name="descripcion" >{% if form and form.descripcion %}{{ form.descripcion }}{% endif %}
-        </textarea>
-      </div>
-      <div class="campos">
-        <label for="tiempoLaborado"
-          >Cuánto tiempo tenia laborando en la institución u
-          organización:
-        </label>
-        <input class="input-text" type="text" id="tiempoLaborado" name="antiguedad" value="{% if form and form.antiguedad %}{{ form.antiguedad }}{% endif %}"/>
-      </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn-actualizar my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Actualizar
+        </button>
 
-      <div class="campos">
-        <label for="horasTrabajo"
-          >Cuántas horas trabaja?
-        </label>
-        <input class="input-text" type="text" id="horasTrabajo" name="jornada" value="{% if form and form.jornada %}{{ form.jornada }}{% endif %}"/>
-      </div>
-    </div>
-      <!-- Button trigger modal -->
-   <button type="button" class="btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Actualizar
-  </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Actualizar informacion
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <b>¿Esta seguro de actualizar la informacion?</b>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="" data-bs-dismiss="modal">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-x-square btn-cerrar" viewBox="0 0 16 16">
+                    <path
+                      d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                    <path
+                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                  </svg>
+                </button>
+                <button type="submit" class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-floppy btn-guardar" viewBox="0 0 16 16">
+                    <path d="M11 2H9v3h2z" />
+                    <path
+                      d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar informacion</h1>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-      <b>¿Esta seguro de actualizar la informacion?</b>
-    </div>
-    <div class="modal-footer">
-    <button type="button" class="btn3" data-bs-dismiss="modal">Cerrar</button>
-    <button type="submit" class="btn3 ">Guardar cambios</button>
-    </div>
-    </div>
-    </div>
-    </div>
-
-  </fieldset>
-</form>
-
+      </fieldset>
+    </form>
+  </div>
+</div>
 {%endblock%}
