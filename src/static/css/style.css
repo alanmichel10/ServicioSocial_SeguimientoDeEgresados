@@ -218,3 +218,47 @@ button{
 }
 
 /************************************** Termina Estilos para Tablon ************************************/
+
+/************************************** Estilos para Dashboard ************************************/
+
+caption{
+    font-size: 4rem;
+    color: #000000;
+}
+.btn-verMas{
+    border-style: none;
+    padding: .8rem;
+    border-radius: 1rem;
+    background-color: #b5e4ff;
+    transition: 500ms;
+}
+.btn-verMas:hover{
+    padding: 1rem;
+    background-color: var(--blanco);
+    border-style: solid;
+    border-width: .1rem;
+    border-color: #b5e4ff;
+}
+.btn-Excel{
+    border-style: none;
+    padding: .8rem;
+    border-radius: 1rem;
+    background-color: #7ab876;
+    transition: 500ms;
+}
+.btn-Excel:hover{
+    padding: 1rem;
+    background-color: var(--blanco);
+    border-style: solid;
+    border-width: .1rem;
+    border-color: #7ab876;
+}
+
+.estadisticas{
+    border-radius: 1.5rem;
+    background-color: #b5e4ff;
+}
+.estadisticas p{
+    font-size: 3rem;
+}
+/************************************** Termina Estilos para Dashboard ************************************/
