@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/nexa-bold?styles=29913" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/handil-pro?styles=162901" rel="stylesheet">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css') }}"/>
+  <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>     
+  <script src="../static/laboral.js"></script>
+  <title>Formulario de Datos Laboral</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <div class="navbar navbar-expand-lg navbar-color">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+          <img src="{{ url_for('static', filename='img/cutonala.png') }}" alt="Tu Logo" width="120" height="50" class="d-inline-block align-top logo-with-shadow">
+        </a>
+      </div>
+    </div>
+  <div class="banner">
+    <div class="container p-5">
+      <div class="card mx-3 mt-n5 shadow-lg circular" style="border-radius: 40px; border: none">
+        <div class="card-body p-5">
+          <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
+          <h5 class="pb-2 text-center datos-generales-text">Informacion laboral</h5>
+          <hr>
+          <form action="/laboral" method="POST" onsubmit="return confirmarEnvio()">
+            <!-- Grupo 1 de campos del formulario -->
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="trabajoInput">¿Estás actualmente trabajando?</label>
+                    <div class="form-group mb-3">
+                        <select class="form-select circular" id="trabajoInput" name="trabajasiono">
+                            <option disabled selected>Selecciona una opción</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="nombreempresaInput">Nombre del lugar de trabajo</label>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control circular" id="nombreempresaInput" name="lugardetrabajo" placeholder="Ingresa el nombre del lugar de trabajo" data-na>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="horarioInput">Horario laboral</label>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control circular" id="horarioInput" name="horariolaboral" placeholder="Ingresa tu horario laboral" data-na>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Grupo 2 de campos del formulario -->
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="puestoInput">Puesto de trabajo</label>
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control circular" id="puestoInput" name="puestolaboral" placeholder="Ingresa tu puesto" data-na>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="sectorInput">Sector</label>
+                    <div class="form-group mb-3">
+                        <select class="form-select circular" id="sectorInput" name="sector" data-na>
+                            <option disabled selected>Selecciona una opción</option>
+                            <option value="Publico">Público</option>
+                            <option value="Privado">Privado</option>
+                            <option value="NoAplica">N/A</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botones de navegación -->
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E;">Regresar</button>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
+                </div>
+            </div>
+        </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script>
+    function confirmarEnvio() {
+        // Mostrar una alerta y preguntar al usuario si está seguro de enviar los datos
+        return confirm("¿Seguro que quieres enviar tus datos?");
+    }
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>

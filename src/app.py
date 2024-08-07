@@ -4,6 +4,9 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
 from config import config
 import tempfile
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # Modulos
 from models.ModelUser import ModelUser
@@ -40,7 +43,11 @@ def role_required(required_role):
 
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
+
+@app.route('/home')
+def home():
+     return render_template('home.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
