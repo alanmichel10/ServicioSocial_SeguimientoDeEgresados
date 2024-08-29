@@ -239,6 +239,15 @@ caption{
     border-width: .1rem;
     border-color: #b5e4ff;
 }
+
+.busqueda{
+    border-style: solid;
+    border-width: .1rem;
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+    outline: none;
+}
+
 .btn-Excel{
     border-style: none;
     padding: .8rem;
