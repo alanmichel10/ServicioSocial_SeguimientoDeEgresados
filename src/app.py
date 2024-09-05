@@ -5,6 +5,10 @@ from flask_login import LoginManager, logout_user, login_user, login_required, c
 from config import config
 import tempfile
 import smtplib
+import secrets
+import string
+import random
+import mysql.connector
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -19,6 +23,15 @@ from models.entities.User import User
 from models.entities.General import General
 from models.entities.Estudios import Estudios
 from models.entities.Trabajo import Trabajo
+
+correo = None
+def get_var():
+     return correo
+
+def set_var(x):
+     global correo
+     correo = x
+
 
 app = Flask(__name__)
 csrf = CSRFProtect()
@@ -48,42 +61,72 @@ def index():
 @app.route('/home')
 def home():
      return render_template('home.html')
-#---------------------- ----------------------------------------------------------------------#
-#Formulario
+#---------------------- -----------------------#Formulario--------------------------------------------#
 
 
 @app.route('/seleccion', methods=['GET', 'POST'])
 def seleccion():
     if request.method == 'POST': 
-        return redirect(url_for('gen'))
+        return redirect(url_for('gene'))
     return render_template('formulario/seleccion.html')
 
-@app.route('/gen', methods=['GET', 'POST'])
-def gen():
+@app.route('/gene', methods=['GET', 'POST'])
+def gene():
     if request.method == 'POST':
-          #nombre_gen = request.form['nombres']
-          #apellido_p = request.form['apellido_p']
-          #apellido_m = request.form['apellido_m']
-          #sexo = request.form['sexo']
-          #telefono = request.form['tel_contacto']
-          #set_var(request.form['correo_alumno'])
-          #c_postal = request.form['codigo_postal']
-          #pais = request.form['pais']
-          #estado = request.form['estado']
-          #ciudad = request.form['ciudad']
-          #colonia = request.form['colonia']
-          #nacionalidad = request.form['nacionalidad']
-          #f_nacimiento = request.form['f_nacimiento']
-          #insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, get_var(), c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento)
-       return redirect(url_for('estudios'))
+          nombre_gen = request.form['nombres']
+          apellido_p = request.form['apellido_p']
+          apellido_m = request.form['apellido_m']
+          sexo = request.form['sexo']
+          telefono = request.form['tel_contacto']
+          set_var(request.form['correo_alumno'])
+          c_postal = request.form['codigo_postal']
+          pais = request.form['pais']
+          estado = request.form['estado']
+          ciudad = request.form['ciudad']
+          colonia = request.form['colonia']
+          nacionalidad = request.form['nacionalidad']
+          f_nacimiento = request.form['f_nacimiento']
+          insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, get_var(), c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento)
+          return redirect(url_for('estu'))
+    
     return render_template('formulario/Generales.html')
           
 
+@app.route('/estu', methods=['GET', 'POST'])
+def estu():
+    if request.method == 'POST':
+          uni_proce = request.form['nivel']
+          carrera = request.form['carrera']
+          titulado = request.form['titulado']
+          ciclo = request.form['ciclo']
+          ingles = request.form['ingles']
+          promedio = request.form['promedio']
+          insertEstudios(uni_proce, carrera, titulado, ciclo, ingles, promedio, get_var())
+          return redirect(url_for('labo'))
 
+    return render_template('formulario/Estudios.html')
 
+@app.route('/labo', methods=['GET', 'POST'])
+def labo():
+    if request.method == 'POST':
+         siOno = request.form['trabajasiono']
+         lugar= request.form['lugardetrabajo']
+         horario= request.form['horariolaboral']
+         puesto= request.form['puestolaboral']
+         sector = request.form['sector']
+         
+         contrasena = insertLaboral(siOno, lugar, horario, puesto, sector, get_var())
 
+         destinatario = get_var()  # Usando el correo registrado
+         asunto = "Confirmación de Registro"
+         mensaje = "Gracias por registrarte. Tu información laboral ha sido recibida con éxito."
 
-
+         enviar_correo(destinatario, asunto, mensaje, contrasena)
+    
+         flash('Registro completo')
+         return redirect(url_for('inicio'))
+    
+    return render_template('formulario/Laboral.html')
 
 
 
@@ -343,6 +386,70 @@ def protected():
     return "<h1>Inicia sesion para acceder al sitio</h1>"
 def status_401(error):
     return redirect(url_for('login'))
+
+#---------------------------                 FORMULARIO                      -----------------------------------##
+
+def generar_contrasena(longitud=8):
+    caracteres = string.ascii_letters + string.digits + string.punctuation
+    contrasena = ''.join(random.choice(caracteres) for i in range(longitud))
+    return contrasena
+
+def insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, correo, c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento):
+     cursor = mysql.connection.cursor()
+     cursor.execute("insert into general (Nombres, Apellido_P, Apellido_M, Sexo, Tel_Contacto, Correo_Alumno, Codigo_Postal, Pais, Estado, Ciudad, Colonia, Nacionalidad, F_Nacimiento) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", (nombre_gen, apellido_p, apellido_m, sexo, telefono, correo, c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento))
+     mysql.connection.commit()
+     cursor.close()
+     mysql.connection.close()
+
+def insertEstudios(uni_proce, carrera, titulado, ciclo, ingles, promedio, correo):
+     cursor = mysql.connection.cursor()
+     cursor.execute("insert into grado_estudios values(%s, %s, %s, %s, %s, %s, %s);", (uni_proce, carrera, titulado, ciclo, ingles, promedio, correo))
+     mysql.connection.commit()
+     cursor.close()
+     mysql.connection.close()
+
+def insertLaboral(siOno, lugar, horario, puesto, sector, correo):
+    contrasena = generar_contrasena()  # Generar una contraseña aleatoria
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO info_laboral (Trabajando, Direccion_trabajo, Horario_Laboral, Puesto_Trabajo, Sector, Correo_PK_Info) VALUES (%s, %s, %s, %s, %s, %s);", 
+                   (siOno, lugar, horario, puesto, sector, correo))
+    mysql.connection.commit()
+
+    # Insertar la cuenta y contraseña en la base de datos
+    cursor.execute("INSERT INTO usuarios (correo, contrasena) VALUES (%s, %s);", (correo, contrasena))
+    mysql.connection.commit()
+
+    cursor.close()
+    mysql.connection.close()
+
+    return contrasena  # Retornar la contraseña generada
+
+def enviar_correo(destinatario, asunto, mensaje, contrasena=None):
+    remitente = "udgcorreos115@gmail.com"
+    contraseña = "mtzy zsdn vwnx jwdx"
+
+    # Configuración del servidor de correo
+    servidor = smtplib.SMTP('smtp.gmail.com', 587)
+    servidor.starttls()
+    servidor.login(remitente, contraseña)
+
+    # Creación del correo
+    correo = MIMEMultipart()
+    correo['From'] = remitente
+    correo['To'] = destinatario
+    correo['Subject'] = asunto
+
+    # Agregar el mensaje al correo
+    if contrasena:
+        mensaje += f"\n\nTu contraseña es: {contrasena}"
+    correo.attach(MIMEText(mensaje, 'plain'))
+
+    # Enviar el correo
+    servidor.send_message(correo)
+    servidor.quit()
+
+
 
 
 def status_404(error):
