@@ -48,7 +48,48 @@ def index():
 @app.route('/home')
 def home():
      return render_template('home.html')
+#---------------------- ----------------------------------------------------------------------#
+#Formulario
 
+
+@app.route('/seleccion', methods=['GET', 'POST'])
+def seleccion():
+    if request.method == 'POST': 
+        return redirect(url_for('gen'))
+    return render_template('formulario/seleccion.html')
+
+@app.route('/gen', methods=['GET', 'POST'])
+def gen():
+    if request.method == 'POST':
+          #nombre_gen = request.form['nombres']
+          #apellido_p = request.form['apellido_p']
+          #apellido_m = request.form['apellido_m']
+          #sexo = request.form['sexo']
+          #telefono = request.form['tel_contacto']
+          #set_var(request.form['correo_alumno'])
+          #c_postal = request.form['codigo_postal']
+          #pais = request.form['pais']
+          #estado = request.form['estado']
+          #ciudad = request.form['ciudad']
+          #colonia = request.form['colonia']
+          #nacionalidad = request.form['nacionalidad']
+          #f_nacimiento = request.form['f_nacimiento']
+          #insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, get_var(), c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento)
+       return redirect(url_for('estudios'))
+    return render_template('formulario/Generales.html')
+          
+
+
+
+
+
+
+
+
+
+
+#---------------------- ----------------------------------------------------------------------#
+#Login
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
