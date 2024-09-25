@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/nexa-bold?styles=29913" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/handil-pro?styles=162901" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>     
+  <title>Formulario de Datos Generales</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-color">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="css/img/LogoCUT.png" alt="Tu Logo" width="109" height="48" class="d-inline-block align-top logo-with-shadow">
+      </a>
+      <!-- Nombre del usuario que inició sesión -->
+      <span class="navbar-text" style="color: aliceblue;">
+        Nombre de Usuario
+      </span>
+    </div>
+  </nav>
+  <div class="banner">
+    <div class="container p-5">
+      <div class="card mx-3 mt-n5 shadow-lg circular" style="border-radius: 40px; border: none">
+        <div class="card-body p-5">
+          <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
+          <h5 class="pb-2 text-center datos-generales-text">Datos Generales</h5>
+          <hr>
+          <form>
+            <!-- Grupo 1 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="NombreInput">Nombre(s)</label>
+                <div class="form-text mb-3">
+                  <input type="text" class="form-control circular" id="NombreInput" placeholder="Ingresa tu nombre">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="apellidopInput">Apellido Paterno</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="apellidopInput" placeholder="Ingresa tu apellido paterno">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="apellidomInput">Apellido Materno</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="apellidomInput" placeholder="Ingresa tu apellido materno">
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 2 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="curpInput">CURP</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="curpInput" placeholder="Ingresa tu CURP">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="sexoInput">Sexo</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="sexoInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                    <option value="Prefiero">Prefiero no decirlo</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="estadoInput">Estado Civil</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="estadoInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Soltero">Soltero/a</option>
+                    <option value="Casado">Casado/a</option>
+                    <option value="Divorciado">Divorciado/a</option>
+                    <option value="Viudo">Viudo/a</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 3 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="codigoInput">Codigo de Estudiante UDG</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="codigoInput" placeholder="Ingresa tu codigo udg">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="celInput">Numero de Celular</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="celInput" placeholder="Ingresa tu celular">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="correoInput">Correo Electronico</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="correoInput" placeholder="Ingresa tu correo">
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 4 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="postalInput">Codigo Postal</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="postalInput" placeholder="Ingresa tu codigo postal">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="paisInput">Pais</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="paisInput" placeholder="Ingresa tu pais">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="estadoInput">Estado</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="estadoInput" placeholder="Ingresa tu estado">
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 5 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="ciudadInput">Ciudad</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="ciudadInput" placeholder="Ingresa tu ciudad">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="coloniaInput">Colonia</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="coloniaInput" placeholder="Ingresa tu colonia">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="domicilioInput">Domicilio</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="domicilioInput" placeholder="Ingresa tu domicilio">
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 6 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="telefonoInput">Telefono de Casa</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="telefonoInput" placeholder="Ingresa tu telefono de casa">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="fechanacimientoInput">Fecha de Nacimiento</label>
+                <div class="form-group mb-3">
+                  <input type="date" class="form-control circular" id="fechanacimientoInput" placeholder="Fecha de Nacimiento">
+                </div>
+              </div>
+            </div>
+
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>
+            <!-- Botones de navegación -->
+            <div class="nav-buttons">
+              <button type="button" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+body, html{
+    font-family: 'Nexa', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    line-height: auto;
+  }
+
+  .barra {
+    background-color: #016A70;
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #549099 10px ), repeating-linear-gradient( #0C616E55, #0C616E );
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
+
+  .titulo {
+    color: white;
+    margin-left: 6%;
+  }
+
+  .logo{
+      height: 55px;
+      width: auto;
+      margin-left: 50px;
+      margin-right: 10px;
+      border-radius: 5px;
+  }
+  
+
+  .user{
+      height: 40px;
+      margin-right: 50px;
+  }
+
+  .usuario{
+    margin: auto;
+    margin-right: 10px;
+    padding: 5px;
+    color: white;
+    font-size: .9em;
+  }
+
+  .contenedor{
+    display: flex;
+  }
+
+
+  .barra-lateral{
+    padding: 10px 10px 20px 10px;
+    background-color: #016A70 ;
+    max-height: 100%; 
+    width: 220px;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+
+  .barra-lateral h6{
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+
+  .boton {
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+    background: none;
+    color: white;
+    border-bottom: 1px solid white;
+    text-align: justify;
+  }
+  
+  .boton:hover {
+    background-color: #0C616E; /* Cambiamos el color de fondo al pasar el ratón */
+  }
+ 
+  .main {
+    flex-grow: 1; 
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: rgb(247, 247, 247);
+}
+
+.registros{
+  padding: 10px 1px 10px 20px;
+  margin-bottom: 30px;
+  background-color: white;
+  margin-right: 75%;
+  border-left: 5px solid #0C616E;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.registros p{
+  font-size: .8em;
+  font-weight: bold;
+  color: #0C616E;
+}
+
+.registros h6{
+  color: #9b9b9b;
+}
+
+.datos {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    max-width: 1080px; /* Puedes ajustar este valor según tus necesidades */
+  }
+
+
+.buscador{
+  padding: 25px 15px 20px 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: .5px solid #eeeeee;
+  border-radius: 3px;
+}
+
+.buscador2{
+  padding: 10px 15px 10px 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: .5px solid #eeeeee;
+  border-radius: 3px;
+}
+
+.buscador h6{
+  color: #0C616E;
+}
+
+.button{
+  background-color: #0C616E ;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px 5px 10px;
+}
+
+.contenedor-tabla {
+  border: .5px solid #eeeeee;
+  border-radius: 5px;
+}
+
+.tablas {
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  margin: 10px;
+}
+
+.table-striped{
+  min-width: max-content;
+}
+
+
+th, td{
+  padding: 10px;
+}
+

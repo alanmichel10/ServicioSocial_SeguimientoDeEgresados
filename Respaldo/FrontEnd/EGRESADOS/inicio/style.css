@@ -1,0 +1,236 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+.contenedor{
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 5px; 
+  border: 1px solid #ccc;
+}
+
+.barra {
+    background-color: #0C616E;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.barra img{
+    height: 60px;
+    margin-left: 10px;
+}
+
+.barra h1{
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 40px;
+    font-size: 30px;
+    color: white;
+}
+   
+.acceso {
+  margin-left: auto;
+  margin-right: 40px; 
+}
+
+.acceso a {
+  
+  font-size: 16px; 
+  font-weight: bold; 
+  text-decoration: none; 
+  color: #ffffff; 
+  transition: color 0.3s;
+}
+
+.acceso a:hover {
+  color: #bebebe; 
+}
+
+
+
+.carrucel{
+    background-color: rgb(244, 244, 244);
+}
+
+.carousel {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding-bottom: 40px;
+}
+
+.carousel-item img {
+    width: 700px;
+    height: 500px;
+    object-fit: cover; 
+}
+
+.registro{
+    text-align: center;
+    margin: 40px;
+}
+
+.registro h1{
+    color: rgb(123, 123, 123);
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.registro button {
+    background-color: #0C616E; 
+    color: #fff; 
+    padding: 1px 10px; 
+    border: none; 
+    border-radius: 25px; 
+    font-size: 2em; 
+    font-weight: bold;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+.convocatoria{
+    background-color: rgb(244, 244, 244);
+    padding: 40px;
+}
+
+.convocatoria h2{
+    color: rgb(111, 111, 111);
+    font-weight: bold;
+    text-align: center;
+    width: 950px;
+    margin: 0 auto;
+}
+
+.maestria {
+    display: flex;
+    padding: 40px;
+  }
+  
+  .imagen {
+    flex: 1; 
+    
+  }
+  
+  .imagen img {
+    max-width: 100%; 
+    height: auto;
+  }
+  
+  .contenido {
+    flex: 1; 
+    text-align: left;
+    padding-left: 50px;
+    
+  }
+  
+  .contenido h1 {
+    font-size: 2.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
+    color: rgb(94, 94, 94);
+  }
+  
+  .contenido ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .contenido li {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(94, 94, 94);
+    
+  }
+  
+  .doctorado {
+    background-color: rgb(244, 244, 244);
+    padding: 40px;
+    display: flex;
+  }
+  
+  .contenido2 {
+    flex: 1; 
+    text-align: left;
+    padding-right: 50px;
+    
+  }
+  
+  .contenido2 h2 {
+    font-size: 2.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
+    color: rgb(94, 94, 94);
+  }
+  
+  .contenido2 ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .contenido2 li {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(94, 94, 94);
+  }
+  
+  .imagen2 {
+    flex: 1;
+    
+  }
+  
+  .imagen2 img {
+    max-width: 100%; 
+    height: auto;
+  }
+
+  .linea{
+    padding: 60px 40px;
+  }
+
+  .linea-divisoria {
+    border: none; 
+    border-top: 3px solid #ccc; 
+    margin: 30px -30px; 
+  }
+  
+  
+  
+  .logo{
+    padding: 30px;
+  }
+  
+  .contacto {
+    background-color: #F2F2F2;
+    padding: 20px;
+    position: relative;
+  }
+
+  .contacto img {
+    width: 250px; 
+    display: block;
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+    z-index: 1;
+}
+
+  .contacto p {
+    font-size: 11px; 
+    margin-bottom: 5px; 
+    color:rgb(94, 94, 94);
+  }
+
+  .derechos-autor {
+    font-size: 11px; 
+    text-align: center; 
+    margin-top: 90px; 
+    color:rgb(94, 94, 94);
+  }

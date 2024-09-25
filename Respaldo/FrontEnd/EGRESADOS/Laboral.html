@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/nexa-bold?styles=29913" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/handil-pro?styles=162901" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>     
+  <title>Formulario de Datos Laboral</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-color">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="css/img/LogoCUT.png" alt="Tu Logo" width="109" height="48" class="d-inline-block align-top logo-with-shadow">
+      </a>
+      <!-- Nombre del usuario que inició sesión -->
+      <span class="navbar-text" style="color: aliceblue;">
+        Nombre de Usuario
+      </span>
+    </div>
+  </nav>
+  <div class="banner">
+    <div class="container p-5">
+      <div class="card mx-3 mt-n5 shadow-lg circular" style="border-radius: 40px; border: none">
+        <div class="card-body p-5">
+          <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
+          <h5 class="pb-2 text-center datos-generales-text">Informacion Laboral</h5>
+          <hr>
+          <form>
+            <!-- Grupo 1 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="trabajoInput">¿Estas Actualmente Trabajando?</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="trabajoInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="tipotrabaInput">Tipo de Trabajo</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="tipotrabaInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Empleado">Empleado</option>
+                    <option value="Docente">Docente</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="nombreempresaInput">Nombre de la Empresa</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="nombreempresaInput" placeholder="Ingresa el nombre de la empresa">
+                </div>
+              </div>
+            </div>
+
+            <!-- Grupo 2 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="puestoInput">Puesto de Trabajo</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="puestoInput" placeholder="Ingresa tu puesto">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="sectorInput">Sector</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="sectorInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Publico">Publico</option>
+                    <option value="Privado">Privado</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="giroInput">Giro de la Empresa</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="giroInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Servicios">Servicios</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="Educativo">Educativo</option>
+                  </select>
+                </div>             
+              </div>
+            </div>
+            <!-- Grupo 4 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="tiempoInput">Tiempo Laborando</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="tiempoInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="1año">Menos de 1 año</option>
+                    <option value="1a5años">De 1 a 5 años</option>
+                    <option value="10años">Mas de 10 años</option>
+                  </select>
+                </div>             
+              </div>
+            </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>
+            <!-- Botones de navegación -->
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" style="border-radius: 30px; background-color: #0C616E;">Regresar</button>
+              <button type="button" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>

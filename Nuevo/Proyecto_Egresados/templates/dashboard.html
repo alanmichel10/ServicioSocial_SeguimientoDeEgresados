@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Aspirantes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style4.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="principal">
+        <div class="barra">
+            <img class="logo" src="{{ url_for('static', filename='img/cutonala.png') }}" alt="Logo CUTonalá">
+            <p class="usuario">{{ session.get('user_name', 'Usuario') }}</p>
+            <img class="user" src="{{ url_for('static', filename='img/usuario.png') }}" alt="Icono de usuario">
+        </div>
+    
+        <div class="contenedor">
+            <aside class="barra-lateral">
+              <h6>PANEL DE CONTROL</h6>
+              <button type="button" class="boton">Aspirantes</button>
+            </aside>
+            <main class="main">
+                <div class="registros">
+                    <p>ASPIRANTES REGISTRADOS</p>
+                    <h6>{{ data|length }}</h6>
+                </div>
+                <div class="datos">
+                    <div class="buscador">
+                        <h6>INFORMACIÓN DE ASPIRANTES</h6>
+                        <div class="button-container">
+                            <button class="button" id="exportExcel">Generar Excel</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive contenedor-tabla">
+                        <table id="aspirantesTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="15" style="text-align: center;">DATOS GENERALES</th>
+                                    <th colspan="6" style="text-align: center;">DATOS DE ESTUDIOS</th>
+                                    <th colspan="5" style="text-align: center;">DATOS TRABAJO</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Apellido Paterno</th>
+                                    <th scope="col">Apellido Materno</th>
+                                    <th scope="col">Sexo</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Código Postal</th>
+                                    <th scope="col">País</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Ciudad</th>
+                                    <th scope="col">Colonia</th>
+                                    <th scope="col">Nacionalidad</th>
+                                    <th scope="col">Fecha de Nacimiento</th>
+                                    <th scope="col">Carreras de Interés</th>
+                                    <th scope="col">Universidad de Procedencia</th>
+                                    <th scope="col">Carrera</th>
+                                    <th scope="col">Titulado</th>
+                                    <th scope="col">Ciclo de Egreso</th>
+                                    <th scope="col">Nivel de Inglés</th>
+                                    <th scope="col">Promedio</th>
+                                    <th scope="col">¿Trabajando?</th>
+                                    <th scope="col">Lugar de Trabajo</th>
+                                    <th scope="col">Horario Laboral</th>
+                                    <th scope="col">Puesto de Trabajo</th>
+                                    <th scope="col">Sector</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in data %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ row[0] }}</td>
+                                    <td>{{ row[1] }}</td>
+                                    <td>{{ row[2] }}</td>
+                                    <td>{{ row[3] }}</td>
+                                    <td>{{ row[4] }}</td>
+                                    <td>{{ row[5] }}</td>
+                                    <td>{{ row[6] }}</td>
+                                    <td>{{ row[7] }}</td>
+                                    <td>{{ row[8] }}</td>
+                                    <td>{{ row[9] }}</td>
+                                    <td>{{ row[10] }}</td>
+                                    <td>{{ row[11] }}</td>
+                                    <td>{{ row[12] }}</td>
+                                    <td>{{ row[13] }}</td>
+                                    <td>{{ row[14] }}</td>
+                                    <td>{{ row[15] }}</td>
+                                    <td>{{ row[16] }}</td>
+                                    <td>{{ row[17] }}</td>
+                                    <td>{{ row[18] }}</td>
+                                    <td>{{ row[19] }}</td>
+                                    <td>{{ row[20] }}</td>
+                                    <td>{{ row[21] }}</td>
+                                    <td>{{ row[22] }}</td>
+                                    <td>{{ row[23] }}</td>
+                                    <td>{{ row[24] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#aspirantesTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                }
+            });
+
+            $('#exportExcel').on('click', function() {
+                $('.buttons-excel').click();
+            });
+        });
+    </script>
+</body>
+</html>

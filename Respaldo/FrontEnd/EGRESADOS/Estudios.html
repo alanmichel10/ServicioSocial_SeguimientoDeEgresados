@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://fonts.cdnfonts.com/css/nexa-bold?styles=29913" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/handil-pro?styles=162901" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css"/>
+  <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>     
+  <title>Formulario de Datos Generales</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-color">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="css/img/LogoCUT.png" alt="Tu Logo" width="109" height="48" class="d-inline-block align-top logo-with-shadow">
+      </a>
+      <!-- Nombre del usuario que inició sesión -->
+      <span class="navbar-text" style="color: aliceblue;">
+        Nombre de Usuario
+      </span>
+    </div>
+  </nav>
+  <div class="banner">
+    <div class="container p-5">
+      <div class="card mx-3 mt-n5 shadow-lg circular" style="border-radius: 40px; border: none">
+        <div class="card-body p-5">
+          <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
+          <h5 class="pb-2 text-center datos-generales-text">Datos Estudios</h5>
+          <hr>
+          <form>
+            <!-- Grupo 1 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="nivelInput">Nivel</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="nivelInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Maestria">Maestria</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="centroInput">Centro Universitario</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="centroInput" placeholder="Ingresa tu centro">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="carreraInput">Carrera</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="carreraInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Lorem1">Lorem ipsum dolor sit amet.</option>
+                    <option value="Lorem2">Lorem, ipsum dolor.</option>
+                  </select>
+                </div>             
+              </div>
+            </div>
+
+            <!-- Grupo 2 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="cicloInput">Ciclo Escolar Egreso</label>
+                <div class="form-group mb-3">
+                  <input type="text" class="form-control circular" id="cicloInput" placeholder="Ingresa tu ciclo de egreso">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="nivelinglesInput">Nivel de Ingles</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="nivelinglesInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Basico">Basico</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="otroidiomaInput">Otro Idioma</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="otroidiomaInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Frances">Frances</option>
+                    <option value="Portugues">Portugues</option>
+                    <option value="Mandarin">Mandarin</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>             
+              </div>
+            </div>
+            <!-- Grupo 4 de campos del formulario -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="nivelotroInput">Nivel Otro Idioma</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="nivelotroInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Basico">Basico</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="nivelotroInput">Titulado</label>
+                <div class="form-group mb-3">
+                  <select class="form-select circular" id="nivelotroInput">
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>             
+              </div>
+              <div class="col-md-4">
+                <label for="fechanacimientoInput">Fecha de Obtencion Titulo</label>
+                <div class="form-group mb-3">
+                  <input type="date" class="form-control circular" id="fechanacimientoInput" placeholder="Fecha de Nacimiento">
+                </div>
+              </div>
+            </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>
+            <!-- Botones de navegación -->
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" style="border-radius: 30px; background-color: #0C616E;">Regresar</button>
+              <button type="button" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+</body>
+</html>

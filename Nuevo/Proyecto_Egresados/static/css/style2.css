@@ -1,0 +1,370 @@
+body, html{
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.principal{
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 5px;
+  background-color: #FDFDFD;
+}
+.barra {
+  background-color: #549099;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #549099 10px), repeating-linear-gradient(#0C616E55, #0C616E);
+  height: 90px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.barra img {
+  height: 60px;
+  margin-left: 50px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.barra h5 {
+  color: white;
+}
+
+.inicio-sesion {
+  background-color: #0C616E;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: auto;
+  margin-left: auto;
+  margin-right: 40px; /* Añadido para dar un espacio a la derecha */
+  padding: 5px;
+}
+
+form {
+  margin-left: auto;
+}
+
+
+.introduccion{
+  background-color: #30707a;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.hoja{
+  height: 70px;
+  margin-left: 5px;
+}
+  
+.introduccion h4{
+  text-align: center;
+  color: white;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.hoja2 {
+  height: 70px;
+  margin-right: 5px;
+}
+   
+.contenedor{
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1), 5px 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.carrucel{
+  margin: auto;
+  background-color: white;
+  padding-bottom: 50px;
+}
+
+.carousel-inner{
+  height: 420px;
+  width: auto;
+
+}
+
+.registro{
+  padding: 80px 100px 80px 100px;
+  background-color: white;
+}
+
+.registro h3{
+  color: rgb(94, 94, 94);
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+}
+
+.registro p{
+text-align: justify;
+text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+color: rgb(94, 94, 94);
+font-size: 1.1em;
+margin-bottom: 20px;
+}
+
+.registro button {
+  background-color: #0C616E; 
+  color: #fff; 
+  border: none; 
+  border-radius: 25px; 
+  font-size: 2em; 
+  font-weight: bold;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: auto;
+}
+
+
+.comentario{
+  color: #fffefe;
+  -webkit-text-stroke: .3px black;
+  font-weight: bold;
+}
+
+.informacion{
+  background-color: rgb(244, 244, 244);
+  padding:80px 100px 80px 100px;
+  
+}
+
+.informacion h3{
+  text-align: justify;
+  text-align: center;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+  padding: 10px 20px ;
+}
+
+.informacion img{
+  display: block;
+  margin: auto;
+  width: 80px;
+}
+
+.parrafo{
+  text-align: center;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+  font-size: 1.1em;
+  padding-top: 15px ;
+}
+
+.parrafo2{
+  text-align: justify;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+  font-size: 1.1em;
+}
+
+.pregunta{
+  padding: 80px 100px 80px 100px;
+  background-color: white;
+}
+
+.pregunta h3{
+  text-align: center;
+  color: rgb(94, 94, 94);
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+}
+
+.objetivo{
+  display: flex;
+  justify-content: center;
+  padding: 80px 80px;
+  background-color: rgba(244,244,244);
+  background-image:  radial-gradient(#0C616E 0.75px, transparent 0.75px), radial-gradient(#0C616E 0.75px, rgba(244,244,244,0) 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0,15px 15px;
+}
+
+.card {
+  margin-right: 35px;
+  margin-left: 35px;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1), 5px 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.card h6{
+  text-align: center;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+}
+
+.card-text{
+  text-align: justify;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+  padding: 15px;
+}
+
+.programas{
+  padding: 80px 100px 80px 100px;
+  background-color: white;
+}
+
+.programas h3{
+  text-align: center;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+  padding-top: 15px ;
+}
+
+.programas p{
+  text-align: justify;
+  text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+  color: rgb(94, 94, 94);
+  font-size: 1.1em;
+  padding-top: 15px ;
+}
+
+.imagenes{
+  display: flex;
+  justify-content: space-between;
+}
+
+.izquierda{
+  float: left;
+  max-width: 48%;
+}
+
+.derecha{
+  float: right;
+  max-width: 48%;
+}
+
+.maestria {
+  background-color: rgb(244, 244, 244);
+  padding:80px 100px 80px 100px;
+}
+
+.maestria h3{
+  text-align: left;
+  color: rgb(94, 94, 94);
+  padding-left: 33px;
+  padding-bottom: 20px;
+}
+
+.card-header button {
+  width: 100%; /* El botón ocupa todo el ancho del encabezado */
+  text-align: left; /* Texto alineado a la izquierda */
+  color: rgb(94, 94, 94); /* Color del texto del encabezado */
+  font-weight: bold; /* Texto en negrita */
+  border: none; /* Quita el borde del botón */
+  outline: none; /* Quita el contorno del botón al hacer clic */
+}
+
+.card-body {
+  background-color: #fff; /* Fondo del cuerpo del acordeón */
+  padding: 10px; /* Espacio alrededor del contenido */
+  text-align: justify;
+}
+
+.card-header button.collapsed {
+  background-color: #f9f9f9;
+}
+
+.linea2{
+  background-color:  rgb(244, 244, 244);
+  padding:1px 1px ;
+}
+
+.linea-divisoria2 {
+  border: none; 
+  border-top: 1.5px solid #ccc; 
+}
+
+.doctorado {
+  background-color: rgb(244, 244, 244);
+  padding:80px 100px 80px 100px;
+}
+
+.doctorado h3{
+  text-align: left;
+  color: rgb(94, 94, 94);
+  padding-left: 33px;
+  padding-bottom: 20px;
+}
+
+.convocatoria{
+    background-color: rgb(255, 255, 255);
+    padding:80px 100px 80px 100px;
+}
+
+.convocatoria p{
+    color: rgb(94, 94, 94);
+    text-align: justify;
+    font-size: 1.1em;
+    text-shadow: 0px .2px .2px rgba(0, 0, 0, 0.6);
+}
+
+.convocatoria img{
+  width: 700px;
+  height: auto;
+  display: block;
+  margin: auto;
+  padding: 20px;
+}
+
+.img img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.linea{
+    padding:40px 20px 40px 20px;
+    background-color: white;
+}
+
+.linea-divisoria {
+    border: none; 
+    border-top: 1.5px solid #ccc; 
+}
+  
+.logo{
+    padding: 30px;
+}
+  
+.contacto {
+    background-color: #ebeaeb;
+    padding: 20px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.contacto img {
+    width: 250px; 
+    display: block;
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+    z-index: 1;
+}
+
+.p {
+    font-size: 11px; 
+    margin-bottom: 5px; 
+    color:rgb(94, 94, 94);
+    text-align: left;
+}
+
+.derechos-autor {
+    font-size: 11px; 
+    text-align: center; 
+    margin-top: 90px; 
+    color:rgb(94, 94, 94);
+}

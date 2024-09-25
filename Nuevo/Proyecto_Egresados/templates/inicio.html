@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posgrados</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="principal">  
+    <div class="contenedor">
+
+      <div class="barra">
+        <img src="{{ url_for('static', filename='img/cutonala.png') }}" alt="">
+        <h5>Centro Universitario de Tonalá</h5>
+          <form action="/login" method="get">
+        <button class="inicio-sesion" type="submit" >INICIAR SESIÓN</button>
+      </form>
+      </div>
+
+      <div class="introduccion">
+        <img src="{{ url_for('static', filename='img/hoja.png') }}" alt="" class="hoja">
+      <h4>¡Te estamos esperando! Explora nuevas oportunidades para el crecimiento académico y profesional. </h4>
+      <img src="{{ url_for('static', filename='img/hoja.png') }}" alt="" class="hoja2">
+      </div>
+
+      <div class="carrucel">
+        <div id="miCarrusel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#miCarrusel" data-slide-to="0" class="active"></li>
+            <li data-target="#miCarrusel" data-slide-to="1"></li>
+            <li data-target="#miCarrusel" data-slide-to="2"></li>
+            <li data-target="#miCarrusel" data-slide-to="3"></li>
+            <li data-target="#miCarrusel" data-slide-to="4"></li>
+            <li data-target="#miCarrusel" data-slide-to="5"></li>
+          </ol>
+        
+          <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <img src="{{ url_for('static', filename='img/Principal.jpg') }}" class="d-block w-100" alt="cutonala">
+              <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/1.jpg') }}" class="d-block w-100" alt="derechos-humanos">
+              <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/2.jpg') }}" class="d-block w-100" alt="derechos-humanos">
+              <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/3.jpg') }}" class="d-block w-100" alt="energia">
+              <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        
+            <!-- Slide 4 -->
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/4.jpg') }}" class="d-block w-100" alt="geologia"> 
+              <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        
+            <!-- Slide 5 -->
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/5.jpg') }}" class="d-block w-100" alt="movilidad-urbana">
+              <div class="carousel-caption d-none d-md-block">
+                </div>
+            </div>
+        
+          </div>
+        
+          <a class="carousel-control-prev" href="#miCarrusel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+          </a>
+          <a class="carousel-control-next" href="#miCarrusel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+          </a>
+          
+        </div>
+    </div>
+
+    <div class="registro">
+      <h3>¡Próximas Convocatorias!</h3>
+      <p>Mantente atento a nuestras próximas convocatorias para los programas de maestría y doctorado. Estamos ansiosos por recibir a estudiantes apasionados que estén listos para embarcarse en un viaje educativo y de investigación en nuestra comunidad académica.</p>
+      <form action="/seleccion" method="get">
+      <button type="submit">REGISTRATE</button>
+    </form>
+    </div>
+
+    <div class="informacion">
+      <h3>Programa de Régistro de Maestrías y Doctorados</h3>
+      <img src="{{ url_for('static', filename='img/registro.png') }}" alt="">
+      <p class="parrafo">¡Bienvenido a la convocatoria de Maestrías y Doctorados del Centro Universitario de Tonala!</p>
+      <p class="parrafo2">En el CUT, nos enorgullecemos de ofrecer programas de posgrado de alta calidad que están diseñados para preparar a nuestros estudiantes para carreras exitosas en sus campos de interés. Nuestros programas de maestría y doctorado son impartidos por destacados profesores e investigadores que están a la vanguardia de sus disciplinas.</p>
+
+    </div>
+
+    <div class="pregunta">
+      <h3>¿Por qué elegir estudiar nuestros Posgrádos?</h3>
+    </div>
+
+    <div class="objetivo">
+      <div class="card" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='img/card1.jpg') }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Excelencia Académica</h5>
+          <p class="card-text">Nuestros programas de posgrado están diseñados para brindar una educación de clase mundial, que te preparará para destacarte en tu campo profesional.</p>
+        </div>
+      </div>
+      
+      <div class="card" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='img/card2.jpg') }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Investigación Innovadora</h5>
+          <p class="card-text">Únete a una comunidad académica que impulsa la investigación innovadora en una amplia variedad de disciplinas.</p>
+        </div>
+      </div>
+      
+      <div class="card" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='img/card3.jpg') }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Oportunidades Profesionales</h5>
+          <p class="card-text">Nuestros graduados están muy solicitados en el mercado laboral, gracias a la formación de alta calidad que reciben.</p>
+        </div>
+      </div>
+    </div>
+
+      <div class="programas">
+        <h3>Lo que Ofrecemos</h3>
+        <p>Echa un vistazo a nuestros programas de maestrías y doctorados y encuentra la mejor opción que se alinea mejor con tus objetivos profesionales y académicos: </p>
+        <div class="imagenes">
+          <img class="izquierda" src="{{ url_for('static', filename='img/maestrias.jpg') }}" alt="">
+          <img class="derecha" src="{{ url_for('static', filename='img/doctorado.jpg') }}" alt="">
+        </div>
+      </div>
+      
+      <div class="maestria">
+        <h3>Maestrías</h3>
+        <div id="miAcordeon">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Maestría en Movilidad Urbana, Transporte y Territorio
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#miAcordeon">
+              <div class="card-body">
+                La Maestría en Movilidad Urbana, Transporte y Territorio (MMUTT) se encuentra dentro del Padrón Nacional de Posgrados del Consejo Nacional de Ciencia y Tecnología (CONACYT).
+                En un acercamiento general  sobre la problemática de las ciudades, cada vez más acentuada en el tema de la movilidad urbana y el transporte, resalta la necesidad de realizar estudios sobre su desarrollo, sus posibilidades creativas, renovación de las infraestructuras, de los equipamientos, de los materiales y capacidades técnicas, así como los métodos y tecnologías en que pueden apoyarse en cada una de sus variantes.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Maestría en Ingeniería del Agua y la Energía (Profesionalizante)
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#miAcordeon">
+              <div class="card-body">
+                Existe una demanda en la región en la temática de sustentabilidad del agua y la energía, en los sectores privado, gubernamental, académico y social. La Maestría en Ingeniería del agua y Energía, formará recursos humanos de alto nivel que impulsen el desarrollo. Se requieren en el estado nuevas ideas, soluciones prácticas y económicas en la gestión integral de los recursos hídrico y energético. Este programa de posgrado será un programa académico escolarizado, con orientación profesionalizante.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Maestría en Gestión de Gobiernos Locales
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#miAcordeon">
+              <div class="card-body">
+                En este programa buscamos formar profesionales del sector público en el ámbito local que, en su día a día, construyan una mejor vida en común.
+                Para esto ofrecemos un proceso de formación serio y orientado a la práctica. Si deseas participar en este proyecto te verás involucrado en cursos, talleres, conferencias y proyectos vinculados con tu práctica profesional. Nos centramos en ofrecer a ti y a la instancia donde laboras resultados académicos de utilidad. 
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingFour">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Maestría en Geología
+                </button>
+              </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#miAcordeon">
+              <div class="card-body">
+                El objetivo general de la Maestría en Geología es formar maestros especializados en el área de la geología de alta calidad, con capacidades críticas para desempeñarse en instituciones públicas y privadas que se dedican a la exploración, aprovechamiento y gestión de recursos geológicos.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingFive">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Maestría en Ciencias en Ingeniería del Agua y la Energía (Investigación)
+                </button>
+              </h5>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#miAcordeon">
+              <div class="card-body">
+                La Maestría en Ciencias en Ingeniería del Agua y la Energía tiene por objeto cubrir las demandas creadas por el sector productivo, social académico y principalmente científico y tecnológico, en el estado de Jalisco, como en el resto de estados de la República Mexicana. Se formarán profesionistas altamente capacitados que participen en el ámbito de la docencia y que tendrán la capacidad de desarrollar ideas que coadyuven en la generación de nuevo conocimiento y aplicación del conocimiento.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingSix">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                  Maestría en Ciencias Antropológicas
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#miAcordeon">
+              <div class="card-body">
+                Este programa surge ante la necesidad de formar investigadores con conocimiento integral de la disciplina, centrados en el manejo de los enfoques teórico metodológicos medulares y contemporáneos de la antropología en el ámbito local y global, para que sean capaces de desarrollar proyectos de investigación y proponer programas de impacto social sustentados en los temas de estudio de su competencia, desarrollando habilidades de interlocución con otras disciplinas sociales. De este modo se busca que el posgrado aporte un profundo y completo conocimiento sobre la antropología, desarrollando en los estudiantes las competencias que son demandadas por la realidad social.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingSeven">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                  Maestría en Ciencia de la Ciudad
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#miAcordeon">
+              <div class="card-body">
+                La Maestría en Ciencia de la Ciudad (MCCd) propone una construcción estructural sólida hacia la visión transdisciplinar, para comprender los procesos urbanos, condición necesaria para el conocimiento de sistemas complejos como las ciudades. 
+                Se orienta hacia la investigación y promueve el desarrollo tecnológico, la innovación y la aplicación la investigación en el camino hacia la transformación del conocimiento de las intervenciones urbanas.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingEight">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                  Maestría en Bioética
+                </button>
+              </h5>
+            </div>
+            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#miAcordeon">
+              <div class="card-body">
+                La bioética, de acuerdo con los documentos internacionales que la definen, debe concebirse como una disciplina plural y pluridisciplinaria. Esto cobra gran sentido en el contexto nacional, si consideramos que una problemática bioética implica aspectos humanísticos, sociales, científicos, tecnológicos y administrativos. Además, el mosaico cultural de nuestro país, así como las grandes desigualdades de oportunidades, nos colocan en una situación sine qua non para la atención de los preceptos de la bioética.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="linea2">
+        <hr class="linea-divisoria2">
+      </div>
+     
+      <div class="doctorado">
+        <h3>Doctorados</h3>
+        <div id="miAcordeon">
+          <div class="card">
+            <div class="card-header" id="headingNine">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                  Doctorado en Movilidad Urbana, Transporte y Territorio
+                </button>
+              </h5>
+            </div>
+            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#miAcordeon">
+              <div class="card-body">
+                En un acercamiento general  sobre la problemática de las ciudades, cada vez más acentuada en el tema de la movilidad urbana y el transporte, resalta la necesidad de realizar estudios sobre su desarrollo, sus posibilidades creativas, renovación de las infraestructuras, de los equipamientos, de los materiales y capacidades técnicas, así como los métodos y tecnologías en que pueden apoyarse en cada una de sus variantes.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingTen">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                  Doctorado en Investigación Multidisciplinaria en Salud
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#miAcordeon">
+              <div class="card-body">
+                Los países considerados potencias mundiales son aquellos que han sustentado su economía en el desarrollo de sus recursos y no en aquellos que la naturaleza les otorgo. Estos recursos, creados por ellos mismos, son producto de un modelo basado en la Ciencia o el desarrollo científico. Este marco les permite identificar y caracterizar el problema y, por ende, crear la tecnología para resolver problemas inherentes de su sociedad y su tiempo sin la dependencia de otros. Sin embargo, el principal atributo de trabajar bajo este marco científico les permite vislumbrar, elegir y planear su futuro.  
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingEleven">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                  Doctorado en Geología
+                </button>
+              </h5>
+            </div>
+            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#miAcordeon">
+              <div class="card-body">
+                El objetivo general del Doctorado en Geología es formar investigadores calificados y con capacidad para desarrollar investigación en el área de la geología, tanto en el ámbito regional, nacional e internacional.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingTwelve">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                  Doctorado en Derechos Humanos
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#miAcordeon">
+              <div class="card-body">
+                La reforma constitucional del 2011, que obliga a todas las autoridades en el ámbito de sus competencias a promover, respetar, proteger y garantizar los derechos humanos; sin embargo, hasta el momento, su estudio se ha abocado más desde la función pública y el ejercicio jurisdiccional, sin embargo, esta obligación va más allá, toda vez que tal obligación implica a todos los profesionistas en cualquier área de conocimiento que posean un poder o mando ya sea de hecho o de derecho.
+              </div>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-header" id="headingThirteen">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+                  Doctorado en Agua y Energía
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#miAcordeon">
+              <div class="card-body">
+                Es un programa de investigación avanzada que se centra en el estudio interdisciplinario de la gestión, conservación y uso eficiente de recursos hídricos y energéticos. Los estudiantes de este programa exploran temas como la hidrología, tecnologías de energía renovable, políticas de recursos naturales y la interacción entre agua y energía en contextos ambientales y socioeconómicos. 
+              </div>
+            </div>
+          </div>  
+        </div> 
+      </div>
+    
+      <div class="convocatoria">
+        <p> Estamos seguros de que encontrarás una oportunidad educativa que se alinee perfectamente con tus aspiraciones y objetivos profesionales. ¡Esperamos darte la bienvenida como parte de nuestra comunidad académica en el Centro Universitario de Tonala!</p>
+        <img src="{{ url_for('static', filename='img/ultima.jpg') }}" alt="">
+      </div>
+
+      <div class="linea">
+        <hr class="linea-divisoria">
+      </div>
+
+      <div class="relleno">
+      </div>
+
+      <div class="img">
+        <img src="{{ url_for('static', filename='img/portada.jpg') }}" alt="">
+      </div>
+    
+      <div class="linea">
+        <hr class="linea-divisoria">
+      </div>
+    
+      <div class="contacto">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='img/png.png') }}" alt="logo">
+        </div>
+        <p class="p">CENTRO UNIVERSITARIO DE TONALÁ</p>
+        <p class="p">Av. Nuevo Periférico No. 555 Ejido San José Tateposco, C.P. 45425, Tonalá Jalisco, México</p>
+        <p class="p">Teléfono: +52 (33) 20 00 23 00 Ext. 64007 y 64044</p>
+        <p class="derechos-autor">Derechos reservados ©1997 - 2023. Universidad de Guadalajara. Sitio desarrollado por CGTI | Créditos de sitio | Política de privacidad y manejo de datos</p>
+        
+      </div>
+    
+    </div>  
+  </div>  
+</body>
+</html>

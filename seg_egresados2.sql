@@ -18,6 +18,87 @@ USE `seg_egresados5`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `aspirante_carrera`
+--
+
+DROP TABLE IF EXISTS `aspirante_carrera`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `aspirante_carrera` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `Correo_Alumno` varchar(150) DEFAULT NULL,
+  `idCarrera` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Correo_Alumno` (`Correo_Alumno`),
+  KEY `idCarrera` (`idCarrera`),
+  CONSTRAINT `aspirante_carrera_ibfk_1` FOREIGN KEY (`Correo_Alumno`) REFERENCES `general` (`Correo_Alumno`),
+  CONSTRAINT `aspirante_carrera_ibfk_2` FOREIGN KEY (`idCarrera`) REFERENCES `carrera` (`idCarrera`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aspirante_carrera`
+--
+
+LOCK TABLES `aspirante_carrera` WRITE;
+/*!40000 ALTER TABLE `aspirante_carrera` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aspirante_carrera` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carrera`
+--
+
+DROP TABLE IF EXISTS `carrera`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carrera` (
+  `idCarrera` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idCarrera`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carrera`
+--
+
+LOCK TABLES `carrera` WRITE;
+/*!40000 ALTER TABLE `carrera` DISABLE KEYS */;
+INSERT INTO `carrera` VALUES (1,'Maestría en Movilidad Urbana, Transporte y Territorio'),(2,'Maestría en Ingeniería del Agua y la Energía (Profesionalizante)'),(3,'Maestría en Gestión de Gobiernos Locales'),(4,'Maestría en Geología'),(5,'Maestría en Ciencias en Ingeniería del Agua y la Energía (Investigación)'),(6,'Maestría en Ciencias Antropológicas'),(7,'Maestría en Ciencia de la Ciudad'),(8,'Maestría en Bioética'),(9,'Doctorado en Movilidad Urbana, Transporte y Territorio'),(10,'Doctorado en Investigación Multidisciplinaria en Salud'),(11,'Doctorado en Geología'),(12,'Doctorado en Derechos Humanos'),(13,'Doctorado en Agua y Energía');
+/*!40000 ALTER TABLE `carrera` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coordinador_carrera`
+--
+
+DROP TABLE IF EXISTS `coordinador_carrera`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `coordinador_carrera` (
+  `idCoordinador` int NOT NULL AUTO_INCREMENT,
+  `correo` varchar(255) DEFAULT NULL,
+  `idCarrera` int DEFAULT NULL,
+  PRIMARY KEY (`idCoordinador`),
+  KEY `correo` (`correo`),
+  KEY `idCarrera` (`idCarrera`),
+  CONSTRAINT `coordinador_carrera_ibfk_1` FOREIGN KEY (`correo`) REFERENCES `cuenta` (`correo`),
+  CONSTRAINT `coordinador_carrera_ibfk_2` FOREIGN KEY (`idCarrera`) REFERENCES `carrera` (`idCarrera`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coordinador_carrera`
+--
+
+LOCK TABLES `coordinador_carrera` WRITE;
+/*!40000 ALTER TABLE `coordinador_carrera` DISABLE KEYS */;
+INSERT INTO `coordinador_carrera` VALUES (1,'mae.geologia@cutonala.udg.mx',4);
+/*!40000 ALTER TABLE `coordinador_carrera` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cuenta`
 --
 
@@ -34,7 +115,7 @@ CREATE TABLE `cuenta` (
   KEY `idRol` (`idRol`),
   CONSTRAINT `cuenta_ibfk_1` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`),
   CONSTRAINT `cuenta_ibfk_2` FOREIGN KEY (`correo`) REFERENCES `general` (`Correo_Alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +124,7 @@ CREATE TABLE `cuenta` (
 
 LOCK TABLES `cuenta` WRITE;
 /*!40000 ALTER TABLE `cuenta` DISABLE KEYS */;
-INSERT INTO `cuenta` VALUES (7,'alanmissaeljimenez@gmail.com','a836dfe9449fa43d38f3b8031daa39686918d8f33d664d9aec0735b4578e1983',2),(8,'alan.jimenez1350@alumnos.udg.mx','8c16e61c9fc42aa1ef4776b6ed19351a185f3c1c8a628acd777e2baddc4e295d',2);
+INSERT INTO `cuenta` VALUES (11,'mae.geologia@cutonala.udg.mx','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5',3);
 /*!40000 ALTER TABLE `cuenta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +154,6 @@ CREATE TABLE `estudios` (
 
 LOCK TABLES `estudios` WRITE;
 /*!40000 ALTER TABLE `estudios` DISABLE KEYS */;
-INSERT INTO `estudios` VALUES ('alan.jimenez1350@alumnos.udg.mx','CUTONALA','Ciencias computacionales','2022A','A2-B1: Pre-intermedio','En Proceso','99'),('alanmissaeljimenez@gmail.com','CUTONALA','Ciencias computacionales','2022A','B1: Intermedio','En Proceso','99');
 /*!40000 ALTER TABLE `estudios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +173,6 @@ CREATE TABLE `general` (
   `celular` varchar(15) DEFAULT NULL,
   `codigoPostal` varchar(10) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
-  `posgrado` varchar(255) DEFAULT NULL,
   `Pais` varchar(45) DEFAULT NULL,
   `Estado` varchar(45) DEFAULT NULL,
   `Ciudad` varchar(45) DEFAULT NULL,
@@ -109,7 +188,7 @@ CREATE TABLE `general` (
 
 LOCK TABLES `general` WRITE;
 /*!40000 ALTER TABLE `general` DISABLE KEYS */;
-INSERT INTO `general` VALUES ('alan.jimenez1350@alumnos.udg.mx','Alan','Lopez','Jimenez','Masculino','56454654','94984','2024-09-01','[\"Maestría en Geología\",\"Maestría en Bioética\"]','México','Jalisco','Guadalajara','Oblatos','Mexicana'),('alanmissaeljimenez@gmail.com','Alan','Coco','Jimenez','Femenino','56454654','94984','2024-09-01','[\"Maestría en Movilidad Urbana, Transporte y Territorio\",\"Maestría en Ingeniería del Agua y la Energía (Profesionalizante)\"]','México','Jalisco','Guadalajara','Oblatos','Mexicana');
+INSERT INTO `general` VALUES ('mae.geologia@cutonala.udg.mx','Nombre','ApellidoP','ApellidoM','Sexo','Celular','44747','0001-02-05','Pais','Estado','Ciudad','Colonia','Nacionalidad');
 /*!40000 ALTER TABLE `general` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +217,6 @@ CREATE TABLE `laboral` (
 
 LOCK TABLES `laboral` WRITE;
 /*!40000 ALTER TABLE `laboral` DISABLE KEYS */;
-INSERT INTO `laboral` VALUES ('alan.jimenez1350@alumnos.udg.mx','No','N/A','N/A','N/A','NoAplica'),('alanmissaeljimenez@gmail.com','No','N/A','N/A','N/A','NoAplica');
 /*!40000 ALTER TABLE `laboral` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +231,7 @@ CREATE TABLE `roles` (
   `idRol` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`idRol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +240,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Administrador'),(2,'Usuario Normal');
+INSERT INTO `roles` VALUES (1,'Administrador'),(2,'Usuario Normal'),(3,'coordinador');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -175,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-19 19:54:35
+-- Dump completed on 2024-09-24 17:55:52

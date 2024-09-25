@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #3498db;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .sidebar {
+            background-color: #2c3e50;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        .card {
+            border-radius: 15px;
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div>
+            <img src="logo.png" alt="Logo" style="height: 50px;">
+        </div>
+        <div>
+            <p>Nombre de Usuario</p>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h2>Nombre de Carrera</h2>
+        <button class="button">Aspirantes</button>
+        <button class="button">Carreras</button>
+        <button class="button" style="margin-top: auto;">Cerrar Sesión</button>
+    </div>
+
+    <div class="main-content">
+        <div class="card">
+            <h2>Aspirantes</h2>
+            <p>Número de personas registradas: 18</p>
+        </div>
+
+        <div class="card">
+            <h2>DATOS ASPIRANTES</h2>
+            <button class="button">Generar Excel</button>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- ... Encabezados de la tabla ... -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <!-- ... Filas de la tabla ... -->
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
