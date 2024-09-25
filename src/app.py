@@ -40,7 +40,7 @@ def role_required(required_role):
 
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for('index.html'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
