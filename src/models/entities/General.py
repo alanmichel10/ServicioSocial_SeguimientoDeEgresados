@@ -1,14 +1,17 @@
 from flask_login import UserMixin
 
 class General(UserMixin):
-        def __init__(self,idCuenta,sexo,curp,cp,codigoEstudiante,estadoCivil,fechaNacimiento,lugarNacimiento,telefono,posgrado) -> None:
-            self.id=idCuenta
+        def __init__(self,idCuenta,nombre,apellidoP,apellidoM,sexo,celular,curp,codigoPostal,fechaNacimiento,Pais,Estado,Ciudad,Colonia,Nacionalidad) -> None:
+            self.correo=CorreoAlumno
+            self.nombre= nombre
+            self.apellidoP = apellidoP
+            self.apellidoM = apellidoM
             self.sexo= sexo
-            self.curp= curp
-            self.codigoPostal= cp
-            self.codigoEstudiante= codigoEstudiante
-            self.estadoCivil= estadoCivil
+            self.numeroTelefono= celular
+            self.codigoPostal= codigoPostal
             self.fecha= fechaNacimiento
-            self.lugarNacimiento= lugarNacimiento
-            self.numeroTelefono= telefono
-            self.posgrado= posgrado
+            self.pais= Pais
+            self.estado= Estado
+            self.ciudad= Ciudad
+            self.colonia= Colonia
+            self.nacionalidad= Nacionalidad
