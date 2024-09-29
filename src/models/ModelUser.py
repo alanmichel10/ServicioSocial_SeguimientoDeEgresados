@@ -6,7 +6,7 @@ class ModelUser():
     def login(self,db,user):
         try:
             cursor = db.connection.cursor()
-            sql="""SELECT idCuenta, correo, clave, nombre FROM cuenta
+            sql="""SELECT idCuenta, correo, clave FROM cuenta
                    WHERE correo='{}'""".format(user.correo)
             cursor.execute(sql)
             row=cursor.fetchone()
@@ -17,12 +17,14 @@ class ModelUser():
                 return None
         except Exception as ex:
             raise Exception(ex)
+        
+        
     
     @classmethod
     def get_by_id(self, db, id):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT idCuenta, correo, nombre,apellidoP,apellidoM,idRol FROM cuenta WHERE idCuenta = {}".format(id)
+            sql = "SELECT idCuenta, correo, idRol FROM cuenta WHERE idCuenta = {}".format(id)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:

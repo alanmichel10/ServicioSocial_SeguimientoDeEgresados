@@ -9,11 +9,22 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link href="https://fonts.cdnfonts.com/css/nexa-bold?styles=29913" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/handil-pro?styles=162901" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
   <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>
 
-
   <title>Formulario de Posgrado</title>
+  <style>
+    .checkbox-list {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+    }
+    .form-check {
+      padding-left: 2rem;
+    }
+  </style>
 </head>
 <body>
   <!-- Barra de navegación -->
@@ -21,7 +32,7 @@
     <div class="container">
       <!-- Logo -->
       <a class="navbar-brand" href="#">
-        <img src="{{ url_for('static', filename='img/home/cutonala.png') }}" alt="Tu Logo" width="120" height="50" class="d-inline-block align-top logo-with-shadow">
+        <img src="{{ url_for('static', filename='img/cutonala.png') }}" alt="Tu Logo" width="120" height="50" class="d-inline-block align-top logo-with-shadow">
       </a>
     </div>
   </div>
@@ -32,53 +43,48 @@
           <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
           <h5 class="pb-2 text-center datos-generales-text">Posgrado</h5>
           <hr>
-          <form action="/seleccion" method="post">
+          <form action="/seleccion" method="post" id="posgradoForm" onsubmit="actualizarCampoOculto()">
             <!-- Selección de Posgrado -->
             <div class="form-group mb-3">
-              <label for="posgradoInput">Escoge un posgrado</label>
+              <label for="posgradoInput">Escoge un tipo de posgrado</label>
               <select class="form-select circular" id="posgradoInput" onchange="mostrarOpciones()">
                 <option disabled selected>Selecciona una opción</option>
                 <option value="maestria">Maestría</option>
                 <option value="doctorado">Doctorado</option>
               </select>
             </div>
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
-            <!-- Opciones para Maestría -->
-            <div id="maestriaOpciones" style="display: none;">
-              <label for="maestriaInput">Selecciona una maestría</label>
-              <select class="form-select circular" id="maestriaInput">
-                <option disabled selected>Selecciona una opción</option>
-                <option value="Maestría en Movilidad Urbana, Transporte y Territorio">Maestría en Movilidad Urbana, Transporte y Territorio</option>
-                <option value="Maestría en Ingeniería del Agua y la Energía (Profesionalizante)">Maestría en Ingeniería del Agua y la Energía (Profesionalizante)</option>
-                <option value="Maestría en Gestión de Gobiernos Locales">Maestría en Gestión de Gobiernos Locales</option>
-                <option value="Maestría en Geología">Maestría en Geología</option>
-                <option value="Maestría en Ciencias en Ingeniería del Agua y la Energía (Investigación)">Maestría en Ciencias en Ingeniería del Agua y la Energía (Investigación)</option>
-                <option value="Maestría en Ciencias Antropológicas">Maestría en Ciencias Antropológicas</option>
-                <option value="Maestría en Ciencia de la Ciudad">Maestría en Ciencia de la Ciudad</option>
-                <option value="Maestría en Bioética">Maestría en Bioética</option>
-              </select>
+    
+            <div id="maestriaOpciones" style="display:none;">
+                <label for="seleccionesPosgrado">Selecciona las Carreras de Maestría:</label><br>
+                <input type="checkbox" name="seleccionesPosgrado" value="1"> Maestría en Movilidad Urbana, Transporte y Territorio<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="2"> Maestría en Ingeniería del Agua y la Energía (Profesionalizante)<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="3"> Maestría en Gestión de Gobiernos Locales<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="4"> Maestría en Geología<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="5"> Maestría en Ciencias en Ingeniería del Agua y la Energía (Investigación)<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="6"> Maestría en Ciencias Antropológicas<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="7"> Maestría en Ciencia de la Ciudad<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="8"> Maestría en Bioética<br>
             </div>
-
-            <!-- Opciones para Doctorado -->
-            <div id="doctoradoOpciones" style="display: none;">
-              <label for="doctoradoInput">Selecciona un doctorado</label>
-              <select class="form-select circular" id="doctoradoInput">
-                <option disabled selected>Selecciona una opción</option>
-                <option value="Doctorado en Movilidad Urbana, Transporte y Territorio">Doctorado en Movilidad Urbana, Transporte y Territorio</option>
-                <option value="Doctorado en Investigación Multidisciplinaria en Salud">Doctorado en Investigación Multidisciplinaria en Salud</option>
-                <option value="Doctorado en Geología">Doctorado en Geología</option>
-                <option value="Doctorado en Derechos Humanos">Doctorado en Derechos Humanos</option>
-                <option value="Doctorado en Agua y Energía">Doctorado en Agua y Energía</option>
-              </select>
+    
+            <div id="doctoradoOpciones" style="display:none;">
+                <label for="seleccionesPosgrado">Selecciona las Carreras de Doctorado:</label><br>
+                <input type="checkbox" name="seleccionesPosgrado" value="9"> Doctorado en Movilidad Urbana, Transporte y Territorio<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="10"> Doctorado en Investigación Multidisciplinaria en Salud<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="11"> Doctorado en Geología<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="12"> Doctorado en Derechos Humanos<br>
+                <input type="checkbox" name="seleccionesPosgrado" value="13"> Doctorado en Agua y Energía<br>
             </div>
+    
+            <!-- Campo oculto para almacenar las selecciones -->
+            <input type="hidden" id="seleccionesPosgrado" name="seleccionesPosgrado">
             
             <!-- Espacio en blanco para separar los botones -->
             <div style="height: 20px;"></div>
             
             <!-- Botones de navegación -->
             <div class="nav-buttons mt-4 text-center">
-                <button type="submit" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
-              </div>
+              <button type="submit" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
+            </div>
           </form>
         </div>
       </div>
@@ -86,7 +92,7 @@
   </div>
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LE"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECfgy/ZiAxD7CpG8NDkEemp9" crossorigin="anonymous"></script>
   <script>
     function mostrarOpciones() {
       const posgradoInput = document.getElementById("posgradoInput");
