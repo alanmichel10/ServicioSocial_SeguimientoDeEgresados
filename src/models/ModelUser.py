@@ -1,24 +1,28 @@
 from .entities.User import User
 from werkzeug.security import check_password_hash, generate_password_hash
+import hashlib
 
 class ModelUser():
     @classmethod
-    def login(self,db,user):
+    def login(self, db, user):
         try:
             cursor = db.connection.cursor()
-            sql="""SELECT idCuenta, correo, clave FROM cuenta
-                   WHERE correo='{}'""".format(user.correo)
-            cursor.execute(sql)
-            row=cursor.fetchone()
+            sql = """SELECT idCuenta, correo, clave FROM cuenta
+                     WHERE correo = %s"""
+            cursor.execute(sql, (user.correo,))
+            row = cursor.fetchone()
             if row != None:
-                user = User(row[0], row[1], User.check_password(row[2], user.clave), row[3])
-                return user
+                stored_password = row[2]
+                # Hashea la contraseña ingresada
+                hashed_password = hashlib.sha256(user.clave.encode()).hexdigest()
+                if hashed_password == stored_password:
+                    return User(row[0], row[1], None)
+                else:
+                    return None
             else:
                 return None
         except Exception as ex:
             raise Exception(ex)
-        
-        
     
     @classmethod
     def get_by_id(self, db, id):
@@ -28,7 +32,7 @@ class ModelUser():
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
-                return User(row[0], row[1], None, row[2],row[3],row[4],row[5])
+                return User(row[0], row[1], None, row[2])
             else:
                 return None
         except Exception as ex:

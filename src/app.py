@@ -6,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
 from config import config
 import tempfile
+import hashlib
 
 # Modulos
 from models.ModelUser import ModelUser
@@ -178,28 +179,16 @@ def flaboral():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # print(request.form['correo'])
-        # print(request.form['clave'])
         user = User(0, request.form['correo'], request.form['clave'])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
-            if logged_user.clave:
-
-                login_user(logged_user)
-                
-                
-                return redirect(url_for('inicio'))
-            else:
-                flash("Contraseña incorrecta")
-                return render_template('login/login.html')
-
+            login_user(logged_user)
+            return redirect(url_for('inicio'))
         else:
-            flash("Usuario no encontrado.")
+            flash("Credenciales incorrectas. Por favor, inténtalo de nuevo.", 'danger')
             return render_template('login/login.html')
     else:
         return render_template('login/login.html')
-
-
 
 
 #---------------------- ----------------------------------------------------------------------#
