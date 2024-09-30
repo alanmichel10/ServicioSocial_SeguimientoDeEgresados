@@ -28,6 +28,8 @@ h1, h2, h3, h4, h5{
 .hr-navbar{
     height: .2rem;
     background-color: var(--azulOscuro);
+    padding: 0;
+    margin: 0;
 }
 
 /************************************** Estilos para el Header, el Footer y el offcanvas************************************/
