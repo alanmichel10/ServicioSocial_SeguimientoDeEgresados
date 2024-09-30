@@ -1,10 +1,9 @@
 class Trabajo():
-        def __init__(self,idTrabajo,estatus,nombre=None, ubicacion=None, descripcion=None, antiguedad=None, jornadaLaboral=None) -> None:
-            self.id=idTrabajo
+        def __init__(self,Correo_Alu,estatus,nombre, Horario_Laboral, Puesto_trabajo, Sector,) -> None:
+            self.correo=Correo_Alu
             self.estatus= estatus
             self.nombre= nombre
-            self.ubicacion= ubicacion
-            self.descripcion= descripcion
-            self.antiguedad = antiguedad
-            self.jornada = jornadaLaboral
+            self.horario= Horario_Laboral
+            self.puesto= Puesto_trabajo
+            self.sector = Sector
        

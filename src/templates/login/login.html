@@ -3,49 +3,78 @@
 
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 {% endblock %}
 
 {% block body %}
-<form class="form-signin" action="/login" method="POST">
+<!-- Barra de navegación -->
+<header class="header">
+  <nav class="navbar">
+    <!-- Logo -->
+       <!-- Enlace de inicio -->
+    <a href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/Logo_cut.jpg') }}" alt="Logo" class="logo2">
+    </a>
   
-    {% with messages = get_flashed_messages() %}
+  </nav>
+</header>
 
-    {% if messages %}
-    <br />
-    {% for message in messages %}
-    <div class="alert alert-primary alert-dismissible" role="alert">
-        <strong>{{ message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+
+<div class="background"></div>
+
+<div class="container">
+  <div class="content">
+    <h2 class="logo"><i class='bx bxl-mongodb'></i> Centro Universitario CUT</h2>
+    <div class="text-sci">
+      <h2> <br><span></span></h2>
+     
     </div>
-    {% endfor %}
-    {% endif %}
-
-    {% endwith %}
-<div class="form-1">
-    <h1 class="h2 mb-3 fw-normal">Iniciar sesión</h1>
-    <span class="line"></span>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-    <div class="form-floating">
-      <input type="email" class=" iniciose form-control" id="floatingInput" name="correo" placeholder="">
-      <label for="floatingInput">Correo electronico</label>
-    </div>
-
-    <div class="form-floating">
-      <input type="password" class="iniciose form-control" id="floatingPassword" name="clave" placeholder="">
-      <label for="floatingPassword">Contraseña</label>
-    </div>
-
-    <button class="btn" type="submit" >Iniciar sesión</button>
-
-    <div class="form-check text-center my-4">
-      <a class="link link-offset-1 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover " href="{{ url_for('crearCuenta') }}">
-        Crear cuenta
-      </a>
-    </div>
-    
   </div>
 
-    <p class=" c cmt-4 mb-2 ">&copy;  Universidad de Guadalajara 2023</p>
-  </form>
-{% endblock %}
+  <div class="logreg-box">
+    <div class="form-box login">
+      <!-- Formulario de inicio de sesión -->
+      <form action="/login" method="POST">
+        <h2>Inicio de sesión</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="input-box">
+          <span class="icon"><i class='bx bbxs-lock-alt'></i></span>
+          <input type="email" name="correo" required>
+          <label>Correo electrónico</label>
+        </div>
+
+        <div class="input-box">
+          <span class="icon"><i class='bx bxs-lock-alt'></i></span>
+          <input type="password" name="clave" required>
+          <label>Contraseña</label>
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox"> Recordar</label>
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn">Iniciar sesión</button>
+
+        
+        <p class="c cmt-4 mb-2 ">&copy; Universidad de Guadalajara 2023</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
