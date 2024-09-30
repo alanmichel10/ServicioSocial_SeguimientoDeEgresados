@@ -1,16 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file, session
 from flask_mysqldb import MySQL
+
 from flask_wtf.csrf import CSRFProtect
+
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
 from config import config
 import tempfile
-import smtplib
-import secrets
-import string
-import random
-import mysql.connector
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+import hashlib
 
 # Modulos
 from models.ModelUser import ModelUser
@@ -18,24 +14,34 @@ from models.ModelGeneral import ModelGeneral
 from models.ModelEstudios import ModelEstudios
 from models.ModelTrabajo import ModelTrabajo
 from models.ModelAdmin import ModelAdmin
+
+# Modulos Formulario
+from models.ModelFGeneral import  insertGeneral
+from models.ModelFEstudios import insertEstudios
+from models.ModelFLaboral import insertLaboral
+from models.ModelCorreo import enviar_correo
+
 # Entities
 from models.entities.User import User
 from models.entities.General import General
 from models.entities.Estudios import Estudios
 from models.entities.Trabajo import Trabajo
 
-correo = None
+
 def get_var():
-     return correo
+    correo = request.form.get('correo')
+    return correo
 
 def set_var(x):
      global correo
      correo = x
 
-
 app = Flask(__name__)
+
 csrf = CSRFProtect()
+
 db = MySQL(app)
+
 
 login_manager_app = LoginManager(app)
 
@@ -64,96 +70,122 @@ def home():
 #---------------------- -----------------------#Formulario--------------------------------------------#
 
 
+# Página de Selección
 @app.route('/seleccion', methods=['GET', 'POST'])
-def seleccion():
-    if request.method == 'POST': 
-        return redirect(url_for('gene'))
+def fseleccion():
+    if request.method == 'POST':
+        tipo_posgrado = request.form.get('posgradoInput')
+        selecciones = request.form.getlist('seleccionesPosgrado')
+
+        # Guardamos el tipo de posgrado y las selecciones en la sesión
+        session['tipo_posgrado'] = tipo_posgrado
+        session['carreras_interes'] = selecciones
+        return redirect(url_for('fgeneral'))
+
     return render_template('formulario/seleccion.html')
 
-@app.route('/gene', methods=['GET', 'POST'])
-def gene():
+# Página de Datos Generales
+@app.route('/general', methods=['GET', 'POST'])
+def fgeneral():
     if request.method == 'POST':
-          nombre_gen = request.form['nombres']
-          apellido_p = request.form['apellido_p']
-          apellido_m = request.form['apellido_m']
-          sexo = request.form['sexo']
-          telefono = request.form['tel_contacto']
-          set_var(request.form['correo_alumno'])
-          c_postal = request.form['codigo_postal']
-          pais = request.form['pais']
-          estado = request.form['estado']
-          ciudad = request.form['ciudad']
-          colonia = request.form['colonia']
-          nacionalidad = request.form['nacionalidad']
-          f_nacimiento = request.form['f_nacimiento']
-          insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, get_var(), c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento)
-          return redirect(url_for('estu'))
+        nombre_gen = request.form['nombres']
+        apellido_p = request.form['apellido_p']
+        apellido_m = request.form['apellido_m']
+        sexo = request.form['sexo']
+        telefono = request.form['tel_contacto']
+        correo = request.form['correo_alumno']
+        c_postal = request.form['codigo_postal']
+        pais = request.form['pais']
+        estado = request.form['estado']
+        ciudad = request.form['ciudad']
+        colonia = request.form['colonia']
+        nacionalidad = request.form['nacionalidad']
+        f_nacimiento = request.form['f_nacimiento']
+
+        # Obtener las carreras de interés y el tipo de posgrado de la sesión
+        carreras_interes = session.get('carreras_interes', [])
+        tipo_posgrado = session.get('tipo_posgrado', '')
+
+        # Guardamos el correo en la variable global para usarlo después
+        session['correo'] = correo
+
+        insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, correo, c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento, carreras_interes, tipo_posgrado)
+        return redirect(url_for('festudios'))
     
     return render_template('formulario/Generales.html')
-          
 
-@app.route('/estu', methods=['GET', 'POST'])
-def estu():
+# Página de Datos de Estudios
+@app.route('/estudios', methods=['GET', 'POST'])
+def festudios():
     if request.method == 'POST':
-          uni_proce = request.form['nivel']
-          carrera = request.form['carrera']
-          titulado = request.form['titulado']
-          ciclo = request.form['ciclo']
-          ingles = request.form['ingles']
-          promedio = request.form['promedio']
-          insertEstudios(uni_proce, carrera, titulado, ciclo, ingles, promedio, get_var())
-          return redirect(url_for('labo'))
+        uni_proce = request.form['nivel']
+        carrera = request.form['carrera']
+        titulado = request.form['titulado']
+        ciclo = request.form['ciclo']
+        ingles = request.form['ingles']
+        promedio = request.form['promedio']
+        insertEstudios(uni_proce, carrera, titulado, ciclo, ingles, promedio, session['correo'])
+        return redirect(url_for('flaboral'))
 
     return render_template('formulario/Estudios.html')
 
-@app.route('/labo', methods=['GET', 'POST'])
-def labo():
+# Página de Datos de Laboral
+@app.route('/laboral', methods=['GET', 'POST'])
+def flaboral():
     if request.method == 'POST':
-         siOno = request.form['trabajasiono']
-         lugar= request.form['lugardetrabajo']
-         horario= request.form['horariolaboral']
-         puesto= request.form['puestolaboral']
-         sector = request.form['sector']
-         
-         contrasena = insertLaboral(siOno, lugar, horario, puesto, sector, get_var())
+        siOno = request.form['trabajasiono']
+        lugar = request.form['lugardetrabajo']
+        horario = request.form['horariolaboral']
+        puesto = request.form['puestolaboral']
+        sector = request.form['sector']
+        correo = session.get('correo')
 
-         destinatario = get_var()  # Usando el correo registrado
-         asunto = "Confirmación de Registro"
-         mensaje = "Gracias por registrarte. Tu información laboral ha sido recibida con éxito."
+        if not correo:
+            print("Error: Correo no puede ser nulo")
+            flash('Error: Correo no puede ser nulo')
+            return redirect(url_for('laboral'))
 
-         enviar_correo(destinatario, asunto, mensaje, contrasena)
+        contrasena, correo_usuario = insertLaboral(siOno, lugar, horario, puesto, sector, correo)
+
+        destinatario = correo_usuario  # Usando el correo registrado
+        asunto = "Confirmación de Registro"
+        mensaje_base = "Gracias por registrarte. Tu información ha sido recibida con éxito."
+        mensaje_extra = """
+        
+        Bienvenido a nuestra comunidad de egresados.
+
+        Nos complace informarte que tu información ha sido registrada con éxito. Gracias por tu interés en nuestros programas de posgrado.
+
+        Para obtener más información y continuar con el proceso, por favor, inicia sesión con la cuenta y contraseña que se te proporcionaron en este correo. Puedes hacerlo a través del siguiente enlace: LINK DEL LOGIN.
+
+        Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.
+
+        ¡Que tengas un excelente día!
+
+
+        """
+
+        enviar_correo(destinatario, asunto, mensaje_base, contrasena, correo_usuario, mensaje_extra)
     
-         flash('Registro completo')
-         return redirect(url_for('inicio'))
+        flash('Registro completo')
+        return redirect(url_for('home'))
     
     return render_template('formulario/Laboral.html')
 
 
+#---------------------- #Login----------------------------------------------------------------------#
 
-
-#---------------------- ----------------------------------------------------------------------#
-#Login
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # print(request.form['correo'])
-        # print(request.form['clave'])
         user = User(0, request.form['correo'], request.form['clave'])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
-            if logged_user.clave:
-
-                login_user(logged_user)
-                
-                
-                return redirect(url_for('inicio'))
-            else:
-                flash("Contraseña incorrecta")
-                return render_template('login/login.html')
-
+            login_user(logged_user)
+            return redirect(url_for('inicio'))
         else:
-            flash("Usuario no encontrado.")
+            flash("Credenciales incorrectas. Por favor, inténtalo de nuevo.", 'danger')
             return render_template('login/login.html')
     else:
         return render_template('login/login.html')
@@ -213,7 +245,7 @@ def ajustes():
 #Paginas
 #Inicio
 @app.route('/inicio')  
-@login_required 
+# @login_required ---------------------------------------------------
 
 def inicio():
     if current_user.rol == 1:
@@ -387,70 +419,6 @@ def protected():
 def status_401(error):
     return redirect(url_for('login'))
 
-#---------------------------                 FORMULARIO                      -----------------------------------##
-
-def generar_contrasena(longitud=8):
-    caracteres = string.ascii_letters + string.digits + string.punctuation
-    contrasena = ''.join(random.choice(caracteres) for i in range(longitud))
-    return contrasena
-
-def insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, correo, c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento):
-     cursor = mysql.connection.cursor()
-     cursor.execute("insert into general (Nombres, Apellido_P, Apellido_M, Sexo, Tel_Contacto, Correo_Alumno, Codigo_Postal, Pais, Estado, Ciudad, Colonia, Nacionalidad, F_Nacimiento) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", (nombre_gen, apellido_p, apellido_m, sexo, telefono, correo, c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento))
-     mysql.connection.commit()
-     cursor.close()
-     mysql.connection.close()
-
-def insertEstudios(uni_proce, carrera, titulado, ciclo, ingles, promedio, correo):
-     cursor = mysql.connection.cursor()
-     cursor.execute("insert into grado_estudios values(%s, %s, %s, %s, %s, %s, %s);", (uni_proce, carrera, titulado, ciclo, ingles, promedio, correo))
-     mysql.connection.commit()
-     cursor.close()
-     mysql.connection.close()
-
-def insertLaboral(siOno, lugar, horario, puesto, sector, correo):
-    contrasena = generar_contrasena()  # Generar una contraseña aleatoria
-
-    cursor = mysql.connection.cursor()
-    cursor.execute("INSERT INTO info_laboral (Trabajando, Direccion_trabajo, Horario_Laboral, Puesto_Trabajo, Sector, Correo_PK_Info) VALUES (%s, %s, %s, %s, %s, %s);", 
-                   (siOno, lugar, horario, puesto, sector, correo))
-    mysql.connection.commit()
-
-    # Insertar la cuenta y contraseña en la base de datos
-    cursor.execute("INSERT INTO usuarios (correo, contrasena) VALUES (%s, %s);", (correo, contrasena))
-    mysql.connection.commit()
-
-    cursor.close()
-    mysql.connection.close()
-
-    return contrasena  # Retornar la contraseña generada
-
-def enviar_correo(destinatario, asunto, mensaje, contrasena=None):
-    remitente = "udgcorreos115@gmail.com"
-    contraseña = "mtzy zsdn vwnx jwdx"
-
-    # Configuración del servidor de correo
-    servidor = smtplib.SMTP('smtp.gmail.com', 587)
-    servidor.starttls()
-    servidor.login(remitente, contraseña)
-
-    # Creación del correo
-    correo = MIMEMultipart()
-    correo['From'] = remitente
-    correo['To'] = destinatario
-    correo['Subject'] = asunto
-
-    # Agregar el mensaje al correo
-    if contrasena:
-        mensaje += f"\n\nTu contraseña es: {contrasena}"
-    correo.attach(MIMEText(mensaje, 'plain'))
-
-    # Enviar el correo
-    servidor.send_message(correo)
-    servidor.quit()
-
-
-
 
 def status_404(error):
     return "<h1>Página no encontrada</h1>", 404
@@ -459,7 +427,9 @@ def status_404(error):
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
+    
     csrf.init_app(app)
+    
     app.register_error_handler(401,status_401)
     app.register_error_handler(404,status_404)
     app.run()
