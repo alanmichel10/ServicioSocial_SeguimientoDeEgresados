@@ -53,14 +53,9 @@ h5{
   text-align: start;
 }
 
-.form-group select{
-  padding: .5rem .5rem;
-  font-size: 1.8rem;
-  border-style: solid;
-  border-width: .1rem;
-  border-color: #a0a0a0;
-  border-radius: .5rem;
-  outline: none;
+
+label{
+  font-weight: bold;
 }
 
 .btn-siguiente{
@@ -79,4 +74,23 @@ h5{
   border-style: solid;
   border-width: .1rem;
   border-color: #011c3df5;
+}
+
+.datos{
+  font-size: 1.5rem;
+  background-color: rgb(227, 237, 255); ;
+  width: 100%;
+  border-width: 0.1rem;
+  padding: 1.5rem 1rem;
+  border-radius: 1.3rem;
+  border-style: none;
+  outline: none;
+}
+.datos:focus{
+  box-shadow: 0 0 1rem .3rem rgb(99, 190, 255); 
+}
+
+.contenedor-campos{
+  padding: 1rem;
+  margin: .5rem 0;
 }

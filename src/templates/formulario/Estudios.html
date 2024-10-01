@@ -2,85 +2,99 @@
 {% block titulo %} Datos de Estudios {% endblock %}
 
 {%block cssPersonalizado%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}" />
 <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>
 {%endblock%}
 
 {% block contenido %}
-  <div class="banner">
-    <div class="container p-5">
-      <div class="card mx-3 mt-n5 shadow-lg circular" style="border-radius: 40px; border: none">
-        <div class="card-body p-5">
-          <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
-          <h5 class="pb-2 text-center datos-generales-text">Datos estudios</h5>
-          <hr>
-          <form action="/estudios" method="post">
-            <!-- Grupo 1 de campos del formulario -->
-            <div class="row">
-              <div class="col-md-4">
-                <label for="nivelInput">Universidad de procedencia</label>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control circular" id="nivelInput" placeholder="Ingresa tu universidad de procedencia" name="nivel">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label for="carreraInput">Carrera de procedencia</label>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control circular" id="carreraInput" placeholder="Ingresa tu carrera de procedencia" name="carrera">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label for="tituladoInput">Titulado</label>
-                <div class="form-group mb-3">
-                  <select class="form-select circular" id="tituladoInput" name="titulado">
-                    <option disabled selected>Selecciona una opción</option>
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
-                    <option value="En Proceso">En proceso</option>
-                  </select>
-                </div>             
-              </div>
-            </div>
-
-            <!-- Grupo 2 de campos del formulario -->
-            <div class="row">
-              <div class="col-md-4">
-                <label for="cicloInput">Ciclo escolar egreso</label>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control circular" id="cicloInput" placeholder="Ingresa tu ciclo de egreso" name="ciclo">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label for="nivelinglesInput">Nivel de ingles</label>
-                <div class="form-group mb-3">
-                  <select class="form-select circular" id="nivelinglesInput" name="ingles">
-                    <option disabled selected>Selecciona una opción</option>
-                    <option value="A0: Principiante">A0: Principiante</option>
-                    <option value="A1-A2: Básico">A1-A2: Básico</option>
-                    <option value="A2-B1: Pre-intermedio">A2-B1: Pre-intermedio</option>
-                    <option value="B1: Intermedio">B1: Intermedio</option>
-                    <option value="B2: Intermedio-Alto">B2: Intermedio-Alto</option>
-                    <option value="C1-C2: Avanzado">C1-C2: Avanzado</option>
-                  </select>
-                </div>             
-              </div>
-              <div class="col-md-4">
-                <label for="promedioInput">Promedio</label>
-                <div class="form-group mb-3">
-                  <input type="text" class="form-control circular" id="promedioInput" placeholder="Ingresa tu promedio" name="promedio">
-                </div>
-              </div>
-            </div>
-              <!-- Botones de navegación -->
-            <div class="d-flex justify-content-between">
-              <button type="" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E;">Regresar
-              <a href="/generales"></a>
-              </button>
-              <button type="submit" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
-            </div>
-          </form>
+<div class="banner">
+  <div class="container p-5">
+    <div class="card mx-3 mt-n5 shadow-lg">
+      <div class="card-body p-5">
+        <h3 class="pb-2 text-center">REGISTRO</h3>
+        <div class="row text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-mortarboard"
+            viewBox="0 0 16 16">
+            <path
+              d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917zM8 8.46 1.758 5.965 8 3.052l6.242 2.913z" />
+            <path
+              d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46z" />
+          </svg>
+          <h5 class="pb-2 ">Informacion de Estudios</h5>
         </div>
+
+        <hr class="hr-navbar opacity-100 my-4">
+        <form action="/estudios" method="post">
+          <!-- Grupo 1 de campos del formulario -->
+          <div class="row contenedor-campos">
+            <div class="col-md-4">
+              <label for="nivelInput">Universidad de procedencia</label>
+              <div class="form-group my-3">
+                <input type="text" class="datos" id="nivelInput" placeholder="Ingresa tu universidad de procedencia"
+                  name="nivel">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="carreraInput">Carrera de procedencia</label>
+              <div class="form-group my-3">
+                <input type="text" class="datos" id="carreraInput" placeholder="Ingresa tu carrera de procedencia"
+                  name="carrera">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="tituladoInput">Titulado</label>
+              <div class="form-group my-3">
+                <select class="datos" id="tituladoInput" name="titulado">
+                  <option disabled selected>Selecciona una opción</option>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+                  <option value="En Proceso">En proceso</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grupo 2 de campos del formulario -->
+          <div class="row contenedor-campos">
+            <div class="col-md-4">
+              <label for="cicloInput">Ciclo escolar egreso</label>
+              <div class="form-group my-3">
+                <input type="text" class="datos" id="cicloInput" placeholder="Ingresa tu ciclo de egreso" name="ciclo">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="nivelinglesInput">Nivel de ingles</label>
+              <div class="form-group my-3">
+                <select class="datos" id="nivelinglesInput" name="ingles">
+                  <option disabled selected>Selecciona una opción</option>
+                  <option value="A0: Principiante">A0: Principiante</option>
+                  <option value="A1-A2: Básico">A1-A2: Básico</option>
+                  <option value="A2-B1: Pre-intermedio">A2-B1: Pre-intermedio</option>
+                  <option value="B1: Intermedio">B1: Intermedio</option>
+                  <option value="B2: Intermedio-Alto">B2: Intermedio-Alto</option>
+                  <option value="C1-C2: Avanzado">C1-C2: Avanzado</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="promedioInput">Promedio</label>
+              <div class="form-group my-3">
+                <input type="text" class="datos" id="promedioInput" placeholder="Ingresa tu promedio" name="promedio">
+              </div>
+            </div>
+          </div>
+
+          <hr class="hr-navbar opacity-100 my-4">
+          <!-- Botones de navegación -->
+          <div class="contenedor-campos d-flex justify-content-between">
+            <button type="" class="btn-siguiente">Regresar
+              <a href="/generales"></a>
+            </button>
+            <button type="submit" class="btn-siguiente">Siguiente</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  {%endblock%}
+</div>
+{%endblock%}

@@ -9,43 +9,53 @@
 {% block contenido %}
 <div class="banner">
   <div class="container py-5">
-    <div class="card mx-3 my-5 shadow-lg rounded-4">
+    <div class="card shadow-lg rounded-4">
       <div class="card-body p-5">
-        <h5 class="pb-2 text-center registro-text">REGISTRO</h5>
-        <h5 class="pb-2 text-center datos-generales-text">Datos generales</h5>
-        <hr>
+        <h3 class="pb-2 text-center">REGISTRO</h3>
+        <div class="row text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-vcard"
+            viewBox="0 0 16 16">
+            <path
+              d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
+            <path
+              d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
+          </svg>
+          <h5 class="pb-2 text-center">Informacion General</h5>
+        </div>
+
+        <hr class="hr-navbar opacity-100 my-4">
         <form action="/general" method="post">
           <!-- Grupo 1 de campos del formulario -->
-          <div class="row">
+          <div class="row contenedor-campos">
             <div class="col-md-4">
               <label for="NombreInput">Nombre(s)</label>
-              <div class="form-group mb-3">
-                <input type="text" name="nombres" class="form-control circular" id="NombreInput"
-                  placeholder="Ingresa tu nombre" required>
+              <div class="form-group my-3">
+                <input type="text" name="nombres" class="datos" id="NombreInput" placeholder="Ingresa tu nombre"
+                  required>
               </div>
             </div>
             <div class="col-md-4">
               <label for="apellidopInput">Apellido paterno</label>
-              <div class="form-group mb-3">
-                <input type="text" name="apellido_p" class="form-control circular" id="apellidopInput"
+              <div class="form-group my-3">
+                <input type="text" name="apellido_p" class="datos" id="apellidopInput"
                   placeholder="Ingresa tu apellido paterno" required>
               </div>
             </div>
             <div class="col-md-4">
               <label for="apellidomInput">Apellido materno</label>
-              <div class="form-group mb-3">
-                <input type="text" name="apellido_m" class="form-control circular" id="apellidomInput"
+              <div class="form-group my-3">
+                <input type="text" name="apellido_m" class="datos" id="apellidomInput"
                   placeholder="Ingresa tu apellido materno" required>
               </div>
             </div>
           </div>
 
           <!-- Grupo 2 de campos del formulario -->
-          <div class="row">
+          <div class="row contenedor-campos">
             <div class="col-md-4">
               <label for="sexoInput">Sexo</label>
-              <div class="form-group mb-3">
-                <select class="form-select circular" name="sexo" id="sexoInput" required>
+              <div class="form-group my-3">
+                <select class="datos" name="sexo" id="sexoInput" required>
                   <option disabled selected>Selecciona una opción</option>
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
@@ -55,40 +65,41 @@
             </div>
             <div class="col-md-4">
               <label for="celInput">Telefono de contacto</label>
-              <div class="form-group mb-3">
-                <input type="text" name="tel_contacto" class="form-control circular" id="celInput"
+              <div class="form-group my-3">
+                <input type="text" name="tel_contacto" class="datos" id="celInput"
                   placeholder="Ingresa tu Telefono de contacto" required>
               </div>
             </div>
             <div class="col-md-4">
               <label for="correoInput">Correo electronico</label>
-              <div class="form-group mb-3">
-                <input type="text" name="correo_alumno" class="form-control circular" id="correoInput"
-                  placeholder="Ingresa tu correo" required>
+              <div class="form-group my-3">
+                <input type="text" name="correo_alumno" class="datos" id="correoInput" placeholder="Ingresa tu correo"
+                  required>
               </div>
             </div>
           </div>
 
           <!-- Grupo 3 de campos del formulario -->
-          <div class="row">
+          <div class="row contenedor-campos">
             <div class="col-md-4">
               <label for="codigo_postal">Codigo postal</label>
-              <div class="form-group mb-3">
-                <input type="text" name="codigo_postal" class="form-control circular" id="codigo_postal" maxlength="5"
-                  minlength="5" placeholder="Ingresa tu codigo postal" required="">
+              <div class="form-group my-3">
+                <input type="text" name="codigo_postal" class="datos" id="codigo_postal" maxlength="5" minlength="5"
+                  placeholder="Ingresa tu codigo postal" required="">
               </div>
             </div>
+
             <div class="col-md-4">
               <label for="paisInput">Pais</label>
-              <div class="form-group mb-3">
-                <input type="text" name="pais" class="form-control circular" id="paisInput"
-                  placeholder="Ingresa tu pais" required>
+              <div class="form-group my-3">
+                <input type="text" name="pais" class="datos" id="paisInput" placeholder="Ingresa tu pais" required>
               </div>
             </div>
+
             <div class="col-md-4">
               <label for="id_estado">Estado</label>
-              <div class="form-group mb-3">
-                <select name="estado" class="form-select circular" id="id_estado" required>
+              <div class="form-group my-3">
+                <select name="estado" class="datos" id="id_estado" required>
                   <option disabled selected value="0" selected="true">Selecciona una opcion...</option>
                   <option value="1">Aguascalientes</option>
                   <option value="2">Baja California</option>
@@ -125,50 +136,50 @@
                 </select>
               </div>
             </div>
+          </div>
 
-            <!-- Grupo 4 de campos del formulario -->
-            <div class="row">
-              <div class="col-md-4">
-                <label for="id_municipio">Municipio</label>
-                <div class="form-group mb-3">
-                  <input type="text" name="ciudad" class="form-control circular" id="municipio"
-                    placeholder="Ingresa tu municipio" required="">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label for="id_colonia">Colonia</label>
-                <div class="form-group mb-3">
-                  <input type="text" name="colonia" class="form-control circular" id="colonia"
-                    placeholder="Ingresa tu colonia" required="">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <label for="nacionalidadInput">Nacionalidad</label>
-                <div class="form-group mb-3">
-                  <input type="text" name="nacionalidad" class="form-control circular" id="nacionalidadInput"
-                    placeholder="Ingresa tu nacionalidad" required>
-                </div>
+          <!-- Grupo 4 de campos del formulario -->
+          <div class="row contenedor-campos">
+            <div class="col-md-4">
+              <label for="id_municipio">Municipio</label>
+              <div class="form-group my-3">
+                <input type="text" name="ciudad" class="datos" id="municipio" placeholder="Ingresa tu municipio"
+                  required="">
               </div>
             </div>
-
-            <!-- Grupo 5 de campos del formulario -->
-            <div class="row">
-              <div class="col-md-4">
-                <label for="fechanacimientoInput">Fecha de nacimiento</label>
-                <div class="form-group mb-3">
-                  <input type="date" name="f_nacimiento" class="form-control circular" id="fechanacimientoInput"
-                    placeholder="Fecha de Nacimiento" required>
-                </div>
+            <div class="col-md-4">
+              <label for="id_colonia">Colonia</label>
+              <div class="form-group my-3">
+                <input type="text" name="colonia" class="datos" id="colonia" placeholder="Ingresa tu colonia"
+                  required="">
               </div>
             </div>
-
-            <!-- Botones de navegación -->
-            <div class="nav-buttons mt-4 text-center">
-              <input type="submit" class="btn btn-primary"
-                style="border-radius: 30px; background-color: #0C616E; text-align: center;" value="Registrar">
-              <button type="submit" class="btn btn-primary"
-                style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
+            <div class="col-md-4">
+              <label for="nacionalidadInput">Nacionalidad</label>
+              <div class="form-group my-3">
+                <input type="text" name="nacionalidad" class="datos" id="nacionalidadInput"
+                  placeholder="Ingresa tu nacionalidad" required>
+              </div>
             </div>
+          </div>
+
+          <!-- Grupo 5 de campos del formulario -->
+          <div class="row contenedor-campos">
+            <div class="col-md-4">
+              <label for="fechanacimientoInput">Fecha de nacimiento</label>
+              <div class="form-group my-3">
+                <input type="date" name="f_nacimiento" class="datos" id="fechanacimientoInput"
+                  placeholder="Fecha de Nacimiento" required>
+              </div>
+            </div>
+          </div>
+
+          <hr class="hr-navbar opacity-100 my-4">
+          <!-- Botones de navegación -->
+          <div class="nav-buttons mt-4 text-end">
+            <input type="submit" class="btn-siguiente" value="Registrar">
+            <button type="submit" class="btn-siguiente">Siguiente</button>
+          </div>
         </form>
       </div>
     </div>
