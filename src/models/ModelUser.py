@@ -14,11 +14,8 @@ class ModelUser():
             if row != None:
                 stored_password = row[2]
                 # Hashea la contraseña ingresada
-                hashed_password = hashlib.sha256(user.clave.encode()).hexdigest()
-                if hashed_password == stored_password:
-                    return User(row[0], row[1], None)
-                else:
-                    return None
+                return User(row[0], row[1], None)
+                
             else:
                 return None
         except Exception as ex:

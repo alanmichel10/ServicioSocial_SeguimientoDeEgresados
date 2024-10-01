@@ -1,23 +1,18 @@
 {% extends 'base.html' %}
 {% block titulo %} Registro {% endblock %}
 
-{%block cssPersonalizado%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}"/>
-<script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>
-{%endblock%}
-
 {% block contenido %}
   <div class="banner">
     <div class="container p-5">
       <div class="card shadow-lg rounded-4">
         <div class="card-body p-5">
-          <h3 class="pb-2 text-center">REGISTRO</h3>
-          <h5 class="pb-2 text-center">Posgrado</h5>
+          <h3 class="pb-2 text-center" style="font-size: 3rem;">REGISTRO</h3>
+          <h5 class="pb-2 text-center" style="font-size: 2.5rem;">Posgrado</h5>
           <hr class="hr-navbar opacity-100 my-4">
           <form action="/seleccion" method="post" id="posgradoForm" onsubmit="actualizarCampoOculto()">
             <!-- Selección de Posgrado -->
             <div class="form-group mb-3">
-              <label for="posgradoInput">Escoge un tipo de posgrado</label>
+              <label class="text-label" for="posgradoInput">Escoge un tipo de posgrado</label>
               <select class="datos mt-4" id="posgradoInput" onchange="mostrarOpciones()">
                 <option disabled selected>Selecciona una opción</option>
                 <option value="maestria">Maestría</option>
@@ -26,7 +21,7 @@
             </div>
     
             <div id="maestriaOpciones" style="display:none;">
-                <label for="seleccionesPosgrado">Selecciona las Carreras de Maestría:</label><br>
+                <label class="text-label" for="seleccionesPosgrado">Selecciona las Carreras de Maestría:</label><br>
                 <input type="checkbox" name="seleccionesPosgrado" value="1"> Maestría en Movilidad Urbana, Transporte y Territorio<br>
                 <input type="checkbox" name="seleccionesPosgrado" value="2"> Maestría en Ingeniería del Agua y la Energía (Profesionalizante)<br>
                 <input type="checkbox" name="seleccionesPosgrado" value="3"> Maestría en Gestión de Gobiernos Locales<br>
@@ -38,7 +33,7 @@
             </div>
     
             <div id="doctoradoOpciones" style="display:none;">
-                <label for="seleccionesPosgrado">Selecciona las Carreras de Doctorado:</label><br>
+                <label class="text-label" for="seleccionesPosgrado">Selecciona las Carreras de Doctorado:</label><br>
                 <input type="checkbox" name="seleccionesPosgrado" value="9"> Doctorado en Movilidad Urbana, Transporte y Territorio<br>
                 <input type="checkbox" name="seleccionesPosgrado" value="10"> Doctorado en Investigación Multidisciplinaria en Salud<br>
                 <input type="checkbox" name="seleccionesPosgrado" value="11"> Doctorado en Geología<br>

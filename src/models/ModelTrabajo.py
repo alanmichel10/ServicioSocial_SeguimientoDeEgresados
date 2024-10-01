@@ -7,10 +7,10 @@ class ModelTrabajo():
             cursor = db.connection.cursor()
 
             if trabajo.estatus == 'Si':
-                sql = """INSERT INTO trabajo (estatus, nombre, ubicacion, descripcion, antiguedad, jornadalaboral) 
+                sql = """INSERT INTO trabajo (estatus,nombre, Horario_Laboral, Puesto_trabajo, Sector) 
                         VALUES (%s, %s, %s, %s, %s, %s)"""
                 values = (
-                    trabajo.estatus, trabajo.nombre, trabajo.ubicacion, trabajo.descripcion, trabajo.antiguedad, trabajo.jornada
+                    trabajo.estatus, trabajo.nombre, trabajo.Horario_Laboral, trabajo.Puesto_trabajo, trabajo.Sector
                 )
             else:
                 sql = """INSERT INTO trabajo (estatus) 
@@ -39,30 +39,15 @@ class ModelTrabajo():
 
     
     @classmethod
-    def get_by_id(cls, db, id):
+    def get_by_id(cls, db, correo_user):
         try:
             cursor = db.connection.cursor()
-
-            sql = "SELECT trabajo FROM general WHERE cuenta = {}".format(id)
+            sql = "SELECT Correo_Alu,estatus,nombre, Horario_Laboral, Puesto_trabajo, Sector FROM laboral WHERE Correo_Alu = '{}'".format(correo_user)
             cursor.execute(sql)
-            idTrabajo = cursor.fetchone()
-           
-            if idTrabajo ==None:
-                idTrabajo=0
-                return idTrabajo
-            if idTrabajo is not None:
-                idTrabajo = idTrabajo[0]
-                if idTrabajo is not None:
-                    sql = "SELECT idTrabajo,estatus,nombre,ubicacion,descripcion,antiguedad,jornadaLaboral FROM trabajo WHERE idTrabajo = {}".format(idTrabajo)
-                    cursor.execute(sql)
-                    row = cursor.fetchone()
+            row = cursor.fetchone()
 
-                    if row:
-                        return Trabajo(row[0], row[1], row[2], row[3], row[4], row[5],row[6])
-                    else:
-                        return Trabajo()
-                else:
-                    return None
+            if row:
+                return Trabajo(row[0], row[1], row[2], row[3], row[4], row[5])
             else:
                 return Trabajo()
         except Exception as ex:
@@ -73,7 +58,7 @@ class ModelTrabajo():
     def validarTrabajo(self, db, id):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT trabajo FROM general WHERE cuenta = {}".format(id)
+            sql = "SELECT Correo_Alumno FROM general WHERE Correo_Alumno = {}".format(id)
             cursor.execute(sql)
             row = cursor.fetchone()
             idTrabajo = row[0]
@@ -83,7 +68,7 @@ class ModelTrabajo():
                 return idTrabajo
             if row:
                 
-                sqlTrabajo = "SELECT idTrabajo FROM trabajo WHERE idTrabajo = {}".format(row[0])
+                sqlTrabajo = "SELECT Correo_Alu FROM trabajo WHERE Correo_Alu = {}".format(row[0])
                 cursor.execute(sqlTrabajo)
                 trabajo= cursor.fetchone()
                 print(trabajo)
@@ -100,22 +85,22 @@ class ModelTrabajo():
     def actualizarTrabajo(self, db, trabajo, id):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT trabajo FROM general WHERE cuenta = {}".format(id)
+            sql = "SELECT Correo_Alumno FROM general WHERE Correo_Alumno = {}".format(id)
             cursor.execute(sql)
             idTrabajo = cursor.fetchone()
             idTrabajo = idTrabajo[0]
             if idTrabajo:
                 if trabajo.estatus == 'Si':
                     sql = """UPDATE trabajo 
-                            SET estatus = %s, nombre= %s, ubicacion=%s, descripcion=%s, antiguedad=%s, jornadaLaboral=%s
-                            WHERE idtrabajo=%s"""
+                            SET estatus = %s, nombre= %s, Horario_Laboral=%s, Puesto_trabajo=%s, Sector=%s
+                            WHERE Correo_Alu=%s"""
                     values = (
-                        trabajo.estatus , trabajo.nombre, trabajo.ubicacion, trabajo.descripcion, trabajo.antiguedad, trabajo.jornada, idTrabajo
+                        trabajo.estatus, trabajo.nombre, trabajo.Horario_Laboral, trabajo.Puesto_trabajo, trabajo.Sector, idTrabajo
                         )
                 else:
                     sql = """UPDATE trabajo 
-                            SET estatus = %s, nombre=NULL, ubicacion=NULL, descripcion=NULL, antiguedad=NULL, jornadaLaboral=NULL
-                            WHERE idtrabajo=%s"""
+                            SET estatus = %s, nombre=NULL, Horario_Laboral=NULL, Puesto_trabajo=NULL, Sector=NULL
+                            WHERE Correo_Alu=%s"""
                     values = (
                         trabajo.estatus , idTrabajo
                         )

@@ -12,6 +12,7 @@ contenido%}
     </svg>
     <strong class="mx-4 apartado">General</strong>
   </div>
+  <hr class="hr-navbar opacity-100">
   <div class="card-body">
     <form class="form-cuestionario mx-auto" action="/informacion/general" method="POST">
       {% with messages = get_flashed_messages() %}
@@ -38,75 +39,26 @@ contenido%}
           <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-3 col-12" for="name">Nombre(s): </label>
             <input class="campo-datos col-lg-9 col-md-9 col-12" type="text" id="name"
-              value="{{ current_user.nombre }}" />
+              value="{% if form and form.nombre %}{{ form.nombre }}{% endif %}" />
           </div>
           <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-4 col-12" for="apellidoPaterno">Apellido paterno: </label>
             <input class="campo-datos col-lg-9 col-md-8 col-12" type="text" id="apellidoPaterno"
-              value="{{ current_user.apellidoP}}" />
+              value="{% if form and form.apellidoP %}{{ form.apellidoP }}{% endif %}" />
           </div>
           <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-4 col-12" for="apellidoMaterno">Apellido materno: </label>
             <input class="campo-datos col-lg-9 col-md-8 col-12" type="text" id="apellidoMaterno"
-              value="{{ current_user.apellidoM }}" />
+              value="{% if form and form.apellidoM %}{{ form.apellidoM }}{% endif %}" />
           </div>
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-12 my-2" for="">Sexo: </label>
-            <div class="row justify-content-between">
-              <div class="text-start col-md-3 col-sm-12">
-                <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Hombre" {% if form and
-                  form.sexo=='Hombre' %} checked {% endif %} /><label>Hombre</label>
-              </div>
-              <div class="text-start col-md-3 col-sm-12">
-                <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Mujer" {% if form and
-                  form.sexo=='Mujer' %} checked {% endif %} /><label>Mujer</label>
-              </div>
-              <div class="text-start col-md-6 col-sm-12">
-                <input class="campo-datos mx-2 radio" type="radio" name="sexo" value="Otro" {% if form and
-                  form.sexo=='Otro' %} checked {% endif %} /><label>Prefiero no decirlo</label>
-              </div>
-            </div>
-          </div>
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-2 col-md-2 col-12" for="curp">CURP: </label>
-            <input class="campo-datos col-lg-10 col-md-10 col-12 curp" type="text" id="curp" name="curp"
-              value="{% if form and form.curp %}{{ form.curp }}{% endif %}" />
-          </div>
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-3 col-md-3 col-12" for="cp">Codigo postal: </label>
-            <input class="campo-datos col-lg-9 col-md-9 col-12 zip" type="text" id="cp" name="codigoPostal"
-              value="{% if form and form.codigoPostal %}{{ form.codigoPostal }}{% endif %}" />
-          </div>
-
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-4 col-md-4 col-12" for="codigoEstudiante">Codigo estudiante: </label>
-            <input class="campo-datos col-lg-8 col-md-8 col-12" type="texto" id="codigoEstudiante"
-              name="codigoEstudiante"
-              value="{% if form and form.codigoEstudiante %}{{ form.codigoEstudiante }}{% endif %}" />
-          </div>
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-3 col-md-3 col-12" for="">Estado civil: </label>
-            <select class="campo-datos col-lg-9 col-md-9 col-12" aria-label="Large select example" name="estadoCivil">
-              <option disabled>Seleccione una opción</option>
-              <option value="Soltero" {% if form and form.estadoCivil=='Soltero' %} selected {% endif %}>Soltero/a
-              </option>
-              <option value="Casado" {% if form and form.estadoCivil=='Casado' %} selected {% endif %}>Casado/a</option>
-              <option value="Divorciado" {% if form and form.estadoCivil=='Divorciado' %} selected {% endif %}>
-                Divorciado/a
-              </option>
-              <option value="Viudo" {% if form and form.estadoCivil=='Viudo' %} selected {% endif %}>Viudo/a</option>
+            <label class="text-label col-lg-2 col-md-2 col-12- my-2" for="">Sexo: </label>
+            <select class="campo-datos col-lg-10 col-md-10 col-12" name="sexo" id="sexoInput" required>
+              <option disabled selected>Selecciona una opción</option>
+              <option value="Masculino" {% if form and form.sexo == 'Masculino' %} selected {% endif %}>Masculino</option>
+              <option value="Femenino" {% if form and form.sexo == 'Femenino' %} selected {% endif %}>Femenino</option>
+              <option value="Otro" {% if form and form.sexo == 'Otro' %} selected {% endif %}>Prefiero no decirlo</option>
             </select>
-          </div>
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-4 col-md-5 col-12" for="fechaNacimiento">Fecha de nacimiento: </label>
-            <input class="campo-datos col-lg-8 col-md-7 col-12" type="date" id="fechaNacimiento"
-              value="{% if form and form.fecha %}{{ form.fecha.strftime('%Y-%m-%d') }}{% endif %}"
-              name="fechaNacimiento" />
-          </div>
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-4 col-md-5 col-12" for="lugarNacimiento">Lugar de nacimiento: </label>
-            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="lugarNacimiento" name="lugarNacimiento"
-              value="{% if form and form.lugarNacimiento %}{{ form.lugarNacimiento }}{% endif %}" />
           </div>
           <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-4 col-md-4 col-12" for="phone">Número de teléfono: </label>
@@ -114,69 +66,84 @@ contenido%}
               value="{% if form and form.numeroTelefono %}{{ form.numeroTelefono }}{% endif %}" />
           </div>
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-4 col-md-5 col-12" for="">Posgrado al que aspira</label>
-            <select class="campo-datos col-lg-8 col-md-7 col-12" aria-label="Large select example" name="posgrado">
-              <option disabled selected>Seleccione una opción</option>
-              <option value="Maestría en Movilidad Urbana, Transporte y Territorio" {% if form and
-                form.posgrado=="Maestría en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
-                Maestría en Movilidad Urbana, Transporte y Territorio
-              </option>
-              <option value="Maestría en Ingeniería del Agua y la Energía" {% if form and
-                form.posgrado=="Maestría en Ingeniería del Agua y la Energía" %} selected {% endif %}>
-                Maestría en Ingeniería del Agua y la Energía (Profesionalizante)
-              </option>
-              <option value="Maestría en Gestión de Gobiernos Locales" {% if form and
-                form.posgrado=="Maestría en Gestión de Gobiernos Locales" %} selected {% endif %}>
-                Maestría en Gestión de Gobiernos Locales
-              </option>
-              <option value="Maestría en Geología" {% if form and form.posgrado=="Maestría en Geología" %} selected {%
-                endif %}>
-                Maestría en Geología
-              </option>
-              <option value="Maestría en Ciencias en Ingeniería del Agua y la Energía" {% if form and
-                form.posgrado=="Maestría en Ciencias en Ingeniería del Agua y la Energía" %} selected {% endif %}>
-                Maestría en Ciencias en Ingeniería del Agua y la Energía
-                (Investigación)
-              </option>
-              <option value="Maestría en Ciencias Antropológicas" {% if form and
-                form.posgrado=="Maestría en Ciencias Antropológicas" %} selected {% endif %}>
-                Maestría en Ciencias Antropológicas
-              </option>
-              <option value="Maestría en Ciencia de la Ciudad" {% if form and
-                form.posgrado=="Maestría en Ciencia de la Ciudad" %} selected {% endif %}>
-                Maestría en Ciencia de la Ciudad
-              </option>
-              <option value="Maestría en Bioética" {% if form and form.posgrado=="Maestría en Bioética" %} selected {%
-                endif %}>
-                Maestría en Bioética
-              </option>
-              <option value="Doctorado en Movilidad Urbana, Transporte y Territorio" {% if form and
-                form.posgrado=="Doctorado en Movilidad Urbana, Transporte y Territorio" %} selected {% endif %}>
-                Doctorado en Movilidad Urbana, Transporte y Territorio
-              </option>
-              <option value="Doctorado en Investigación Multidisciplinaria en Salud" {% if form and
-                form.posgrado=="Doctorado en Investigación Multidisciplinaria en Salud" %} selected {% endif %}>
-                Doctorado en Investigación Multidisciplinaria en Salud
-              </option>
-              <option value="Doctorado en Geología" {% if form and form.posgrado=="Doctorado en Geología" %} selected {%
-                endif %}>
-                Doctorado en Geología</option>
-              <option value="Doctorado en Derechos Humanos" {% if form and
-                form.posgrado=="Doctorado en Derechos Humanos" %} selected {% endif %}>
-                Doctorado en Derechos Humanos
-              </option>
-              <option value="Doctorado en Agua y Energía" {% if form and form.posgrado=="Doctorado en Agua y Energía" %}
-                selected {% endif %}>
-                Doctorado en Agua y Energía
-              </option>
+            <label class="text-label col-lg-2 col-md-2 col-12" for="paisInput">Pais</label>
+            <input type="text" name="pais" class="campo-datos col-lg-10 col-md-10 col-12" id="paisInput"
+            value="{% if form and form.pais %} {{ form.pais }} {% endif %}" />
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-2 col-md-2 col-12" for="id_estado">Estado</label>
+            <select name="estado" class="campo-datos col-lg-10 col-md-10 col-12" id="id_estado">
+              <option disabled selected value="0" selected="true">Selecciona una opcion...</option>
+              <option value="1" {% if form and form.estado == '1' %} selected {% endif %}>Aguascalientes</option>
+              <option value="2" {% if form and form.estado == '2' %} selected {% endif %}>Baja California</option>
+              <option value="3" {% if form and form.estado == '3' %} selected {% endif %}>Baja California Sur</option>
+              <option value="4" {% if form and form.estado == '4' %} selected {% endif %}>Campeche</option>
+              <option value="5" {% if form and form.estado == '5' %} selected {% endif %}>Coahuila</option>
+              <option value="6" {% if form and form.estado == '6' %} selected {% endif %}>Colima</option>             
+              <option value="7" {% if form and form.estado == '7' %} selected {% endif %}>Chiapas</option>
+              <option value="8" {% if form and form.estado == '8' %} selected {% endif %}>Chihuahua</option>
+              <option value="9" {% if form and form.estado == '9' %} selected {% endif %}>Ciudad de México</option>
+              <option value="10" {% if form and form.estado == '10' %} selected {% endif %}>Durango</option>
+              <option value="11" {% if form and form.estado == '11' %} selected {% endif %}>Guanajuato</option>
+              <option value="12" {% if form and form.estado == '12' %} selected {% endif %}>Guerrero</option>              
+              <option value="13" {% if form and form.estado == '13' %} selected {% endif %}>Hidalgo</option>
+              <option value="14" {% if form and form.estado == '14' %} selected {% endif %}>Jalisco</option>
+              <option value="15" {% if form and form.estado == '15' %} selected {% endif %}>Estado de México</option>
+              <option value="16" {% if form and form.estado == '16' %} selected {% endif %}>Michoacán</option>
+              <option value="17" {% if form and form.estado == '17' %} selected {% endif %}>Morelos</option>
+              <option value="18" {% if form and form.estado == '18' %} selected {% endif %}>Nayarit</option>
+              <option value="19" {% if form and form.estado == '19' %} selected {% endif %}>Nuevo León</option>
+              <option value="20" {% if form and form.estado == '20' %} selected {% endif %}>Oaxaca</option>
+              <option value="21" {% if form and form.estado == '21' %} selected {% endif %}>Puebla</option>
+              <option value="22" {% if form and form.estado == '22' %} selected {% endif %}>Querétaro</option>
+              <option value="23" {% if form and form.estado == '23' %} selected {% endif %}>Quintana Roo</option>
+              <option value="24" {% if form and form.estado == '24' %} selected {% endif %}>San Luis Potosí</option>
+              <option value="25" {% if form and form.estado == '25' %} selected {% endif %}>Sinaloa</option>              
+              <option value="26" {% if form and form.estado == '26' %} selected {% endif %}>Sonora</option>
+              <option value="27" {% if form and form.estado == '27' %} selected {% endif %}>Tabasco</option>
+              <option value="28" {% if form and form.estado == '28' %} selected {% endif %}>Tamaulipas</option>
+              <option value="29" {% if form and form.estado == '29' %} selected {% endif %}>Tlaxcala</option>
+              <option value="30" {% if form and form.estado == '30' %} selected {% endif %}>Veracruz</option>
+              <option value="31" {% if form and form.estado == '31' %} selected {% endif %}>Yucatán</option>
+              <option value="32" {% if form and form.estado == '32' %} selected {% endif %}>Zacatecas</option>
             </select>
           </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="cp">Codigo postal: </label>
+            <input class="campo-datos col-lg-9 col-md-9 col-12 zip" type="text" id="cp" name="codigoPostal"
+              value="{% if form and form.codigoPostal %}{{ form.codigoPostal }}{% endif %}" />
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="id_municipio">Municipio</label>
+            <input type="text" name="ciudad" class="campo-datos col-lg-9 col-md-9 col-12" id="municipio"
+            value="{% if form and form.ciudad %}{{ form.ciudad }}{% endif %}">
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-2 col-md-2 col-12" for="id_colonia">Colonia</label>
+            <input type="text" name="colonia" class="campo-datos col-lg-10 col-md-10 col-12" id="colonia"
+            value="{% if form and form.colonia %}{{ form.colonia }}{% endif %}">
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-3 col-md-3 col-12" for="nacionalidadInput">Nacionalidad</label>
+            <input type="text" name="nacionalidad" class="campo-datos col-lg-9 col-md-9 col-12" id="nacionalidadInput"
+            value="{% if form and form.nacionalidad %}{{ form.nacionalidad }}{% endif %}">
+          </div>
+          <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-4 col-md-5 col-12" for="fechaNacimiento">Fecha de nacimiento: </label>
+            <input class="campo-datos col-lg-8 col-md-7 col-12" type="date" id="fechaNacimiento"
+              value="{% if form and form.fecha %}{{ form.fecha.strftime('%Y-%m-%d') }}{% endif %}"
+              name="fechaNacimiento" />
+          </div>
+          
         </div>
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn-actualizar my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Actualizar
-        </button>
+        <hr class="hr-navbar opacity-100 mt-5 mb-3">
+        <div class="text-end">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn-actualizar my-4 text-end" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Actualizar
+          </button>
+        </div>
       </fieldset>
     </form>
 

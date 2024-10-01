@@ -1,17 +1,13 @@
 {% extends 'base.html' %}
 {% block titulo %} Datos Generales {% endblock %}
 
-{%block cssPersonalizado%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}" />
-<script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>
-{%endblock%}
 
 {% block contenido %}
 <div class="banner">
   <div class="container py-5">
     <div class="card shadow-lg rounded-4">
       <div class="card-body p-5">
-        <h3 class="pb-2 text-center">REGISTRO</h3>
+        <h3 class="pb-2 text-center" style="font-size: 3rem;">REGISTRO</h3>
         <div class="row text-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-vcard"
             viewBox="0 0 16 16">
@@ -20,7 +16,7 @@
             <path
               d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
           </svg>
-          <h5 class="pb-2 text-center">Informacion General</h5>
+          <h5 class="pb-2 text-center" style="font-size: 2.5rem;">Informacion General</h5>
         </div>
 
         <hr class="hr-navbar opacity-100 my-4">
@@ -28,21 +24,21 @@
           <!-- Grupo 1 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
-              <label for="NombreInput">Nombre(s)</label>
+              <label class="text-label" for="NombreInput">Nombre(s)</label>
               <div class="form-group my-3">
                 <input type="text" name="nombres" class="datos" id="NombreInput" placeholder="Ingresa tu nombre"
                   required>
               </div>
             </div>
             <div class="col-md-4">
-              <label for="apellidopInput">Apellido paterno</label>
+              <label class="text-label" for="apellidopInput">Apellido paterno</label>
               <div class="form-group my-3">
                 <input type="text" name="apellido_p" class="datos" id="apellidopInput"
                   placeholder="Ingresa tu apellido paterno" required>
               </div>
             </div>
             <div class="col-md-4">
-              <label for="apellidomInput">Apellido materno</label>
+              <label class="text-label" for="apellidomInput">Apellido materno</label>
               <div class="form-group my-3">
                 <input type="text" name="apellido_m" class="datos" id="apellidomInput"
                   placeholder="Ingresa tu apellido materno" required>
@@ -53,7 +49,7 @@
           <!-- Grupo 2 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
-              <label for="sexoInput">Sexo</label>
+              <label class="text-label" for="sexoInput">Sexo</label>
               <div class="form-group my-3">
                 <select class="datos" name="sexo" id="sexoInput" required>
                   <option disabled selected>Selecciona una opción</option>
@@ -64,14 +60,14 @@
               </div>
             </div>
             <div class="col-md-4">
-              <label for="celInput">Telefono de contacto</label>
+              <label class="text-label" for="celInput">Telefono de contacto</label>
               <div class="form-group my-3">
                 <input type="text" name="tel_contacto" class="datos" id="celInput"
                   placeholder="Ingresa tu Telefono de contacto" required>
               </div>
             </div>
             <div class="col-md-4">
-              <label for="correoInput">Correo electronico</label>
+              <label class="text-label" for="correoInput">Correo electronico</label>
               <div class="form-group my-3">
                 <input type="text" name="correo_alumno" class="datos" id="correoInput" placeholder="Ingresa tu correo"
                   required>
@@ -82,7 +78,7 @@
           <!-- Grupo 3 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
-              <label for="codigo_postal">Codigo postal</label>
+              <label class="text-label" for="codigo_postal">Codigo postal</label>
               <div class="form-group my-3">
                 <input type="text" name="codigo_postal" class="datos" id="codigo_postal" maxlength="5" minlength="5"
                   placeholder="Ingresa tu codigo postal" required="">
@@ -90,14 +86,14 @@
             </div>
 
             <div class="col-md-4">
-              <label for="paisInput">Pais</label>
+              <label class="text-label" for="paisInput">Pais</label>
               <div class="form-group my-3">
                 <input type="text" name="pais" class="datos" id="paisInput" placeholder="Ingresa tu pais" required>
               </div>
             </div>
 
             <div class="col-md-4">
-              <label for="id_estado">Estado</label>
+              <label class="text-label" for="id_estado">Estado</label>
               <div class="form-group my-3">
                 <select name="estado" class="datos" id="id_estado" required>
                   <option disabled selected value="0" selected="true">Selecciona una opcion...</option>
@@ -141,21 +137,21 @@
           <!-- Grupo 4 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
-              <label for="id_municipio">Municipio</label>
+              <label class="text-label" for="id_municipio">Municipio</label>
               <div class="form-group my-3">
                 <input type="text" name="ciudad" class="datos" id="municipio" placeholder="Ingresa tu municipio"
                   required="">
               </div>
             </div>
             <div class="col-md-4">
-              <label for="id_colonia">Colonia</label>
+              <label class="text-label" for="id_colonia">Colonia</label>
               <div class="form-group my-3">
                 <input type="text" name="colonia" class="datos" id="colonia" placeholder="Ingresa tu colonia"
                   required="">
               </div>
             </div>
             <div class="col-md-4">
-              <label for="nacionalidadInput">Nacionalidad</label>
+              <label class="text-label" for="nacionalidadInput">Nacionalidad</label>
               <div class="form-group my-3">
                 <input type="text" name="nacionalidad" class="datos" id="nacionalidadInput"
                   placeholder="Ingresa tu nacionalidad" required>
@@ -166,7 +162,7 @@
           <!-- Grupo 5 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
-              <label for="fechanacimientoInput">Fecha de nacimiento</label>
+              <label class="text-label" for="fechanacimientoInput">Fecha de nacimiento</label>
               <div class="form-group my-3">
                 <input type="date" name="f_nacimiento" class="datos" id="fechanacimientoInput"
                   placeholder="Fecha de Nacimiento" required>

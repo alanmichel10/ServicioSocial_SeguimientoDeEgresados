@@ -1,24 +1,19 @@
 {% extends 'base.html' %}
 {% block titulo %} Datos Generales {% endblock %}
 
-{%block cssPersonalizado%}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}"/>
-<script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>
-{%endblock%}
-
 {% block contenido %}
   <div class="banner">
     <div class="container p-5">
-      <div class="card mx-3 mt-n5 shadow-lg circular" style="border-radius: 40px; border: none">
+      <div class="card mx-3 mt-n5 shadow-lg">
         <div class="card-body p-5">
-          <h3 class="pb-2 text-center">REGISTRO</h3>
+          <h3 class="pb-2 text-center" style="font-size: 3rem;">REGISTRO</h3>
           <div class="row text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-briefcase"
       viewBox="0 0 16 16">
       <path
         d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
     </svg>
-    <h5 class="pb-2">Informacion Laboral</h5>
+    <h5 class="pb-2" style="font-size: 2.5rem;">Informacion Laboral</h5>
           </div>
           
           <hr class="hr-navbar opacity-100 my-4">
@@ -26,7 +21,7 @@
             <!-- Grupo 1 de campos del formulario -->
             <div class="row">
                 <div class="col-md-4">
-                    <label for="trabajoInput">¿Estás actualmente trabajando?</label>
+                    <label class="text-label" for="trabajoInput">¿Estás actualmente trabajando?</label>
                     <div class="form-group my-3">
                         <select class="datos" id="trabajoInput" name="trabajasiono">
                             <option disabled selected>Selecciona una opción</option>
@@ -36,15 +31,15 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label for="nombreempresaInput">Nombre del lugar de trabajo</label>
+                    <label class="text-label" for="nombreempresaInput">Nombre del lugar de trabajo</label>
                     <div class="form-group my-3">
                         <input type="text" class="datos" id="nombreempresaInput" name="lugardetrabajo" placeholder="Ingresa el nombre del lugar de trabajo" data-na>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label for="horarioInput">Horario laboral</label>
+                    <label class="text-label" for="horarioInput">Horario laboral</label>
                     <div class="form-group my-3">
-                        <input type="text" class="datos" id="horarioInput" name="horariolaboral" placeholder="Ingresa tu horario laboral" data-na>
+                        <input type="text" class="datos" id="horarioInput" name="horariolaboral" placeholder="Ingresa tu horario laboral">
                     </div>
                 </div>
             </div>
@@ -52,13 +47,13 @@
             <!-- Grupo 2 de campos del formulario -->
             <div class="row">
                 <div class="col-md-4">
-                    <label for="puestoInput">Puesto de trabajo</label>
+                    <label class="text-label" for="puestoInput">Puesto de trabajo</label>
                     <div class="form-group my-3">
                         <input type="text" class="datos" id="puestoInput" name="puestolaboral" placeholder="Ingresa tu puesto" data-na>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label for="sectorInput">Sector</label>
+                    <label class="text-label" for="sectorInput">Sector</label>
                     <div class="form-group my-3">
                         <select class="datos" id="sectorInput" name="sector" data-na>
                             <option disabled selected>Selecciona una opción</option>

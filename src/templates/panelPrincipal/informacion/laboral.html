@@ -9,6 +9,7 @@ contenido%}
     </svg>
     <strong class="mx-4 apartado">Laboral</strong>
   </div>
+  <hr class="hr-navbar opacity-100">
   <div class="card-body">
     <form class="form-cuestionario mx-auto" action="/informacion/laboral" method="POST">
       {% with messages = get_flashed_messages() %}
@@ -28,13 +29,13 @@ contenido%}
       <fieldset>
         <div class="container">
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label" for="">¿Ténia o tiene empleo formal?: </label>
-            <div class="row my-4 justify-content-between align-items-center">
-              <div class="col-6">
-                <input class="input-text radio" type="radio" name="estatus" value="Si" {% if form and
-                  form.estatus=='Si' %} checked {% endif %} /><label>Si</label>
+            <label class="text-label col-lg-6 col-md-6 col-12" for="">¿Estás actualmente trabajando?</label>
+            <div class="row col-lg-6 col-md-6 col-12 my-4 justify-content-between align-items-center">
+              <div class="col-lg-3 col-md-3 col-6">
+                <input class="input-text radio" type="radio" name="estatus" value="Si" {% if form and form.estatus=='Si'
+                  %} checked {% endif %} /><label>Si</label>
               </div>
-              <div class="col-6">
+              <div class="col-lg-3 col-md-3 col-6">
                 <input class="input-text radio" type="radio" name="estatus" value="No" . {% if form and
                   form.estatus=='No' %} checked {% endif %} /><label>No</label>
               </div>
@@ -46,35 +47,33 @@ contenido%}
               value="{% if form and form.nombre %}{{ form.nombre }}{% endif %}" />
           </div>
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-5 col-md-5 col-12" for="ubicacionEmpresa">Ubicación de la empresa: </label>
-            <input class="campo-datos col-lg-7 col-md-7 col-12" type="text" id="ubicacionEmpresa" name="ubicacion"
-              value="{% if form and form.ubicacion %}{{ form.ubicacion }}{% endif %}" />
+            <label class="text-label col-lg-3 col-md-3 col-12" for="horarioInput">Horario laboral</label>
+            <input type="text" class="campo-datos col-lg-9 col-md-9 col-12" id="horarioInput" name="horariolaboral"
+              placeholder="Ingresa tu horario laboral"
+              value="{% if form and form.horario %}{{ form.horario }}{% endif %}">
           </div>
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label" for="descripcionResponsabilidades">Descripcion de las responsabilidades laborales:
-            </label>
-            <textarea class="campo-datos" id="descripcionResponsabilidades" name="descripcion">{% if form and form.descripcion %}{{ form.descripcion }}{% endif %}
+            <label class="text-label" for="puestoInput">Puesto de trabajo</label>
+            <textarea class="campo-datos" id="descripcionResponsabilidades" name="descripcion">{% if form and form.puesto %}{{ form.puesto }}{% endif %}
             </textarea>
           </div>
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label" for="tiempoLaborado">Cuánto tiempo tenia laborando en la institución u
-              organización:
-            </label>
-            <input class="campo-datos" type="text" id="tiempoLaborado" name="antiguedad"
-              value="{% if form and form.antiguedad %}{{ form.antiguedad }}{% endif %}" />
-          </div>
-
-          <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-lg-4 col-md-5 col-12" for="horasTrabajo">Cuántas horas trabaja?
-            </label>
-            <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="horasTrabajo" name="jornada"
-              value="{% if form and form.jornada %}{{ form.jornada }}{% endif %}" />
+            <label class="text-label col-lg-2 col-md-2 col-12" for="sectorInput">Sector</label>
+            <select class="campo-datos col-lg-10 col-md-10 col-12" id="sectorInput" name="sector" data-na>
+              <option disabled selected>Selecciona una opción</option>
+              <option value="Publico" {% if form and form.sector=='Publico' %} selected {% endif %}>Público</option>
+              <option value="Privado" {% if form and form.sector=='Privado' %} selected {% endif %}>Privado</option>
+              <option value="NoAplica" {% if form and form.sector=='NoAplica' %} selected {% endif %}>N/A</option>
+            </select>
           </div>
         </div>
+        <hr class="hr-navbar opacity-100 mt-5 mb-3">
         <!-- Button trigger modal -->
-        <button type="button" class="btn-actualizar my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Actualizar
-        </button>
+        <div class="text-end">
+          <button type="button" class="btn-actualizar my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Actualizar
+          </button>
+        </div>
       </fieldset>
     </form>
   </div>

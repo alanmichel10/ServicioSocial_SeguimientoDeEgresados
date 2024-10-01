@@ -261,108 +261,29 @@ def informacion():
 @app.route('/informacion/general',methods=['GET','POST'])  
 @login_required  
 def general():
-    id = current_user.id
-    general = (ModelGeneral.get_by_id(db,id))
-
-    if request.method == 'POST':
-        validarUsuario= ModelGeneral.validarUsuario(db,id)
-        general = General(0,request.form['sexo'],request.form['curp'],request.form['codigoPostal'],request.form['codigoEstudiante'],request.form['estadoCivil'],request.form['fechaNacimiento'],request.form['lugarNacimiento'],request.form['telefono'],request.form['posgrado'])
-        if validarUsuario is True:
-            registro= ModelGeneral.nuevoGeneral(db,general,id)
-            if registro != None:
-                flash("Registrado con exito")
-                return redirect(url_for('general'))
-            else:
-                flash("Error al registrarse")
-                return redirect(url_for('general'))
-        else:
-            actualizar = ModelGeneral.actualizarGeneral(db,general,id)
-            if actualizar != None:
-                flash("Datos actualizados correctamente")
-                return redirect(url_for('general'))
-            else:
-                flash("Error al actualizar datos")
-                return redirect(url_for('general'))
-    else:
-        if general:
-            return render_template('panelPrincipal/informacion/general.html',form=general)
-        else:
-            return render_template('panelPrincipal/informacion/general.html')
+    correo_user = current_user.correo
+    general = (ModelGeneral.get_by_id(db,correo_user))
+    
+    return render_template('panelPrincipal/informacion/general.html', form=general)
+    
         
     
 @app.route('/informacion/estudios',methods=['GET','POST'])
 @login_required
 def estudios():
-    id = current_user.id
-    estudios = (ModelEstudios.get_by_id(db,id))
+    correo_user = current_user.correo
+    estudios = (ModelEstudios.get_by_id(db,correo_user))
     
-    if request.method == 'POST':
-            validarEstudios= ModelEstudios.validarEstudio(db,id)
-            estudios = Estudios(0,request.form['centroUniversitario'],request.form['carrera'],request.form['cicloEscolar'],request.form['nivelIngles'],request.form['titulado'])
-            if validarEstudios is True:
-                
-                actualizar = ModelEstudios.actualizarEstudios(db,estudios,id)
-                if actualizar != None:
-                    flash("Datos actualizados correctamente")
-                    return redirect(url_for('estudios'))
-                else:
-                    flash("Error al actualizar datos")
-                    return redirect(url_for('estudios'))
-
-            else:
-                registro= ModelEstudios.nuevoEstudios(db,estudios,id)
-                
-                if registro != None:
-                    flash("Registrado con exito")
-                    return redirect(url_for('estudios'))
-                else:
-                    flash("Error al registrarse")
-                    return redirect(url_for('estudios'))
-    
-    else:
-        if estudios:
-            return render_template('panelPrincipal/informacion/estudios.html',form = estudios)
-        else:
-            return render_template('panelPrincipal/informacion/estudios.html')   
+    return render_template('panelPrincipal/informacion/estudios.html',form = estudios)
 
 @app.route('/informacion/laboral',methods=['GET','POST'])
 @login_required
 def laboral():
-    id = current_user.id
-    trabajo = (ModelTrabajo.get_by_id(db,id))
-    if request.method == 'POST':
-            validarTrabajo= ModelTrabajo.validarTrabajo(db,id)
-            if request.form['estatus'] == 'Si':
-                trabajo = Trabajo(0,request.form['estatus'],request.form['nombre'],request.form['ubicacion'],request.form['descripcion'],request.form['antiguedad'],request.form['jornada'])
-            else:
-                trabajo = Trabajo(0, request.form['estatus'])
-         
-            if validarTrabajo is True:
-                
-                actualizar = ModelTrabajo.actualizarTrabajo(db,trabajo,id)
-                if actualizar != None:
-                    flash("Datos actualizados correctamente")
-                    return redirect(url_for('laboral'))
-                else:
-                    flash("Error al actualizar datos")
-                    return redirect(url_for('laboral'))
-
-            else:
-                registro= ModelTrabajo.nuevoTrabajo(db,trabajo,id)
-                
-                if registro != None:
-                    flash("Registrado con exito")
-                    return redirect(url_for('laboral'))
-                else:
-                    flash("Error al registrarse")
-                    return redirect(url_for('laboral'))
+    correo_user = current_user.correo
+    trabajo = (ModelTrabajo.get_by_id(db,correo_user))
     
-    else:
-        if trabajo:
-            return render_template('panelPrincipal/informacion/laboral.html',form = trabajo)
-        else:
-            return render_template('panelPrincipal/informacion/laboral.html')
-    
+    return render_template('panelPrincipal/informacion/laboral.html',form = trabajo)
+        
 @app.route('/tablon')
 @login_required
 def tablon():

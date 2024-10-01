@@ -103,6 +103,58 @@ h1, h2, h3, h4, h5{
 
 /************************************** Termina estilos para index************************************/
 
+/************************************** Estilos para Formulario************************************/
+.banner {
+    background-image: url('../img/home/2.jpg');
+    background-color: rgba(255, 255, 255, 0.61); 
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Fija la imagen de fondo */
+    background-blend-mode: overlay;
+  }
+  .form-group{
+    font-size: 2rem;
+    text-align: start;
+  }
+  
+  .btn-siguiente{
+    text-decoration: none;
+    border-radius: 1rem;
+    background-color: #011c3df5;
+    color: var(--blanco);
+    padding: 1.2rem;
+    transition: 1s;
+  }
+  
+  .btn-siguiente:hover{
+    padding: 2rem;
+    background-color: #011c3d10;
+    color: var(--negro);
+    border-style: solid;
+    border-width: .1rem;
+    border-color: #011c3df5;
+  }
+  
+  .datos{
+    font-size: 1.5rem;
+    background-color: rgb(227, 237, 255);
+    width: 100%;
+    border-width: 0.1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 1.3rem;
+    border-style: none;
+    outline: none;
+  }
+  .datos:focus{
+    box-shadow: 0 0 1rem .3rem rgb(99, 190, 255); 
+  }
+  
+  .contenedor-campos{
+    padding: 1rem;
+    margin: .5rem 0;
+  }
+/************************************** Estilos para Formulario************************************/
+
 /** Estilos para el NavBar **/
 
 .button-toggler{
@@ -162,9 +214,10 @@ h1, h2, h3, h4, h5{
 
 /************************************** Estilos para Perfil************************************/
 .card{
-    background-color: #cfd3d8;
+    background-color: #ffffff;
     border-style: none;
-    border-radius: 1rem;
+    border-radius: 3rem;
+    margin: 5rem 1rem
 }
 .card-title{
     font-size: 2rem;
@@ -187,7 +240,10 @@ input[type="file"] {
     border-radius: 1rem;
     padding: .5rem;
     margin-top: .5rem;
-    background-color: #ffffffc4;
+    background-color: rgb(227, 237, 255);
+}
+.campo-datos:focus{
+    box-shadow: 0 0 1rem .3rem rgb(99, 190, 255);
 }
 .btn-actualizar{
     border-style: none;
@@ -221,8 +277,8 @@ input[type="file"] {
 
 /************************************** Estilos para Cuestionario ************************************/
 .cuestionario{
-    background-color: #002c6328;
-    border-radius: 1rem;
+    background-color: rgb(204, 222, 255);;
+    border-radius: 3rem;
 }
 .nav-cuestionario{
     text-decoration: none;

@@ -1,8 +1,8 @@
 from flask_login import UserMixin
 
 class General(UserMixin):
-        def __init__(self,idCuenta,nombre,apellidoP,apellidoM,sexo,celular,curp,codigoPostal,fechaNacimiento,Pais,Estado,Ciudad,Colonia,Nacionalidad) -> None:
-            self.correo=CorreoAlumno
+        def __init__(self,Correo_Alumno,nombre,apellidoP,apellidoM,sexo,celular,codigoPostal,fechaNacimiento,Pais,Estado,Ciudad,Colonia,Nacionalidad) -> None:
+            self.correo=Correo_Alumno
             self.nombre= nombre
             self.apellidoP = apellidoP
             self.apellidoM = apellidoM

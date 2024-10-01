@@ -3,8 +3,8 @@ endblock %} {% block useractivo %}{{ current_user.nombre }}{% endblock %} {%
 block customCSS %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 {% endblock %} {% block body %}
-<div class="container cuestionario shadow p-4 my-5">
-  <div class="row text-center pt-4 pb-2">
+<div class="container cuestionario shadow px-5 pt-5 pb-1 my-5">
+  <div class="row text-center py-4">
     <div class="col-4">
       <a class="nav-cuestionario my-auto mx-2" href="{{ url_for('general') }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-vcard"

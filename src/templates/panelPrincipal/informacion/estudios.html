@@ -11,6 +11,7 @@ contenido%}
       </svg>
       <strong class="mx-4 apartado">Estudios</strong>
   </div>
+  <hr class="hr-navbar opacity-100">
   <div class="card-body">
     <form class="form-cuestionario mx-auto" action="/informacion/estudios" method="POST">
       {% with messages = get_flashed_messages() %}
@@ -42,6 +43,12 @@ contenido%}
             <input class="campo-datos col-lg-8 col-md-7 col-12" type="text" id="cicloEgreso" name="cicloEscolar" value="{% if form and form.ciclo %}{{ form.ciclo }}{% endif %}"/>
           </div>
           <div class="row my-4 justify-content-between align-items-center">
+            <label class="text-label col-lg-2 col-md-2 col-12" for="promedioInput">Promedio</label>
+            <input type="text" class="campo-datos col-lg-10 col-md-10 col-12" id="promedioInput" placeholder="Ingresa tu promedio" name="promedio"
+            value="{% if form and form.promedio %}{{ form.promedio }}{% endif %}">
+          </div>
+          
+          <div class="row my-4 justify-content-between align-items-center">
             <label class="text-label col-lg-3 col-md-3 col-12" for="">Nivel de ingles: </label>
             <select
               class="campo-datos col-lg-9 col-md-9 col-12"
@@ -49,35 +56,45 @@ contenido%}
               name="nivelIngles"
             >
               <option selected>Seleccione una opción</option>
-              <option value="A1-A2" {% if form and form.ingles == 'A1-A2' %} selected {% endif %}>A1-A2</option>
-              <option value="A2-B1" {% if form and form.ingles == 'A2-B1' %} selected {% endif %}>A2-B1</option>
-              <option value="B1" {% if form and form.ingles == 'B1' %} selected {% endif %}>B1</option>
-              <option value="B2" {% if form and form.ingles == 'B2' %} selected {% endif %}>B2</option>
-              <option value="C1-C2" {% if form and form.ingles == 'C1-C2' %} selected {% endif %}>C1-C2</option>
+              <option value="A0" {% if form and form.ingles == 'A0: Principiante' %} selected {% endif %}>A0: Principiante</option>
+              <option value="A1-A2: Básico" {% if form and form.ingles == 'A1-A2: Básico' %} selected {% endif %}>A1-A2: Básico</option>
+              <option value="A2-B1: Pre-intermedio" {% if form and form.ingles == 'A2-B1: Pre-intermedio' %} selected {% endif %}>A2-B1: Pre-intermedio</option>
+              <option value="B1: Intermedio" {% if form and form.ingles == 'B1: Intermedio' %} selected {% endif %}>B1: Intermedio</option>
+              <option value="B2: Intermedio-Alto" {% if form and form.ingles == 'B2: Intermedio-Alto' %} selected {% endif %}>B2: Intermedio-Alto</option>
+              <option value="C1-C2: Avanzado" {% if form and form.ingles == 'C1-C2: Avanzado' %} selected {% endif %}>C1-C2: Avanzado</option>
             </select>
           </div>
           <div class="row my-4 justify-content-between align-items-center">
-            <label class="text-label col-4" for="">Titulado: </label>
-            <div class="col-lg-8 col-md-8 col-12">
+            <label class="text-label col-2" for="">Titulado: </label>
+            <div class="col-lg-10 col-md-10 col-12">
               <input
                 class="campo-datos radio col-1"
                 type="radio"
                 name="titulado"
                 value="Si"
                 {% if form and form.titulado == 'Si' %} checked {% endif %}
-              /><label class="col-3">Si</label>
+              /><label class="col-2">Si</label>
+              <input
+                class="campo-datos radio col-1"
+                type="radio"
+                name="titulado"
+                value="No"
+                {% if form and form.titulado == 'No' %} checked {% endif %}
+              /><label class="col-2">No</label>
               <input
                 class="campo-datos radio col-1"
                 type="radio"
                 name="titulado"
                 value="En proceso"
-                {% if form and form.titulado == 'En proceso' %} checked {% endif %}
+                {% if form and form.titulado == 'En Proceso' %} checked {% endif %}
               /><label class="col-lg-3 col-lg-3 col-5">En proceso</label>
             </div>
           </div>
         </div>
+        <hr class="hr-navbar opacity-100 mt-5 mb-3">
         <!-- Button trigger modal -->
-        <button
+        <div class="text-end">
+          <button
           type="button"
           class="btn-actualizar my-4"
           data-bs-toggle="modal"
@@ -85,6 +102,7 @@ contenido%}
         >
           Actualizar
         </button>
+        </div>
       </fieldset>
     </form>
   </div>

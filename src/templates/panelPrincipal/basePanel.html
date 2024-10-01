@@ -107,21 +107,24 @@
   </header>
   <hr class="hr-navbar opacity-100">
   {% block body %} {% endblock %}
-  <hr class="hr-nabvar opacity-100">
+  <hr class="hr-navbar opacity-100">
   <footer>
     <div class="container my-5">
-      <div class="row">
-        <div class="col text-center">
-          <img class="my-3" src="{{ url_for('static', filename='img/Logo_udg.png') }}" alt="" width="90" />
-          <div class="my-3">
-            <h5>Universidad de Guadalajara</h5>
-            <h5>Centro Universitario de Tonalá</h5>
-            <h5>Secretaría académica</h5>
-          </div>
+        <div class="row">
+            <div class="col text-start">
+                <img class="my-3" src="{{ url_for('static', filename='img/Logo_udg.png') }}" alt="" width="90" />
+                <div class="my-3">
+                    <p class="p">CENTRO UNIVERSITARIO DE TONALÁ</p>
+                    <p class="p">Av. Nuevo Periférico No. 555 Ejido San José Tateposco, C.P. 45425, Tonalá Jalisco,
+                        México</p>
+                    <p class="p">Teléfono: +52 (33) 20 00 23 00 Ext. 64007 y 64044</p>
+                    <p class="derechos-autor">Derechos reservados ©1997 - 2023. Universidad de Guadalajara. Sitio
+                        desarrollado por CGTI | Créditos de sitio | Política de privacidad y manejo de datos</p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </footer>
+</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
