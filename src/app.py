@@ -369,20 +369,26 @@ def tablon():
     return render_template('panelPrincipal/tablon/tablon.html',general_active="active")
 
 #---------------------------                 Dashboard                      -----------------------------------##
-
-#Administrador
-@app.route('/panelAdmin',endpoint='admin')
+#DASHBOARD COORDINADORES
+@app.route('/panelAdmin', endpoint='admin')
 @login_required
-@role_required(1)
+@role_required(1) 
 def admin():
+    coordinador_correo = current_user.correo
+    print(f"Correo del coordinador: {coordinador_correo}")  # Para debugging
     
-    registros = ModelAdmin.registros(db)
+    carreras = ModelAdmin.getCarrerasCoordinador(db, coordinador_correo)
+    print(f"Carreras obtenidas: {carreras}")  # Para debugging
+    
+    aspirantes = ModelAdmin.getAspirantesCarreras(db, carreras)
+    print(f"Número de aspirantes obtenidos: {len(aspirantes)}")  # Para debugging
+    
     cantidad = ModelAdmin.cuentaTitulados(db)
     
-    return render_template('panelPrincipal/panelAdmin/dashboard/crud.html',form=registros, titulados= cantidad)
+    return render_template('panelPrincipal/panelAdmin/dashboard/crud.html', aspirantes=aspirantes, titulados=cantidad)
 
 
-@app.route('/panelAdmin/vermas/<int:id>')
+@app.route('/panelAdmin/vermas/<string:id>')
 def vermas(id):
     trabajo = (ModelAdmin.laboral(db,id))
     estudios = (ModelAdmin.estudios(db,id))
@@ -410,7 +416,7 @@ def descargar_registros():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 # requerir login
 @app.route('/protected')
 @login_required
