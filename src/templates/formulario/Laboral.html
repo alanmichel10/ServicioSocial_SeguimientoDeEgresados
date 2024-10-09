@@ -18,6 +18,7 @@
           
           <hr class="hr-navbar opacity-100 my-4">
           <form action="/laboral" method="POST" onsubmit="return confirmarEnvio()">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <!-- Grupo 1 de campos del formulario -->
             <div class="row">
                 <div class="col-md-4">

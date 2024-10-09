@@ -11,6 +11,7 @@
           <hr class="hr-navbar opacity-100 my-4">
           <form action="/seleccion" method="post" id="posgradoForm" onsubmit="actualizarCampoOculto()">
             <!-- Selección de Posgrado -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-group mb-3">
               <label class="text-label" for="posgradoInput">Escoge un tipo de posgrado</label>
               <select class="datos mt-4" id="posgradoInput" onchange="mostrarOpciones()">

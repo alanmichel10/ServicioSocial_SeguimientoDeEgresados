@@ -5,43 +5,145 @@ from .entities.General import General
 from flask import send_file
 import xlsxwriter
 import io
+
 from datetime import datetime
 import tempfile
+import logging
+
 
 class ModelAdmin():
+    
     @classmethod
-    def registros(cls,db):
+    def getAllAspirantesData(cls, db, carreras):
         try:
             cursor = db.connection.cursor()
-            sql = """SELECT idGeneral,cuenta.nombre,cuenta.apellidoP, cuenta.apellidoM,
-            celular, cuenta.correo, estudios.nivelIngles, sexo, posgrado FROM general left join
-            cuenta on cuenta = cuenta.idCuenta left join estudios on estudios=estudios.idEstudios """
-            cursor.execute(sql)
+            carrera_ids = [carrera[0] for carrera in carreras]
+            
+            if not carrera_ids:
+                return []
+            
+            placeholders = ','.join(['%s' for _ in carrera_ids])
+            sql = f"""
+                SELECT 
+                    g.Correo_Alumno, g.nombre, g.apellidoP, g.apellidoM, g.sexo, g.celular, 
+                    g.codigoPostal, g.fechaNacimiento, g.Pais, g.Estado, g.Ciudad, g.Colonia, g.Nacionalidad,
+                    l.estatus, l.nombre as nombre_empresa, l.Horario_Laboral, l.Puesto_Trabajo, l.Sector,
+                    e.centroUniversitario, e.carrera, e.cicloEgreso, e.nivelIngles, e.titulado, e.Promedio,
+                    GROUP_CONCAT(c.nombre SEPARATOR ', ') as carreras_seleccionadas
+                FROM general g
+                LEFT JOIN laboral l ON g.Correo_Alumno = l.Correo_Alu
+                LEFT JOIN estudios e ON g.Correo_Alumno = e.Correo_A
+                JOIN aspirante_carrera ac ON g.Correo_Alumno = ac.Correo_Alumno
+                JOIN carrera c ON ac.idCarrera = c.idCarrera
+                WHERE ac.idCarrera IN ({placeholders})
+                GROUP BY g.Correo_Alumno
+            """
+            cursor.execute(sql, carrera_ids)
+            aspirantes = cursor.fetchall()
+            return aspirantes
+        except Exception as ex:
+            print(f"Error en getAllAspirantesData: {ex}")
+            raise Exception(ex)
+    
+    
+    @classmethod
+    def getCarrerasCoordinador(self, db, coordinador_correo):
+        try:
+            cursor = db.connection.cursor()
+            sql = """SELECT cc.idCarrera, c.nombre 
+                    FROM coordinador_carrera cc
+                    JOIN carrera c ON cc.idCarrera = c.idCarrera
+                    WHERE cc.correo = %s"""
+            cursor.execute(sql, (coordinador_correo,))
+            carreras = cursor.fetchall()
+            print(f"Carreras encontradas para {coordinador_correo}: {carreras}")  # Para debugging
+            return carreras
+        except Exception as ex:
+            print(f"Error en getCarrerasCoordinador: {ex}")  # Para debugging
+            raise Exception(ex)
+
+    @classmethod
+    def getAspirantesCarreras(cls, db, carreras):
+        try:
+            cursor = db.connection.cursor()
+            carrera_ids = [carrera[0] for carrera in carreras]
+            
+            if not carrera_ids:
+                return []
+            
+            placeholders = ','.join(['%s' for _ in carrera_ids])
+            sql = f"""
+                SELECT DISTINCT
+                    g.nombre, 
+                    g.apellidoP, 
+                    g.apellidoM, 
+                    g.celular, 
+                    g.Correo_Alumno, 
+                    e.nivelIngles, 
+                    g.sexo, 
+                    e.titulado,
+                    GROUP_CONCAT(c.nombre SEPARATOR ', ') as carreras_seleccionadas
+                FROM 
+                    general g
+                INNER JOIN 
+                    estudios e ON g.Correo_Alumno = e.Correo_A
+                INNER JOIN 
+                    aspirante_carrera ac ON g.Correo_Alumno = ac.Correo_Alumno
+                INNER JOIN
+                    carrera c ON ac.idCarrera = c.idCarrera
+                WHERE 
+                    ac.idCarrera IN ({placeholders})
+                GROUP BY
+                    g.Correo_Alumno
+            """
+            cursor.execute(sql, carrera_ids)
+            aspirantes = cursor.fetchall()
+            return aspirantes
+        except Exception as ex:
+            print(f"Error en getAspirantesCarreras: {ex}")
+            raise Exception(ex)
+
+    @classmethod
+    def registros(cls, db, id_carrera):
+        try:
+            cursor = db.connection.cursor()
+            sql = """SELECT g.Correo_Alumno, g.nombre, g.apellidoP, g.apellidoM,
+                     g.celular, g.Correo_Alumno, e.nivelIngles, g.sexo, e.carrera, e.titulado
+                     FROM general g
+                     LEFT JOIN estudios e ON g.Correo_Alumno = e.Correo_A
+                     JOIN aspirante_carrera ac ON g.Correo_Alumno = ac.Correo_Alumno
+                     WHERE ac.idCarrera = %s"""
+            cursor.execute(sql, (id_carrera,))
             rows = cursor.fetchall()
-            alumnos = [Alumno(*row) for row in rows if len(row) == 9]
+            alumnos = [Alumno(*row) for row in rows if len(row) == 10]
             return alumnos
         except Exception as ex:
             raise Exception(ex)
+
     @classmethod
-    def laboral(cls, db, id):
+    def cuentaTitulados(cls, db, id_carrera):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT trabajo FROM general WHERE idGeneral = {}".format(id)
-            cursor.execute(sql)
-            idTrabajo = cursor.fetchone()
-            
-            idTrabajo = idTrabajo[0]
-            if idTrabajo is None:
-                return None
+            sql = """SELECT COUNT(*) FROM estudios e
+                     JOIN aspirante_carrera ac ON e.Correo_A = ac.Correo_Alumno
+                     WHERE ac.idCarrera = %s AND e.titulado='Si'"""
+            cursor.execute(sql, (id_carrera,))
+            count = cursor.fetchone()[0]
+            return count
+        except Exception as ex:
+            raise Exception(ex)
 
-            
-            sql2 = "SELECT idTrabajo,estatus,nombre,ubicacion,descripcion,antiguedad,jornadaLaboral FROM trabajo WHERE idTrabajo = {}".format(idTrabajo)
-            
-            cursor.execute(sql2)
+    @classmethod
+    def laboral(cls, db, correo):
+        try:
+            cursor = db.connection.cursor()
+            sql = """SELECT estatus, nombre, Horario_Laboral, Puesto_Trabajo, Sector
+                     FROM laboral WHERE Correo_Alu = %s"""
+            cursor.execute(sql, (correo,))
             row = cursor.fetchone()
 
             if row is not None:
-                return Trabajo(row[0], row[1], row[2], row[3], row[4], row[5])
+                return Trabajo(correo, row[0], row[1], row[2], row[3], row[4])
             else:
                 return None
 
@@ -49,24 +151,16 @@ class ModelAdmin():
             raise Exception(ex)
 
     @classmethod
-    def estudios(cls, db, id):
+    def estudios(cls, db, correo):
         try:
             cursor = db.connection.cursor()
-
-            sql = "SELECT estudios FROM general WHERE idGeneral = {}".format(id)
-            cursor.execute(sql)
-            idEstudios = cursor.fetchone()
-            idEstudios = idEstudios[0]
-            if idEstudios is None:
-                return None
-
-            
-            sql1 = "SELECT idEstudios, centroUniversitario, carrera, cicloEgreso, nivelIngles, titulado FROM estudios WHERE idEstudios = {}".format(idEstudios)
-            cursor.execute(sql1)
+            sql = """SELECT centroUniversitario, carrera, cicloEgreso, nivelIngles, titulado
+                     FROM estudios WHERE Correo_A = %s"""
+            cursor.execute(sql, (correo,))
             row = cursor.fetchone()
 
             if row is not None:
-                return Estudios(row[0], row[1], row[2], row[3], row[4], row[5])
+                return Estudios(correo, row[0], row[1], row[2], row[3], row[4])
             else:
                 return None
 
@@ -74,72 +168,98 @@ class ModelAdmin():
             raise Exception(ex)
 
     @classmethod
-    def general(self, db, id):
+    def general(self, db, correo):
         try:
             cursor = db.connection.cursor()
-            sql = "SELECT idGeneral,sexo,curp,codigoPostal,codigoEstudiante,estadoCivil,fechaNacimiento,lugarNacimiento,celular,posgrado FROM general WHERE idGeneral = {}".format(id)
-            cursor.execute(sql)
+            sql = """SELECT Correo_Alumno, sexo, codigoPostal, fechaNacimiento, celular, Pais, Estado, Ciudad
+                     FROM general WHERE Correo_Alumno = %s"""
+            cursor.execute(sql, (correo,))
             row = cursor.fetchone()
             if row != None:
-                return General(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9])
-
+                return General(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7])
             else:
                 return None
         except Exception as ex:
             raise Exception(ex)
+
     @classmethod
-    def informacion(cls,db,id):
+    def informacion(cls, db, correo):
         try:
             cursor = db.connection.cursor()
-            sql = """SELECT idGeneral,cuenta.nombre,cuenta.apellidoP, cuenta.apellidoM,
-            celular, cuenta.correo, estudios.nivelIngles, sexo, posgrado FROM general left join
-            cuenta on cuenta = cuenta.idCuenta left join estudios on estudios=estudios.idEstudios WHERE idGeneral = {}""".format(id)
-            cursor.execute(sql)
+            sql = """SELECT general.Correo_Alumno, general.nombre, general.apellidoP, general.apellidoM,
+            general.celular, general.Correo_Alumno, estudios.nivelIngles, general.sexo, estudios.carrera
+            FROM general LEFT JOIN estudios ON general.Correo_Alumno = estudios.Correo_A
+            WHERE general.Correo_Alumno = %s"""
+            cursor.execute(sql, (correo,))
             row = cursor.fetchone()
             if row != None:
                 return Alumno(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
-
             else:
                 return None
         except Exception as ex:
             raise Exception(ex)
+        
+    @classmethod
+    def descargarRegistros(cls, db, carreras):
+        try:
+            cursor = db.connection.cursor()
+            carrera_ids = [carrera[0] for carrera in carreras]
+            
+            if not carrera_ids:
+                return None
+            
+            placeholders = ','.join(['%s' for _ in carrera_ids])
+            sql = f"""
+                SELECT 
+                    g.Correo_Alumno, g.nombre, g.apellidoP, g.apellidoM, g.sexo, g.celular, 
+                    g.codigoPostal, g.fechaNacimiento, g.Pais, g.Estado, g.Ciudad, g.Colonia, g.Nacionalidad,
+                    l.estatus, l.nombre as nombre_empresa, l.Horario_Laboral, l.Puesto_Trabajo, l.Sector,
+                    e.centroUniversitario, e.carrera, e.cicloEgreso, e.nivelIngles, e.titulado, e.Promedio,
+                    GROUP_CONCAT(c.nombre SEPARATOR ', ') as carreras_seleccionadas
+                FROM general g
+                LEFT JOIN laboral l ON g.Correo_Alumno = l.Correo_Alu
+                LEFT JOIN estudios e ON g.Correo_Alumno = e.Correo_A
+                JOIN aspirante_carrera ac ON g.Correo_Alumno = ac.Correo_Alumno
+                JOIN carrera c ON ac.idCarrera = c.idCarrera
+                WHERE ac.idCarrera IN ({placeholders})
+                GROUP BY g.Correo_Alumno
+            """
+            cursor.execute(sql, carrera_ids)
+            registros = cursor.fetchall()
+
+            output = io.BytesIO()
+            workbook = xlsxwriter.Workbook(output)
+            worksheet = workbook.add_worksheet()
+
+            encabezados = [
+                'Correo', 'Nombre', 'Apelli do Paterno', 'Apellido Materno', 'Sexo', 'Celular', 
+                'Código Postal', 'Fecha de Nacimiento', 'País', 'Estado', 'Ciudad', 'Colonia', 'Nacionalidad',
+                'Estatus Laboral', 'Empresa', 'Horario Laboral', 'Puesto de Trabajo', 'Sector',
+                'Centro Universitario', 'Carrera', 'Ciclo de Egreso', 'Nivel de Inglés', 'Titulado', 'Promedio',
+                'Carreras Seleccionadas'
+            ]
+            
+            for col_num, encabezado in enumerate(encabezados):
+                worksheet.write(0, col_num, encabezado)
+
+            for fila_num, registro in enumerate(registros, start=1):
+                for col_num, valor in enumerate(registro):
+                    worksheet.write(fila_num, col_num, valor)
+
+            workbook.close()
+            output.seek(0)
+            return output
+        except Exception as e:
+            logging.error(f"Error al descargar registros: {str(e)}")
+            raise Exception(e)
+    
 
     @classmethod
-    def descargarRegistros(cls, db):
-        registros = cls.registros(db)
-
-        # Crear un libro de trabajo y una hoja de cálculo
-        output = io.BytesIO()
-        workbook = xlsxwriter.Workbook(output)
-        worksheet = workbook.add_worksheet()
-        now = datetime.now()
-        fecha_actual = now.strftime("%Y-%m-%d")
-
-        encabezados = ['Nombre(s)', 'Apellido paterno', 'Apellido materno', 'Numero de telefono', 'Correo electronico',
-                       'Nivel de ingles', 'Genero', 'Posgrado al que aspira']
-        for col_num, encabezado in enumerate(encabezados):
-            worksheet.write(0, col_num, encabezado)
-
-        for fila_num, registro in enumerate(registros, start=1):
-            worksheet.write(fila_num, 0, registro.nombre)
-            worksheet.write(fila_num, 1, registro.apellidoP)
-            worksheet.write(fila_num, 2, registro.apellidoM)
-            worksheet.write(fila_num, 3, registro.telefono)
-            worksheet.write(fila_num, 4, registro.correoElectronico)
-            worksheet.write(fila_num, 5, registro.ingles)
-            worksheet.write(fila_num, 6, registro.sexo)
-            worksheet.write(fila_num, 7, registro.posgrado)
-
-        workbook.close()
-        output.seek(0)
-        nombre_archivo = f"registros_{fecha_actual}.xlsx"
-        return send_file(output, attachment_filename=nombre_archivo, as_attachment=True)
-    @classmethod
-    def descargarRegistrosid(cls, db, id):
-        trabajo = cls.laboral(db, id)
-        estudios = cls.estudios(db, id)
-        general = cls.general(db, id)
-        informacion = cls.informacion(db, id)
+    def descargarRegistrosid(cls, db, correo):
+        trabajo = cls.laboral(db, correo)
+        estudios = cls.estudios(db, correo)
+        general = cls.general(db, correo)
+        informacion = cls.informacion(db, correo)
 
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output)
@@ -149,50 +269,43 @@ class ModelAdmin():
         worksheet_laboral = workbook.add_worksheet('Informacion laboral')
 
         headers_general = ['Nombre(s)', 'Apellido paterno', 'Apellido materno', 'Correo electronico',
-                        'Sexo', 'CURP', 'Codigo postal', 'Codigo estudiante',
-                        'Estado civil', 'Fecha de nacimiento', 'Lugar de nacimiento',
-                        'Numero de Telefono', 'Posgrado al que aspira']
+                        'Sexo', 'Codigo postal', 'Fecha de nacimiento',
+                        'Numero de Telefono', 'País', 'Estado', 'Ciudad']
 
         headers_estudios = ['Centro Universitario / Escuela de prosedencia', 'Carrera(s)',
                             'Ciclo escolar de egreso', 'Nivel de ingles', 'Titulado']
 
-        headers_laboral = ['Tenia o tiene un empleo formal?', 'Nombre de la empresa',
-                            'Ubicacion de la empresa', 'Descripción de las Responsabilidades Laborales',
-                            'Cuánto tiempo tenía laborando en la institución u organización',
-                            'Cuántas horas trabaja?']
+        headers_laboral = ['Estatus', 'Nombre de la empresa',
+                            'Horario Laboral', 'Puesto de Trabajo', 'Sector']
 
         for col_num, header in enumerate(headers_general):
             worksheet_general.write(0, col_num, header)
 
-        # Verificar si hay datos en la sección 'Datos generales' antes de escribir
         if informacion and general:
             data_general = [informacion.nombre, informacion.apellidoP or '', informacion.apellidoM or '',
-                            informacion.correoElectronico or '', informacion.sexo or '', general.curp or '',
-                            general.codigoPostal or '', general.codigoEstudiante or '', general.estadoCivil or '',
-                            general.fecha or '', general.lugarNacimiento or '', general.numeroTelefono or '',
-                            informacion.posgrado or '']
+                            informacion.correoElectronico or '', informacion.sexo or '',
+                            general.codigoPostal or '', general.fechaNacimiento or '', general.celular or '',
+                            general.pais or '', general.estado or '', general.ciudad or '']
 
             for col_num, value in enumerate(data_general):
                 worksheet_general.write(1, col_num, value)
 
-        # Verificar si hay datos en la sección 'Estudios' antes de escribir
         if estudios:
             for col_num, header in enumerate(headers_estudios):
                 worksheet_estudios.write(0, col_num, header)
 
-            data_estudios = [estudios.centro or '', estudios.carrera or '', estudios.ciclo or '',
-                            estudios.ingles or '', estudios.titulado or '']
+            data_estudios = [estudios.centroUniversitario or '', estudios.carrera or '', estudios.cicloEgreso or '',
+                            estudios.nivelIngles or '', estudios.titulado or '']
 
             for col_num, value in enumerate(data_estudios):
                 worksheet_estudios.write(1, col_num, value)
 
-        # Verificar si hay datos en la sección 'Informacion laboral' antes de escribir
         if trabajo:
             for col_num, header in enumerate(headers_laboral):
                 worksheet_laboral.write(0, col_num, header)
 
-            data_laboral = [trabajo.estatus or '', trabajo.nombre or '', trabajo.ubicacion or '',
-                            trabajo.descripcion or '', trabajo.antiguedad or '', trabajo.jornada or '']
+            data_laboral = [trabajo.estatus or '', trabajo.nombre or '', trabajo.horarioLaboral or '',
+                            trabajo.puestoTrabajo or '', trabajo.sector or '']
 
             for col_num, value in enumerate(data_laboral):
                 worksheet_laboral.write(1, col_num, value)
@@ -205,13 +318,10 @@ class ModelAdmin():
     def cuentaTitulados(cls, db):
         try:
             cursor = db.connection.cursor()
-            sql = """SELECT titulado FROM estudios WHERE titulado='Si'"""
+            sql = """SELECT COUNT(*) FROM estudios WHERE titulado='Si'"""
             cursor.execute(sql)
-            rows = cursor.fetchall()
+            count = cursor.fetchone()[0]
 
-            cantidad = len(rows)
-
-            return cantidad
+            return count
         except Exception as ex:
             raise Exception(ex)
-    
