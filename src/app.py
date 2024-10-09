@@ -375,28 +375,52 @@ def tablon():
 @role_required(1) 
 def admin():
     coordinador_correo = current_user.correo
-    print(f"Correo del coordinador: {coordinador_correo}")  # Para debugging
-    
     carreras = ModelAdmin.getCarrerasCoordinador(db, coordinador_correo)
-    print(f"Carreras obtenidas: {carreras}")  # Para debugging
     
     aspirantes = ModelAdmin.getAspirantesCarreras(db, carreras)
-    print(f"Número de aspirantes obtenidos: {len(aspirantes)}")  # Para debugging
-    
     cantidad = ModelAdmin.cuentaTitulados(db)
+    datosaspirantes = ModelAdmin.getAllAspirantesData(db, carreras)
     
-    return render_template('panelPrincipal/panelAdmin/dashboard/crud.html', aspirantes=aspirantes, titulados=cantidad)
-
+    return render_template('panelPrincipal/panelAdmin/dashboard/crud.html', 
+                           aspirantes=aspirantes, 
+                           titulados=cantidad, 
+                           carreras=carreras,
+                           datosaspirantes=datosaspirantes)
 
 @app.route('/panelAdmin/vermas/<string:id>')
+@login_required
 def vermas(id):
-    trabajo = (ModelAdmin.laboral(db,id))
-    estudios = (ModelAdmin.estudios(db,id))
-    general = (ModelAdmin.general(db,id))
-    informacion=(ModelAdmin.informacion(db,id))
-    return render_template('panelPrincipal/panelAdmin/dashboard/vermas.html',trabajo=trabajo, estudios=estudios, general=general,form=informacion,id=id) 
-
+    general = ModelAdmin.general(db, id)
+    estudios = ModelAdmin.estudios(db, id)
+    laboral = ModelAdmin.laboral(db, id)
+    carrera_id = ModelAdmin.get_carrera_id(db, id)  # Necesitas implementar esta función
+    
+    return render_template('panelPrincipal/panelAdmin/dashboard/vermas.html',
+                           general=general,
+                           estudios=estudios,
+                           laboral=laboral,
+                           carrera_id=carrera_id)
 #---------------------------                                       -----------------------------------##
+
+@app.route('/descargar_excel')
+@login_required
+def descargar_excel():
+    try:
+        coordinador_correo = current_user.correo
+        carreras = ModelAdmin.getCarrerasCoordinador(db, coordinador_correo)
+        
+        output = ModelAdmin.descargarRegistros(db, carreras)
+        return send_file(
+            output,
+            as_attachment=True,
+            download_name='aspirantes.xlsx',
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+    except Exception as e:
+        flash(f'Error al descargar el Excel: {str(e)}', 'error')
+        return redirect(url_for('admin'))
+
+
 @app.route('/registros')
 def descargar():
     registros = ModelAdmin.descargarRegistros(db)

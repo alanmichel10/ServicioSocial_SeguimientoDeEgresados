@@ -1,129 +1,143 @@
-{% extends 'panelPrincipal/panelAdmin/basePanelAdmin.html' %} {%block
-contenido%}
+{% extends 'panelPrincipal/panelAdmin/basePanelAdmin.html' %}
 
+{% block contenido %}
+<div class="container mt-4">
+  <h1 class="mb-4">Información Detallada del Aspirante</h1>
+  
+  <!-- Botón para descargar Excel de todos los aspirantes de la carrera -->
+  <a href="{{ url_for('descargar_registros', id_carrera=Correo_Alumno) }}" class="btn btn-success mb-4">
+    Descargar Excel de Todos los Aspirantes
+  </a>
 
-  <div class="container">
-    <!-- Button de descargar excel-->
-    <button type="button" class="btn-Excel" onclick="window.location.href='/registros/id?id={{ id }}'">
-      Descargar excel
-    </button>
+  <!-- Datos Generales -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h2 class="h4 mb-0">Datos Generales</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <strong>Nombre completo:</strong> 
+          {{ general.nombre }} {{ general.apellidoP }} {{ general.apellidoM }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Correo electrónico:</strong> 
+          {{ general.Correo_Alumno }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Sexo:</strong> 
+          {{ general.sexo or 'No especificado' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Celular:</strong> 
+          {{ general.celular or 'No proporcionado' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Código Postal:</strong> 
+          {{ general.codigoPostal or 'No proporcionado' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Fecha de Nacimiento:</strong> 
+          {{ general.fechaNacimiento or 'No proporcionada' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>País:</strong> 
+          {{ general.Pais or 'No especificado' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Estado:</strong> 
+          {{ general.Estado or 'No especificado' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Ciudad:</strong> 
+          {{ general.Ciudad or 'No especificada' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Colonia:</strong> 
+          {{ general.Colonia or 'No especificada' }}
+        </div>
+        <div class="col-md-4 mb-3">
+          <strong>Nacionalidad:</strong> 
+          {{ general.Nacionalidad or 'No especificada' }}
+        </div>
+      </div>
+    </div>
   </div>
 
-<div class="container">
-  <div class="row">
-    <table class="table table-hover table-bordered caption-top">
-      <caption>Datos generales</caption>
-      <thead class="table-dark text-center">
-        <tr>
-          <th scope="col">Nombre(s)</th>
-          <th scope="col">Apellido paterno</th>
-          <th scope="col">Apellido materno</th>
-          <th scope="col">Correo electronico</th>
-          <th scope="col">Sexo</th>
-          <th scope="col">CURP</th>
-          <th scope="col">Codigo postal</th>
-          <th scope="col">Codigo estudiante</th>
-          <th scope="col">Estado civil</th>
-          <th scope="col">Fecha de nacimiento</th>
-          <th scope="col">Lugar de nacimiento</th>
-          <th scope="col">Numero de Telefono</th>
-          <th scope="col">Posgrado al que aspira</th>
-        </tr>
-      </thead>
-
-      <tbody class="table-group-divider text-center">
-        
-        <tr>
-          <td>{{ form.nombre }}</td>
-          <td>{{ form.apellidoP or '' }}</td>
-          <td>{{ form.apellidoM or '' }}</td>
-          <td>{{ form.correoElectronico or '' }}</td>
-          <td>{{ form.sexo or '' }}</td>
-          <td>{{ general.curp or '' }}</td>
-          <td>{{ general.codigoPostal or '' }}</td>
-          <td>{{ general.codigoEstudiante or '' }}</td>
-          <td>{{ general.estadoCivil or '' }}</td>
-          <td>{{ general.fecha or '' }}</td>
-          <td>{{ general.lugarNacimiento or '' }}</td>
-          <td>{{ general.numeroTelefono or '' }}</td>
-          <td>{{ form.posgrado or '' }}</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </div>
-
-  <div class="row">
-    <table class="table table-hover table-bordered caption-top">
-      <caption>Estudios</caption>
-      <thead class="table-dark text-center">
-        <tr>
-          <th scope="col">Centro Universitario / Escuela de prosedencia</th>
-          <th scope="col">Carrera(s)</th>
-          <th scope="col">Ciclo escolar de egreso</th>
-          <th scope="col">Nivel de ingles</th>
-          <th scope="col">Titulado</th>
-        </tr>
-      </thead>
-
-      <tbody class="table-group-divider text-center">
-        {% if estudios %}
-        <tr>
-          <td>{{ estudios.centro or '' }}</td>
-          <td>{{ estudios.carrera or '' }}</td>
-          <td>{{ estudios.ciclo or '' }}</td>
-          <td>{{ estudios.ingles or '' }}</td>
-          <td>{{ estudios.titulado or '' }}</td>
-        </tr>
-        {% else %}
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        {% endif %}
-      </tbody>
-    </table>
-  </div>
-
-  <div class="row">
-    <table class="table table-hover table-bordered caption-top">
-      <caption>Informacion Laboral</caption>
-      <thead class="table-dark text-center">
-        <tr>
-          <th scope="col">Tenia o tiene un empleo formal?</th>
-          <th scope="col">Nombre de la empresa</th>
-          <th scope="col">Ubicacion de la empresa</th>
-          <th scope="col">Descripción de las Responsabilidades Laborales</th>
-          <th scope="col">
-            Cuánto tiempo tenía laborando en la institución u organización
-          </th>
-          <th scope="col">Cuántas horas trabaja?</th>
-        </tr>
-      </thead>
-      {% if trabajo %}
-      <tr>
-        <td>{{ trabajo.estatus }}</td>
-        <td>{{ trabajo.nombre or '' }}</td>
-        <td>{{ trabajo.ubicacion or '' }}</td>
-        <td>{{ trabajo.descripcion or '' }}</td>
-        <td>{{ trabajo.antiguedad or '' }}</td>
-        <td>{{ trabajo.jornada or '' }}</td>
-      </tr>
+  <!-- Estudios -->
+  <div class="card mb-4">
+    <div class="card-header bg-success text-white">
+      <h2 class="h4 mb-0">Estudios</h2>
+    </div>
+    <div class="card-body">
+      {% if estudios %}
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <strong>Centro Universitario:</strong> 
+            {{ estudios.centroUniversitario or 'No especificado' }}
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Carrera:</strong> 
+            {{ estudios.carrera or 'No especificada' }}
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Ciclo de Egreso:</strong> 
+            {{ estudios.cicloEgreso or 'No especificado' }}
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Nivel de Inglés:</strong> 
+            {{ estudios.nivelIngles or 'No especificado' }}
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Titulado:</strong> 
+            {{ estudios.titulado or 'No especificado' }}
+          </div>
+          <div class="col-md-6 mb-3">
+            <strong>Promedio:</strong> 
+            {{ estudios.Promedio or 'No especificado' }}
+          </div>
+        </div>
       {% else %}
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+        <p class="text-muted">No hay información de estudios disponible.</p>
       {% endif %}
-    </table>
+    </div>
+  </div>
+
+  <!-- Información Laboral -->
+  <div class="card mb-4">
+    <div class="card-header bg-info text-white">
+      <h2 class="h4 mb-0">Información Laboral</h2>
+    </div>
+    <div class="card-body">
+      {% if laboral %}
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <strong>¿Tiene empleo formal?</strong> 
+            {{ laboral.estatus }}
+          </div>
+          {% if laboral.estatus == 'Si' %}
+            <div class="col-md-6 mb-3">
+              <strong>Nombre de la empresa:</strong> 
+              {{ laboral.nombre or 'No especificado' }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <strong>Horario Laboral:</strong> 
+              {{ laboral.Horario_Laboral or 'No especificado' }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <strong>Puesto de Trabajo:</strong> 
+              {{ laboral.Puesto_Trabajo or 'No especificado' }}
+            </div>
+            <div class="col-md-6 mb-3">
+              <strong>Sector:</strong> 
+              {{ laboral.Sector or 'No especificado' }}
+            </div>
+          {% endif %}
+        </div>
+      {% else %}
+        <p class="text-muted">No hay información laboral disponible.</p>
+      {% endif %}
+    </div>
   </div>
 </div>
-
-{%endblock%}
+{% endblock %}

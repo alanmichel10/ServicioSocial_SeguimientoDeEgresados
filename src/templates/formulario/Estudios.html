@@ -32,6 +32,7 @@
           <h5 class="pb-2 text-center datos-generales-text">Datos estudios</h5>
           <hr>
           <form action="/estudios" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <!-- Grupo 1 de campos del formulario -->
             <div class="row">
               <div class="col-md-4">

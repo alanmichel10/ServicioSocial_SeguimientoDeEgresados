@@ -11,7 +11,7 @@
   <link href="https://fonts.cdnfonts.com/css/handil-pro?styles=162901" rel="stylesheet">
   <link rel="stylesheet" href="{{url_for('static', filename='css/form.css') }}"/>
   <script src="https://kit.fontawesome.com/deb38cd3d7.js" crossorigin="anonymous"></script>     
-  <script src="../static/laboral.js"></script>
+  <script src="{{ url_for('static', filename='js/laboral.js') }}"></script>
   <title>Formulario de Datos Laboral</title>
 </head>
 <body>
@@ -32,6 +32,7 @@
           <h5 class="pb-2 text-center datos-generales-text">Informacion laboral</h5>
           <hr>
           <form action="/laboral" method="POST" onsubmit="return confirmarEnvio()">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <!-- Grupo 1 de campos del formulario -->
             <div class="row">
                 <div class="col-md-4">
@@ -81,7 +82,7 @@
                 <!-- Botones de navegación -->
                 <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E;">Regresar</button>
-                    <button type="submit" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Siguiente</button>
+                    <button type="submit" class="btn btn-primary" style="border-radius: 30px; background-color: #0C616E; text-align: center;">Confirmar</button>
                 </div>
             </div>
         </form>
