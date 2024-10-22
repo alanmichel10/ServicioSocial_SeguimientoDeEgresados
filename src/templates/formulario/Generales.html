@@ -21,6 +21,7 @@
 
         <hr class="hr-navbar opacity-100 my-4">
         <form action="/general" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <!-- Grupo 1 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">

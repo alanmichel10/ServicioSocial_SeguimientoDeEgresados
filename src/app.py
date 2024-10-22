@@ -297,11 +297,24 @@ def tablon():
 def admin():
     coordinador_correo = current_user.correo
     carreras = ModelAdmin.getCarrerasCoordinador(db, coordinador_correo)
-    
+
     aspirantes = ModelAdmin.getAspirantesCarreras(db, carreras)
     cantidad = ModelAdmin.cuentaTitulados(db)
+    
+    # Obtener el filtro de la solicitud
+    filtro_titulado = request.args.get('filtro_titulado')
+    
+    # Obtener todos los datos de aspirantes
     datosaspirantes = ModelAdmin.getAllAspirantesData(db, carreras)
     
+    # Filtrar los aspirantes según el estado de titulación
+    if filtro_titulado == "titulados":
+        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'Si']  # Asumiendo que 'Sí' indica titulado
+    elif filtro_titulado == "no_titulados":
+        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'No']  # Asumiendo que 'No' indica no titulado
+    elif filtro_titulado == "en_proceso":
+        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'En Proceso']  # Ajusta según tu lógica
+
     return render_template('panelPrincipal/panelAdmin/dashboard/crud.html', 
                            aspirantes=aspirantes, 
                            titulados=cantidad, 
