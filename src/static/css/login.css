@@ -6,52 +6,55 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-  }
-  
-  body{
+}
+
+body {
     background: #020410;
+}
 
-  }
-
-  .header {
+/* Estilos de la barra de navegación */
+.header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 20px 50px;
-    background: #0C616E;
+    background: #ffffff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-  }
+}
 
+.navbar {
+    display: flex; /* Asegurarse de que los enlaces estén en línea */
+}
 
-.navbar a{
+.navbar a {
     position: relative;
     font-size: 16px;
-    color: #e4e4e4;
+    color: #e4e4e4; /* Color del texto */
     text-decoration: none;
     font-weight: 500;
     margin-right: 30px;
+    transition: color 0.3s;
 }
 
-
-.navbar a::after{
-content: "";
-position: absolute;
-left: 0;
-bottom: -6px;
-width: 100%;
-height: 2px;
-background: #e4e4e4;
-border-radius: 5px;
-transform: translateY(10px);
-transition: .5s;
-opacity: 0;
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: #00319b; /* Color de la línea */
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: .5s;
+    opacity: 0;
 }
 
-.navbar a:hover:after{
+.navbar a:hover:after {
     transform: translateY(0);
     opacity: 1;
 }
@@ -60,52 +63,49 @@ opacity: 0;
     width: 140px; 
     height: auto; 
     margin-right: 10px; 
-  }
-
-
-.search-bar{
-width: 250px;
-height: 45px;
-background: transparent;
-border: 2px solid #e4e4e4;
-border-radius: 6px;
-display: flex;
-align-items: center;
 }
 
-.search-bar input{
-width: 100%;
-background: transparent;
-border: none;
-outline: none;
-font-size: 16px;
-color: #e4e4e4;
+.search-bar {
+    width: 250px;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #e4e4e4;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
 }
 
-.search-bar input::placeholder{
-color: #e4e4e4;
-
+.search-bar input {
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #e4e4e4;
 }
 
-.search-bar button{
-width: 40px;
-height: 100%;
-background: transparent;
-border: none;
-outline: none;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
+.search-bar input::placeholder {
+    color: #e4e4e4;
 }
 
-.search-bar button i{
-font-size: 22px;
-color: #e4e4e4;
-
+.search-bar button {
+    width: 40px;
+    height: 100%;
+    background: #fffbfb;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
-.background{
+.search-bar button i {
+    font-size: 22px;
+    color: #e4e4e4;
+}
+
+.background {
     width: 100%;
     height: 100vh;
     background: url("../img/2.jpeg") no-repeat;
@@ -114,78 +114,62 @@ color: #e4e4e4;
     filter: blur(10px);    
 }
 
-
-
-
-.container{
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 75%;
-height: 1050px;
-background: url("../img/2.jpeg") no-repeat;
-background-size: cover;
-background-position: center;
-border-radius: 10px;
-margin-top: 20px;
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 950px;
+    height: auto;
+    background: url("../img/2.jpeg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 65px; /* Añadido padding */
 }
 
-.container .content{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 45%;
-    height: 100%;
-    background: transparent;
-    padding: 80px;
+.container .content {
+    width: 100%;
+    padding: 40px;
     color: #000000;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
 
-.content.logo{
+.content.logo {
     font-size: 30px;
 }
 
-.text-sci h2{
-font-size: 65px;
-line-height: 1;
+.text-sci h2 {
+    font-size: 1.5rem; /* Usando rem para que sea más escalable */
+    line-height: 1;
 }
 
-.text-sci h2 span{
-font-size: 35px;
+.text-sci h2 span {
+    font-size: 1.5rem; /* Usando rem para que sea más escalable */
 }
 
-
-.text-sci p{
-font-size: 35px;
-margin: 255px 0;
-
+.text-sci p {
+    font-size: 1.5rem; /* Usando rem para que sea más escalable */
+    margin: 255px 0;
 }
 
 .social-icons a i {
     font-size: 22px;
-    color: #e4e4e4;
+    color: #fffbfb;
     margin-right: 10px;
     transition: .5s ease;
 }
 
 .social-icons a:hover i {
-transform: scale(1.2);
-
-
+    transform: scale(1.2);
 }
 
-
-.container .logreg-box{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: calc(100% - 45%);
-    height: 100%;
-    
+.container .logreg-box {
+    width: 100%; /* Cambiado a 100% */
 }
 
 .logreg-box .form-box {
@@ -195,41 +179,66 @@ transform: scale(1.2);
     width: 100%;
     height: 100%;   
     background: transparent;
-    backdrop-filter: blur(20px);
+    
     border-top-right-radius: 45px;
     border-bottom-right-radius: 10px;
-    color: #e4e4e4;
+    color: #ffffff;
 }
 
-.form-box h2{
-    font-size: 50px;
+.form-box h2 {
+    font-size: 2.9rem; /* Aumentar tamaño de fuente */
     text-align: center;
+    color: #ffffff; /* Cambiar color del texto */
+    font-weight: 600; /* Hacer el texto más grueso */
+    text-shadow: 15px 15px 45px rgba(4, 62, 255, 0.2); /* Sombra para dar un efecto de profundidad */
+    margin-bottom: 20px; /* Separar un poco del contenido debajo */
 }
 
 .form-box .input-box {
     position: relative;
-    width: 340px;
+    width: 100%; /* Cambiado a 100% */
+    max-width: 340px; /* Añadido un ancho máximo */
     height: 50px;
-    border-bottom: 2px solid #e4e4e4;
     margin: 30px 0;
 }
 
-.input-box input{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    color: #e4e4e4;
-    font-weight: 500;
-    padding-right: 28px;
+.input-box {
+    display: flex; /* Usar flexbox para alinear el icono y el input */
+    align-items: center; /* Centrar verticalmente el contenido */
 }
 
-.input-box label{
+.input-box span {
+    margin-right: 10px; /* Espacio entre el icono y el campo de entrada */
+    position: absolute; /* Cambiado a absoluto */
+    left: 10px; /* Posición a la izquierda */
+    top: 50%; /* Centrado verticalmente */
+    transform: translateY(-50%); /* Ajustar verticalmente */
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Fondo semitransparente más claro */
+    border: 2px solid #0C616E; /* Borde más visible */
+    outline: none;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    padding-right: 40px; /* Espacio derecho para el texto */
+    padding-left: 40px; /* Espacio izquierdo para el texto */
+    border-radius: 5px; 
+    transition: border 0.3s ease, background 0.3s ease; /* Animación al enfocar */
+}
+
+.input-box input:focus {
+    background: rgba(0, 0, 0, 0.5); /* Fondo más visible al enfocar */
+    border-color: #0C616E; /* Cambiar color del borde al enfocar */
+}
+
+.input-box label {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 45px;
     transform: translateY(-70%);
     font-size: 16px;
     font-weight: 500;
@@ -239,67 +248,87 @@ transform: scale(1.2);
 
 .input-box input:focus~label,
 .input-box input:valid~label {
-    top: -7px;
-
+    top: -5px; /* Ajustar la posición del label */
+    font-size: 12px;
+    color: #0C616E; /* Cambiar color del label al enfocar */
 }
 
-
-.input-box .icon {
-    position: absolute;
-    top: 13px;
-    right: 0;
-    font-size: 19px;
-}
-
-.form-box .remember-forgot {
-    font-size: 14.5px;
-    font-weight: 500;
-    margin: -15px 0 15px;
+.remember-forgot {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.remember-forgot label input{
-    accent-color: #e4e4e4;
-    margin-right: 3px;
+.remember-forgot label {
+    color: #000000; /* Color del texto */
 }
 
-.remember-forgot a{
-    color: #e4e4e4;
+.remember-forgot a {
+    color: #0C616E; /* Color del enlace */
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.remember-forgot a:hover{
-    text-decoration: underline;
+.remember-forgot a:hover {
+    color: #0A4B5C; /* Cambiar color del enlace al pasar el mouse */
 }
 
-.btn{
-    width: 100%;
-    height: 45px;
-    background: #0C616E;
+.btn {
+    width: 100%; /* Hacer el botón ocupar el 100% del ancho */
+    height: 50px; /* Aumentar altura del botón */
+    background: #055966; /* Fondo del botón */
     border: none;
-    outline: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size: 18px; /* Aumentar tamaño de fuente */
+    font-weight: bold; /* Hacer el texto más grueso */
+    color: #ffffff; /* Color del texto */
     cursor: pointer;
-    font-size: 16px;
-    color: #e4e4e4;
-    font-weight: 500;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones para mejorar la interacción */
 }
 
-.form-box .login-register {
-    font-size: 14.5px;
-    font-weight: 500;
+.btn:hover {
+    background-color: #0A4B5C; /* Cambiar color de fondo al pasar el mouse */
+    transform: translateY(-2px); /* Efecto de levantamiento al pasar el mouse */
+}
+
+.login-register {
     text-align: center;
-    margin-top: 25px;
+    margin-top: 20px; /* Añadir separación con respecto al contenido anterior */
 }
 
-.login-register p a{
-    color: #e4e4e4;
-    font-weight: 600;
+.login-register p {
+    color: #000000; /* Color del texto */
+}
+
+.login-register a {
+    color: #0C616E; /* Color del enlace */
     text-decoration: none;
+    transition: color 0.3s;
 }
 
-.login-register p a:hover{
-    text-decoration: underline;
+.login-register a:hover {
+    color: #0A4B5C; /* Cambiar color del enlace al pasar el mouse */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px 20px; /* Ajustar el padding para dispositivos móviles */
+    }
+
+    .logo2 {
+        width: 100px; /* Ajustar el tamaño del logo */
+    }
+
+    .search-bar {
+        width: 80%; /* Ajustar el tamaño de la barra de búsqueda */
+    }
+
+    .form-box h2 {
+        font-size: 2rem; /* Reducir tamaño de fuente en móvil */
+    }
+
+    .input-box {
+        max-width: 100%; /* Eliminar límite de ancho en móvil */
+    }
 }
