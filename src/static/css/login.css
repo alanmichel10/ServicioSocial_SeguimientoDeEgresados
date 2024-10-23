@@ -1,111 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-
-body {
-    background: #020410;
-}
-
-/* Estilos de la barra de navegación */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 50px;
-    background: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
-
-.navbar {
-    display: flex; /* Asegurarse de que los enlaces estén en línea */
-}
-
-.navbar a {
-    position: relative;
-    font-size: 16px;
-    color: #e4e4e4; /* Color del texto */
-    text-decoration: none;
-    font-weight: 500;
-    margin-right: 30px;
-    transition: color 0.3s;
-}
-
-.navbar a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 2px;
-    background: #00319b; /* Color de la línea */
-    border-radius: 5px;
-    transform: translateY(10px);
-    transition: .5s;
-    opacity: 0;
-}
-
-.navbar a:hover:after {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.logo2 {
-    width: 140px; 
-    height: auto; 
-    margin-right: 10px; 
-}
-
-.search-bar {
-    width: 250px;
-    height: 45px;
-    background: transparent;
-    border: 2px solid #e4e4e4;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-}
-
-.search-bar input {
-    width: 100%;
-    background: #ffffff;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    color: #e4e4e4;
-}
-
-.search-bar input::placeholder {
-    color: #e4e4e4;
-}
-
-.search-bar button {
-    width: 40px;
-    height: 100%;
-    background: #fffbfb;
-    border: none;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.search-bar button i {
-    font-size: 22px;
-    color: #e4e4e4;
-}
-
-.background {
+.background-login {
     width: 100%;
     height: 100vh;
     background: url("../img/2.jpeg") no-repeat;
@@ -114,9 +9,9 @@ body {
     filter: blur(10px);    
 }
 
-.container {
+.container-login {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
@@ -130,7 +25,7 @@ body {
     padding: 65px; /* Añadido padding */
 }
 
-.container .content {
+.container-login .content {
     width: 100%;
     padding: 40px;
     color: #000000;
@@ -157,18 +52,7 @@ body {
     margin: 255px 0;
 }
 
-.social-icons a i {
-    font-size: 22px;
-    color: #fffbfb;
-    margin-right: 10px;
-    transition: .5s ease;
-}
-
-.social-icons a:hover i {
-    transform: scale(1.2);
-}
-
-.container .logreg-box {
+.container-login .logreg-box {
     width: 100%; /* Cambiado a 100% */
 }
 
@@ -252,27 +136,6 @@ body {
     font-size: 12px;
     color: #0C616E; /* Cambiar color del label al enfocar */
 }
-
-.remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.remember-forgot label {
-    color: #000000; /* Color del texto */
-}
-
-.remember-forgot a {
-    color: #0C616E; /* Color del enlace */
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.remember-forgot a:hover {
-    color: #0A4B5C; /* Cambiar color del enlace al pasar el mouse */
-}
-
 .btn {
     width: 100%; /* Hacer el botón ocupar el 100% del ancho */
     height: 50px; /* Aumentar altura del botón */
@@ -290,40 +153,8 @@ body {
     background-color: #0A4B5C; /* Cambiar color de fondo al pasar el mouse */
     transform: translateY(-2px); /* Efecto de levantamiento al pasar el mouse */
 }
-
-.login-register {
-    text-align: center;
-    margin-top: 20px; /* Añadir separación con respecto al contenido anterior */
-}
-
-.login-register p {
-    color: #000000; /* Color del texto */
-}
-
-.login-register a {
-    color: #0C616E; /* Color del enlace */
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.login-register a:hover {
-    color: #0A4B5C; /* Cambiar color del enlace al pasar el mouse */
-}
-
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
-    .header {
-        padding: 20px 20px; /* Ajustar el padding para dispositivos móviles */
-    }
-
-    .logo2 {
-        width: 100px; /* Ajustar el tamaño del logo */
-    }
-
-    .search-bar {
-        width: 80%; /* Ajustar el tamaño de la barra de búsqueda */
-    }
-
     .form-box h2 {
         font-size: 2rem; /* Reducir tamaño de fuente en móvil */
     }

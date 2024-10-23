@@ -178,6 +178,7 @@ def flaboral():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    current_route = request.path
     if request.method == 'POST':
         user = User(0, request.form['correo'], request.form['clave'])
         logged_user = ModelUser.login(db, user)
@@ -186,9 +187,9 @@ def login():
             return redirect(url_for('inicio'))
         else:
             flash("Credenciales incorrectas. Por favor, inténtalo de nuevo.", 'danger')
-            return render_template('login/login.html')
+            return render_template('login/login.html', current_route=current_route)
     else:
-        return render_template('login/login.html')
+        return render_template('login/login.html', current_route=current_route)
 
 
 #---------------------- ----------------------------------------------------------------------#

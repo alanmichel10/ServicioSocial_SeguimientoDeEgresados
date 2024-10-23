@@ -1,28 +1,16 @@
-{% extends 'login/baseLogin.html' %}
-{% block title %}Login{% endblock %}
+{% extends 'base.html' %}
+{% block titulo %}Login{% endblock %}
 
 {% block customCSS %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 {% endblock %}
 
-{% block body %}
-<!-- Barra de navegación -->
-<header class="header">
-  <nav class="navbar">
-    <!-- Logo -->
-       <!-- Enlace de inicio -->
-    <a href="{{ url_for('index') }}">
-      <img src="{{ url_for('static', filename='img/Logo_cut.jpg') }}" alt="Logo" class="logo2">
-    </a>
-  
-  </nav>
-</header>
+{% block contenido %}
 
+<div class="background-login"></div>
 
-<div class="background"></div>
-
-<div class="container">
+<div class="container-login">
   <div class="content">
     <h2 class="logo"><i class='bx bxl-mongodb'></i> Centro Universitario CUT</h2>
     <div class="text-sci">
