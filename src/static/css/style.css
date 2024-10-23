@@ -415,3 +415,340 @@ caption{
     font-size: 3rem;
 }
 /************************************** Termina Estilos para Dashboard ************************************/
+
+
+
+/************************************** Estilos para Dashboard ************************************/
+
+/* Variables específicas del dashboard */
+:root {
+    --dashboard-primary: #1192a2;
+    --dashboard-secondary: #559232;
+    --dashboard-accent: #3b7a57;
+    --dashboard-light: #f5f9ff;
+    --dashboard-border-radius: 12px;
+}
+
+/* Contenedor principal del dashboard */
+.dashboard-container {
+    padding: 2rem;
+    background-color: #fcfdfaf9;
+}
+
+.dashboard-wrapper {
+    padding: 2rem;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+}
+
+.dashboard-panel {
+    background-color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Tabla del dashboard */
+.dashboard-table-container {
+    box-shadow: none; /* Removemos la sombra original */
+    margin: 2rem 0 0 0;
+}
+
+.dashboard-table {
+    margin-bottom: 0;
+}
+
+.dashboard-table thead th {
+    background-color: var(--azul);
+    color: var(--blanco);
+    font-weight: 500;
+    border: none;
+    padding: 1rem;
+}
+
+.dashboard-table thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.dashboard-table thead th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.dashboard-btn,
+.dashboard-select,
+.count-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.dashboard-table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--dashboard-light);
+}
+
+/* Collapse personalizado para dashboard */
+.dashboard-collapse {
+    border: none; /* Elimina el borde de la tarjeta */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin-top: 0rem; /* Espaciado superior */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+
+.dashboard-card-body {
+    padding: 1.5rem; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo claro */
+}
+
+.tab-pane {
+    display: none; /* Oculta todas las pestañas por defecto */
+}
+
+.tab-pane.show {
+    display: block; /* Muestra solo la pestaña activa */
+}
+
+h5 {
+    font-size: 1.8rem; /* Tamaño de fuente para el título */
+    margin-bottom: 1rem; /* Espaciado inferior */
+    color: var(--azul); /* Color del título */
+}
+
+/* Tabs del dashboard */
+.dashboard-tabs {
+    border-bottom: 2px solid var(--gris);
+    margin-bottom: 1rem; /* Espaciado inferior */
+}
+
+.dashboard-tabs .nav-link {
+    color: var(--negro); /* Color del texto de las pestañas */
+    font-size: 1.4rem; /* Tamaño de fuente */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 0; /* Sin bordes redondeados */
+}
+
+.dashboard-tabs .nav-link.active {
+    font-weight: bold; /* Negrita para la pestaña activa */
+    color: var(--azul); /* Color del texto activo */
+    border-bottom: 2px solid var(--azul); /* Línea debajo de la pestaña activa */
+}
+
+.dashboard-tab-content {
+    padding: 1rem; /* Ajusta el espaciado interno de la sección */
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Contenido de los tabs */
+.dashboard-tab-content ul {
+    list-style: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el espaciado interno de la lista */
+    margin: 0; /* Elimina el espaciado externo de la lista */
+}
+
+.dashboard-tab-content li {
+    padding: 0.5rem; /* Ajusta el espaciado interno de cada elemento de la lista */
+    border-bottom: 1px solid var(--gris); /* Agrega una línea de separación entre elementos */
+}
+
+.dashboard-tab-content li:last-child {
+    border-bottom: none; /* Elimina la línea de separación del último elemento */
+}
+
+.dashboard-tab-content p {
+    font-weight: bold; /* Negrita para los encabezados de sección */
+    margin-bottom: 0.5rem; /* Espaciado inferior */
+}
+  
+/* Estadísticas base */
+.dashboard-stats {
+    background: var(--blanco);
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .dashboard-stats:hover {
+    transform: translateY(-5px);
+  }
+  
+  .dashboard-stats h3 {
+    color: var(--azul);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .dashboard-stats svg {
+    color: var(--dashboard-secondary);
+    margin-bottom: 1rem;
+  }
+  
+  .dashboard-stats p {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--azul);
+    margin: 0;
+  }
+  
+  /* Nueva variante compacta */
+  .dashboard-stats-compact {
+    padding: 1rem;
+    text-align: center;
+    min-width: 200px;
+  }
+  
+  .dashboard-stats-compact h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dashboard-stats-compact svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dashboard-stats-compact p {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  /* Botones del dashboard */
+  .dashboard-btn {
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 1.6rem;
+    text-decoration: none;
+  }
+  
+  .dashboard-btn-excel {
+    background-color: var(--dashboard-secondary);
+    border: none;
+    color: var(--blanco);
+  }
+  
+  .dashboard-btn-excel:hover {
+    background-color: var(--dashboard-accent);
+    padding: 1rem 1.7rem;
+  }
+  
+  .dashboard-btn-filter {
+    background-color: var(--dashboard-primary);
+    border: none;
+    color: var(--blanco);
+  }
+  
+  /* Select del dashboard */
+  .dashboard-select {
+    border-radius: 8px;
+    border: 1px solid var(--gris);
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    font-size: 1.6rem;
+    background-color: var(--blanco);
+  }
+  
+  .dashboard-select:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 0.2rem rgba(40, 76, 118, 0.25);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      padding: 1rem;
+    }
+    
+    .dashboard-table-responsive {
+      border-radius: var(--dashboard-border-radius);
+    }
+    
+    .dashboard-tabs .nav-link {
+      padding: 0.75rem 1rem;
+    }
+  
+    .dashboard-stats-compact {
+      min-width: 150px;
+    }
+    
+    .dashboard-stats-compact h3 {
+      font-size: 1.2rem;
+    }
+    
+    .dashboard-stats-compact p {
+      font-size: 1.6rem;
+    }
+  }
+  
+
+  /* Tarjeta de conteo */
+/* Contenedor para la tarjeta que mantiene consistencia con dashboard-container */
+.count-card-wrapper {
+    padding: 0 2rem;
+    margin: 1rem 0;
+  }
+  
+  /* Tarjeta de conteo */
+  .count-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--blanco);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: fit-content;
+  }
+  
+  .count-card__icon {
+    color: var(--dashboard-primary);
+    width: 32px;
+    height: 32px;
+  }
+  
+  .count-card__content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .count-card__label {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  .count-card__value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dashboard-primary);
+    margin: 0;
+    line-height: 1;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .count-card-wrapper {
+      padding: 0 1rem;
+    }
+  
+    .count-card {
+      padding: 0.75rem 1rem;
+    }
+    
+    .count-card__icon {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .count-card__value {
+      font-size: 1.25rem;
+    }
+  }

@@ -35,6 +35,27 @@
         </button>
     </div>
 
+    <div class="container text-center p-5 shadow mb-5 rounded">
+        <h5 class="py-4" style="font-size: 2.5rem;">Convocatorias Actuales</h5>
+        <div id="convocatorias">
+            {% for convocatoria in convocatorias %}
+                <div class="convocatoria my-3 p-3 border rounded">
+                    <h6>{{ convocatoria.carrera }}</h6>
+                    {% set hoy = date.today() %}
+                    {% if convocatoria.fecha_apertura > hoy %}
+                        <span class="badge bg-success">Abierta desde {{ convocatoria.fecha_apertura }}</span>
+                    {% elif convocatoria.fecha_cierre < hoy %}
+                        <span class="badge bg-danger">Cerrada desde {{ convocatoria.fecha_cierre }}</span>
+                    {% else %}
+                        <span class="badge bg-warning">En curso hasta {{ convocatoria.fecha_cierre }}</span>
+                    {% endif %}
+                    <p>Fecha de apertura: {{ convocatoria.fecha_apertura }}</p>
+                    <p>Fecha de cierre: {{ convocatoria.fecha_cierre }}</p>
+                </div>
+            {% endfor %}    
+        </div>
+    </div>
+
     <div class="container text-center p-5 shadow mb-5 bg-body-tertiary rounded">
         <div class="row">
             <h5 class="py-4" style="font-size: 2.5rem;">¡Próximas Convocatorias!</h5>
@@ -48,6 +69,8 @@
                 </form>
         </div>
     </div>
+
+    
 
     <div class="card text-center p-5 shadow mb-5 rounded" style="background-color: #002d6318;">
         <div class="card-body">

@@ -14,6 +14,30 @@ import logging
 class ModelAdmin():
     
     @classmethod
+    def guardar_fechas_convocatorias(cls, db, id_carrera, fecha_apertura, fecha_cierre):
+        try:
+            cursor = db.connection.cursor()
+            cursor.execute("""
+                INSERT INTO convocatorias (idCarrera, fecha_apertura, fecha_cierre)
+                VALUES (%s, %s, %s)
+                ON DUPLICATE KEY UPDATE fecha_apertura = VALUES(fecha_apertura), fecha_cierre = VALUES(fecha_cierre)
+            """, (id_carrera, fecha_apertura, fecha_cierre))
+            db.connection.commit()
+        except Exception as ex:
+            db.connection.rollback()
+            raise Exception(ex)
+
+    @classmethod
+    def getConvocatoriasPorCarrera(cls, db, id_carrera):
+        try:
+            cursor = db.connection.cursor()
+            cursor.execute("SELECT * FROM convocatorias WHERE idCarrera = %s", (id_carrera,))
+            convocatorias = cursor.fetchall()
+            return convocatorias
+        except Exception as ex:
+            raise Exception(ex)
+    
+    @classmethod
     def getAllAspirantesData(cls, db, carreras):
         try:
             cursor = db.connection.cursor()

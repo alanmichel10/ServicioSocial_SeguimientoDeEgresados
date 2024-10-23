@@ -40,7 +40,7 @@
                 <div class="col-md-4">
                     <label class="text-label" for="horarioInput">Horario laboral</label>
                     <div class="form-group my-3">
-                        <input type="text" class="datos" id="horarioInput" name="horariolaboral" placeholder="Ingresa tu horario laboral">
+                        <input type="text" class="datos" id="horarioInput" name="horariolaboral" placeholder="Ingresa tu horario laboral" data-na>
                     </div>
                 </div>
             </div>
@@ -85,5 +85,49 @@
         // Mostrar una alerta y preguntar al usuario si está seguro de enviar los datos
         return confirm("¿Seguro que quieres enviar tus datos?");
     }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trabajoInput = document.getElementById('trabajoInput');
+        const camposNA = document.querySelectorAll('[data-na]');
+
+        trabajoInput.addEventListener('change', function () {
+            if (this.value === 'No') {
+                camposNA.forEach(function (campo) {
+                    if (campo.tagName === 'SELECT') {
+                        campo.value = 'NoAplica';
+                        campo.style.pointerEvents = 'none';
+                    } else {
+                        campo.value = 'N/A';
+                        campo.readOnly = true;
+                    }
+                    campo.style.backgroundColor = '#e9ecef';
+                });
+            } else {
+                camposNA.forEach(function (campo) {
+                    if (campo.tagName === 'SELECT') {
+                        campo.selectedIndex = 0;
+                        campo.style.pointerEvents = 'auto';
+                    } else {
+                        campo.value = '';
+                        campo.readOnly = false;
+                    }
+                    campo.style.backgroundColor = '';
+                });
+            }
+        });
+
+        camposNA.forEach(function (campo) {
+            campo.addEventListener('input', function () {
+                if (trabajoInput.value === 'No') {
+                    if (this.tagName === 'SELECT') {
+                        this.value = 'NoAplica';
+                    } else {
+                        this.value = 'N/A';
+                    }
+                }
+            });
+        });
+    });
 </script>
 {%endblock%}

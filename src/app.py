@@ -334,6 +334,9 @@ def vermas(id):
                            estudios=estudios,
                            laboral=laboral,
                            carrera_id=carrera_id)
+    
+    
+    
 #---------------------------                                       -----------------------------------##
 
 @app.route('/descargar_excel')
