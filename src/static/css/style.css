@@ -429,6 +429,9 @@ caption{
     --dashboard-border-radius: 12px;
 }
 
+
+
+
 /* Contenedor principal del dashboard */
 .dashboard-container {
     padding: 2rem;
@@ -453,10 +456,27 @@ caption{
 .dashboard-table-container {
     box-shadow: none; /* Removemos la sombra original */
     margin: 2rem 0 0 0;
+    overflow-x: auto; 
 }
 
 .dashboard-table {
     margin-bottom: 0;
+    width: 100%;
+}
+
+.dashboard-table th {
+    word-wrap: break-word; /* Permite que las palabras largas se dividan */
+    white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+    padding: 0.5rem; /* Espaciado interno para los encabezados */
+}
+
+.dashboard-table th, .dashboard-table td {
+    white-space: nowrap; /* Evitar que el texto se desborde en las celdas */
+    background-color: #f0f0f0; 
+}
+
+.dashboard-table td {
+    border-bottom: 1px solid #ddd; /* Agregar un borde inferior a las celdas */
 }
 
 .dashboard-table thead th {

@@ -37,97 +37,99 @@
     </div>
 
     <div class="dashboard-table-container">
-    <table class="dashboard-table dashboard-table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Nombre</th>
-          <th scope="col">Apellido Paterno</th>
-          <th scope="col">Apellido Materno</th>
-          <th scope="col">Correo electrónico</th>
-          <th scope="col">Celular</th>
-          <th scope="col">Titulado</th>
-          <th scope="col">Nivel de inglés</th>
-          <th scope="col">Ver información completa</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for aspirante in datosaspirantes %}
-        <tr>
-          <td>{{ aspirante[1] }}</td>
-          <td>{{ aspirante[2] }}</td>
-          <td>{{ aspirante[3] }}</td>
-          <td>{{ aspirante[0] }}</td>
-          <td>{{ aspirante[5] }}</td>
-          <td>{{ aspirante[22] }}</td>
-          <td>{{ aspirante[21] }}</td>
-          <td>
-            <button type="button" class="dashboard-btn dashboard-btn-filter" data-bs-toggle="collapse" data-bs-target="#detalleAspirante{{ loop.index }}">Ver más</button>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="8" class="p-0">
-            <div class="collapse dashboard-collapse" id="detalleAspirante{{ loop.index }}">
-              <div class="card">
-                <div class="dashboard-card-body">
-                  <h5>Información detallada del aspirante</h5>
-                  <ul class="nav dashboard-tabs" id="myTab{{ loop.index }}" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link active" id="general-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#general{{ loop.index }}" type="button" role="tab" aria-controls="general" aria-selected="true">General</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="estudios-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#estudios{{ loop.index }}" type="button" role="tab" aria-controls="estudios" aria-selected="false">Estudios</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="laboral-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#laboral{{ loop.index }}" type="button" role="tab" aria-controls="laboral" aria-selected="false">Laboral</button>
-                    </li>
-                  </ul>
-                  <div class="dashboard-tab-content" id="myTabContent{{ loop.index }}">
-                    <div class="tab-pane fade show active" id="general{{ loop.index }}" role="tabpanel" aria-labelledby="general-tab{{ loop.index }}">
-                        <p>Información general:</p>
-                        <ul>
-                            <li>Nombre completo: {{ aspirante[1] }} {{ aspirante[2] }} {{ aspirante[3] }}</li>
-                            <li>Correo electrónico: {{ aspirante[0] }}</li>
-                            <li>Sexo: {{ aspirante[4] }}</li>
-                            <li>Celular: {{ aspirante[5] }}</li>
-                            <li>Código postal: {{ aspirante[6] }}</li>
-                            <li>Fecha de nacimiento: {{ aspirante[7] }}</li>
-                            <li>País: {{ aspirante[8] }}</li>
-                            <li>Estado: {{ aspirante[9] }}</li>
-                            <li>Ciudad: {{ aspirante[10] }}</li>
-                            <li>Colonia: {{ aspirante[11] }}</li>
-                            <li>Nacionalidad: {{ aspirante[12] }}</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane fade" id="estudios{{ loop.index }}" role="tabpanel" aria-labelledby="estudios-tab{{ loop.index }}">
-                        <p>Información de estudios:</p>
-                        <ul>
-                            <li>Centro universitario: {{ aspirante[18] }}</li>
-                            <li>Carrera Procedencia: {{ aspirante[19] }}</li>
-                            <li>Ciclo de egreso: {{ aspirante[20] }}</li>
-                            <li>Nivel de inglés: {{ aspirante[21] }}</li>
-                            <li>Titulado: {{ aspirante[22] }}</li>
-                            <li>Promedio: {{ aspirante[23] }}</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane fade" id="laboral{{ loop.index }}" role="tabpanel" aria-labelledby="laboral-tab{{ loop.index }}">
-                        <p>Información laboral:</p>
-                        <ul>
-                            <li>Estatus: {{ aspirante[13] }}</li>
-                            <li>Nombre de la empresa: {{ aspirante[14] }}</li>
-                            <li>Horario laboral: {{ aspirante[15] }}</li>
-                            <li>Puesto de trabajo: {{ aspirante[16] }}</li>
-                            <li>Sector: {{ aspirante[17] }}</li>
-                        </ul>
-                    </div>
-                </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+      <div class="table-responsive">
+          <table class="dashboard-table dashboard-table-striped">
+              <thead>
+                  <tr>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Apellido Paterno</th>
+                      <th scope="col">Apellido Materno</th>
+                      <th scope="col">Correo electrónico</th>
+                      <th scope="col">Celular</th>
+                      <th scope="col">Titulado</th>
+                      <th scope="col">Nivel de inglés</th>
+                      <th scope="col">Informacion Completa</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for aspirante in datosaspirantes %}
+                  <tr>
+                      <td>{{ aspirante[1] }}</td>
+                      <td>{{ aspirante[2] }}</td>
+                      <td>{{ aspirante[3] }}</td>
+                      <td>{{ aspirante[0] }}</td>
+                      <td>{{ aspirante[5] }}</td>
+                      <td>{{ aspirante[22] }}</td>
+                      <td>{{ aspirante[21] }}</td>
+                      <td class="text-center">
+                          <button type="button" class="dashboard-btn dashboard-btn-filter" data-bs-toggle="collapse" data-bs-target="#detalleAspirante{{ loop.index }}">Ver más</button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colspan="8" class="p-0">
+                          <div class="collapse dashboard-collapse" id="detalleAspirante{{ loop.index }}">
+                              <div class="card">
+                                  <div class="dashboard-card-body">
+                                      <h5>Información detallada del aspirante</h5>
+                                      <ul class="nav dashboard-tabs" id="myTab{{ loop.index }}" role="tablist">
+                                          <li class="nav-item" role="presentation">
+                                              <button class="nav-link active" id="general-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#general{{ loop.index }}" type="button" role="tab" aria-controls="general" aria-selected="true">General</button>
+                                          </li>
+                                          <li class="nav-item" role="presentation">
+                                              <button class="nav-link" id="estudios-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#estudios{{ loop.index }}" type="button" role="tab" aria-controls="estudios" aria-selected="false">Estudios</button>
+                                          </li>
+                                          <li class="nav-item" role="presentation">
+                                              <button class="nav-link" id="laboral-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#laboral{{ loop.index }}" type="button" role="tab" aria-controls="laboral" aria-selected="false">Laboral</button>
+                                          </li>
+                                      </ul>
+                                      <div class="dashboard-tab-content" id="myTabContent{{ loop.index }}">
+                                          <div class="tab-pane fade show active" id="general{{ loop.index }}" role="tabpanel" aria-labelledby="general-tab{{ loop.index }}">
+                                              <p>Información general:</p>
+                                              <ul>
+                                                  <li>Nombre completo: {{ aspirante[1] }} {{ aspirante[2] }} {{ aspirante[3] }}</li>
+                                                  <li>Correo electrónico: {{ aspirante[0] }}</li>
+                                                  <li>Sexo: {{ aspirante[4] }}</li>
+                                                  <li>Celular: {{ aspirante[5] }}</li>
+                                                  <li>Código postal: {{ aspirante[6] }}</li>
+                                                  <li>Fecha de nacimiento: {{ aspirante[7] }}</li>
+                                                  <li>País: {{ aspirante[8] }}</li>
+                                                  <li>Estado: {{ aspirante[9] }}</li>
+                                                  <li>Ciudad: {{ aspirante[10] }}</li>
+                                                  <li>Colonia: {{ aspirante[11] }}</li>
+                                                  <li>Nacionalidad: {{ aspirante[12] }}</li>
+                                              </ul>
+                                          </div>
+                                          <div class="tab-pane fade" id="estudios{{ loop.index }}" role="tabpanel" aria-labelledby="estudios-tab{{ loop.index }}">
+                                              <p>Información de estudios:</p>
+                                              <ul>
+                                                  <li>Centro universitario: {{ aspirante[18] }}</li>
+                                                  <li>Carrera Procedencia: {{ aspirante[19] }}</li>
+                                                  <li>Ciclo de egreso: {{ aspirante[20] }}</li>
+                                                  <li>Nivel de inglés: {{ aspirante[21] }}</li>
+                                                  <li>Titulado: {{ aspirante[22] }}</li>
+                                                  <li>Promedio: {{ aspirante[23] }}</li>
+                                              </ul>
+                                          </div>
+                                          <div class="tab-pane fade" id="laboral{{ loop.index }}" role="tabpanel" aria-labelledby="laboral-tab{{ loop.index }}">
+                                              <p>Información laboral:</p>
+                                              <ul>
+                                                  <li>Estatus: {{ aspirante[13] }}</li>
+                                                  <li>Nombre de la empresa: {{ aspirante[14] }}</li>
+                                                  <li>Horario laboral: {{ aspirante[15] }}</li>
+                                                  <li>Puesto de trabajo: {{ aspirante[16] }}</li>
+                                                  <li>Sector: {{ aspirante[17] }}</li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
   </div>
 
   
