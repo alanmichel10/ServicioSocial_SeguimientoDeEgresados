@@ -6,7 +6,7 @@ class DevelopmentConfig(Config):
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = '2i6a'
-    MYSQL_DB = 'seg_egresados5'
+    MYSQL_DB = 'seg_egresados6'
     
 
 
