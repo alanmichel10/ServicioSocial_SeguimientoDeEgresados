@@ -77,6 +77,15 @@ def fseleccion():
         tipo_posgrado = request.form.get('posgradoInput')
         selecciones = request.form.getlist('seleccionesPosgrado')
 
+        # Validación en el backend
+        if not tipo_posgrado:
+            flash('Debes seleccionar un tipo de posgrado', 'error')
+            return render_template('formulario/seleccion.html')
+        
+        if not selecciones:
+            flash('Debes seleccionar al menos una opción de posgrado', 'error')
+            return render_template('formulario/seleccion.html')
+
         # Guardamos el tipo de posgrado y las selecciones en la sesión
         session['tipo_posgrado'] = tipo_posgrado
         session['carreras_interes'] = selecciones
