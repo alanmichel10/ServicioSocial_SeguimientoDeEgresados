@@ -34,36 +34,133 @@ h1, h2, h3, h4, h5{
 
 /************************************** Estilos para el Header, el Footer y el offcanvas************************************/
 
+/* Estilo para la imagen cuadrada con bordes redondeados */
+.perfil-img {
+    border-radius: 15px; /* Bordes redondeados */
+    object-fit: cover;   /* Ajusta la imagen para que se mantenga cuadrada sin distorsionarse */
+}
+
+/* Estilo para el dropdown (panel) */
+.dropdown-menu {
+    border-radius: 8px;  /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #f8f9fa; /* Fondo suave */
+    transition: opacity 0.3s ease-in-out; /* Animación suave */
+}
+
+/* Hover sobre los elementos del menú */
+.dropdown-menu .dropdown-item:hover {
+    color: white; /* Texto blanco en hover */
+    background-color: #ff000086; /* Fondo azul claro en hover */
+    border-radius: 5px; /* Bordes redondeados en hover */
+}
+
+/* Estilo para el texto dentro del dropdown */
+.dropdown-item {
+    padding: 10px 20px; /* Espaciado */
+}
+
+
+/* Estilos optimizados para fondo azul marino */
+.coordinador-info {
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.carrera-nombre {
+    color: #FFFFFF;  /* Blanco puro para máximo contraste */
+    font-size: 1.9rem;
+    margin-bottom: 1px;
+    letter-spacing: 0.2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);  /* Sutil sombra para mejor legibilidad */
+}
+
+.coordinador-titulo {
+    color: #A5D8FF;  /* Azul claro suave */
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    opacity: 1;
+}
+
+/* Efecto hover suave */
+.coordinador-info:hover .carrera-nombre {
+    color: #F0F8FF;  /* Un blanco con un toque de azul al hover */
+}
+
+/* Variantes alternativas para el nombre de la carrera */
+.carrera-nombre.brillante {
+    color: #00FFFF;  /* Cyan brillante */
+}
+
+.carrera-nombre.suave {
+    color: #E0F7FA;  /* Azul muy claro */
+}
+
+.carrera-nombre.amarillo {
+    color: #FFEB3B;  /* Amarillo que contrasta bien con azul */
+}
+
+.carrera-nombre.verde-claro {
+    color: #B9F6CA;  /* Verde claro suave */
+}
+
 /************************************** Estilos para index************************************/
 
-.btn-iniciarSesion{
-    border-radius: 1.5rem;
+.btn-iniciarSesion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--blanco);
+    border-radius: 2rem;
     text-decoration: none;
-    color: var(--negro);
-    padding: 1rem;
-    font-size: 2.2rem;
-    transition: 500ms;
+    color: var(--blanco);
+    padding: 0.8rem 1.6rem;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    background-color: transparent;
 }
-.btn-iniciarSesion:hover{
-    font-size: 2.5rem;
+
+.btn-iniciarSesion:hover {
+    background-color: var(--blanco);
     color: var(--azulOscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.introduccion{
+.btn-iniciarSesion i {
+    font-size: 5rem;
+}
+
+.introduccion {
     border-radius: 1rem;
-    background-color: #011c3df5;
     padding: 2rem;
+    color: #ffffff; /* o color: var(--blanco); si usas tu variable */
+    --s: 118px; /* control the size */
+    --c1: #013651;
+    --c2: #012639;
+    --_g: 
+        var(--c1) 0%  5%, var(--c2) 6%  15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
+        var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
+        #0000 96%;
+    background:
+        radial-gradient(50% 50% at 100% 0, var(--_g)),
+        radial-gradient(50% 50% at 0 100%, var(--_g)),
+        radial-gradient(50% 50%, var(--_g)),
+        radial-gradient(50% 50%, var(--_g)) calc(var(--s)/2) calc(var(--s)/2)
+        var(--c1);
+    background-size: var(--s) var(--s);
 }
 
-.hoja{
-    height: 7rem;
+.hoja, .hoja2 {
+    height: 7rem; 
+    width: auto; 
     margin-left: .5rem;
+    object-fit: contain;
 }
-  
+
 .hoja2 {
     transform: scaleX(-1);
-    height: 7rem;
-    margin-left: .5rem;
 }
   
 .carousel-inner{
@@ -99,6 +196,47 @@ h1, h2, h3, h4, h5{
 
 .accordion-button{
     font-size: 1.8rem;
+}
+
+.navbar {
+    --s: 118px; /* control the size */
+    --c1: #013651;
+    --c2: #012639;
+    --_g: 
+        var(--c1) 0%  5%, var(--c2) 6%  15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
+        var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
+        #0000 96%;
+    background:
+        radial-gradient(50% 50% at 100% 0, var(--_g)),
+        radial-gradient(50% 50% at 0 100%, var(--_g)),
+        radial-gradient(50% 50%, var(--_g)),
+        radial-gradient(50% 50%, var(--_g)) calc(var(--s)/2) calc(var(--s)/2)
+        var(--c1);
+    background-size: var(--s) var(--s);
+    padding: 1rem 0;
+}
+
+/* Para hacer el texto blanco */
+.navbar p {
+    color: var(--blanco);
+}
+
+/* Para el botón de inicio de sesión */
+.btn-iniciarSesion {
+    color: var(--blanco) !important; /* Asegura que el color sea blanco */
+}
+
+.btn-iniciarSesion:hover {
+    color: #b5e4ff !important; /* Un color más claro al pasar el mouse */
+}
+
+/* Si necesitas ajustar la imagen del logo para que se vea mejor sobre el fondo */
+.navbar-img {
+    transition: transform 0.2s;
+}
+
+.navbar-img:hover {
+    transform: scale(1.05);
 }
 
 /************************************** Termina estilos para index************************************/
@@ -157,11 +295,24 @@ h1, h2, h3, h4, h5{
 
 /** Estilos para el NavBar **/
 
-.button-toggler{
-    background-color: #fcfdfaf9;
-    width: 8rem;
-    border-style: none;
+.button-toggler {
+    background-color: transparent;
+    border: none;
+    color: white;
 }
+
+.button-toggler .bi {
+    fill: white; /* Esto asegura que el icono SVG tenga color blanco */
+}
+
+.button-toggler:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Un ligero cambio de color al pasar el mouse */
+}
+
+.button-toggler:focus {
+    outline: none; /* Remueve el borde al hacer clic */
+}
+
 .bar:hover{
     width: 5rem;
     height: 5rem;
@@ -172,6 +323,17 @@ h1, h2, h3, h4, h5{
     width: 18rem;
     object-fit: contain;
 }
+
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
 /** Termina Estilos para el NavBar **/
 
 /** Estilos para el OffCanvas **/
@@ -213,15 +375,58 @@ h1, h2, h3, h4, h5{
 /************************************** Termina Estilos para el Header, el Footer y el offcanvas************************************/
 
 /************************************** Estilos para Perfil************************************/
-.card{
+/* Estilo general para el card */
+.card {
     background-color: #ffffff;
     border-style: none;
     border-radius: 3rem;
-    margin: 5rem 1rem
+    margin: 5rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra */
+    padding: 2rem; /* Añadir relleno */
 }
-.card-title{
-    font-size: 2rem;
+
+/* Estilo para el título del card */
+.card-title {
+    font-size: 2.5rem; /* Ajuste de tamaño */
+    font-weight: bold; /* Negrita para el título */
+    color: #002d63; /* Color del título */
 }
+
+/* Estilo para el texto del card */
+.card-body p {
+    font-size: 1.5rem; /* Ajuste de tamaño */
+    color: #333; /* Color del texto */
+    line-height: 1.6; /* Espaciado entre líneas */
+}
+
+/* Estilo para el botón */
+.btn-primary {
+    background-color: #004a99; /* Color de fondo */
+    border: none;
+    border-radius: 50px; /* Bordes redondeados */
+    padding: 10px 20px; /* Relleno */
+    font-size: 1rem; /* Tamaño de fuente */
+    transition: background-color 0.3s; /* Efecto de transición */
+}
+
+.btn-primary:hover {
+    background-color: #003366; /* Color al hacer hover */
+}
+
+/* Estilo para el separador horizontal */
+.card hr {
+    border: 0;
+    height: 1px;
+    background: #ddd; /* Color del separador */
+    margin: 20px 0; /* Espaciado */
+}
+
+/* Estilo para el texto muted */
+.text-muted {
+    color: #555; /* Color del texto muted */
+    font-size: 1rem; /* Tamaño de fuente */
+}
+
 .linea-negra{
     background-color: var(--negro);
     width: 100%;

@@ -63,7 +63,7 @@ def enviar_correo(destinatario, asunto, mensaje_base, contrasena=None, correo_us
     <body>
         <div class="container">
             <div class="header">
-                <h1>Bienvenido a Nuestra Comunidad de Egresados</h1>
+                <h1>Bienvenido al Centro Universitario de Tonalá</h1>
             </div>
             <div class="content">
                 <p>{mensaje_base}</p>
@@ -81,6 +81,7 @@ def enviar_correo(destinatario, asunto, mensaje_base, contrasena=None, correo_us
         mensaje_html += f"<p>{mensaje_extra}</p>"
 
     mensaje_html += """
+                <p>Hemos creado una cuenta para ti en nuestro sistema. Con esta cuenta, podrás modificar tu información y ver anuncios importantes sobre las carreras en las que estás interesado.</p>
                 <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
                 <p>¡Que tengas un excelente día!</p>
             </div>

@@ -21,15 +21,14 @@
       <div class="container-fluid">
         <div class="row">
           <button class="button-toggler col mx-3" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-              class="bi bi-grid-3x3-gap bar" viewBox="0 0 16 16">
-              <path
-                d="M4 2v2H2V2zm1 12v-2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m5 10v-2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V7a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1M9 2v2H7V2zm5 0v2h-2V2zM4 7v2H2V7zm5 0v2H7V7zm5 0h-2v2h2zM4 12v2H2v-2zm5 0v2H7v-2zm5 0v2h-2v-2zM12 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1z" />
-            </svg>
+                  data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                    class="bi bi-grid-3x3-gap bar" viewBox="0 0 16 16">
+                  <path d="M4 2v2H2V2zm1 12v-2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m5 10v-2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V7a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1m0-5V2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1M9 2v2H7V2zm5 0v2h-2V2zM4 7v2H2V7zm5 0v2H7V7zm5 0h-2v2h2zM4 12v2H2v-2zm5 0v2H7v-2zm5 0v2h-2v-2zM12 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1z" />
+              </svg>
           </button>
-          <img class="navbar-img col" src="{{ url_for('static', filename='img/Logo_cut.jpg') }}" alt="" />
-        </div>
+          <img class="navbar-img col" src="{{ url_for('static', filename='img/CUT.png') }}" alt="" />
+      </div>
 
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel">
@@ -108,19 +107,34 @@
   <hr class="hr-navbar opacity-100">
   {% block body %} {% endblock %}
   <hr class="hr-navbar opacity-100">
-  <footer>
-    <div class="container my-5">
+  <footer class="bg-white text-dark pt-5 pb-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Columna para la imagen -->
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-4 d-flex justify-content-center">
+                <img src="{{ url_for('static', filename='img/UDGCUT.png') }}" alt="Logo CUT" class="img-fluid" width="auto" />
+            </div>
+
+            <!-- Columna para el contenido de contacto -->
+            <div class="col-lg-8 col-md-8 col-sm-12 mb-4">
+                <h5 class="text-uppercase mb-3">Contacto</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <p><strong>Centro Universitario de Tonalá</strong></p>
+                    </li>
+                    <li>
+                        <p>Av. Nuevo Periférico No. 555 Ejido San José Tateposco, C.P. 45425, Tonalá Jalisco, México</p>
+                    </li>
+                    <li>
+                        <p><strong>Teléfono:</strong> +52 (33) 20 00 23 00 Ext. 64007 y 64044</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr class="bg-dark">
         <div class="row">
-            <div class="col text-start">
-                <img class="my-3" src="{{ url_for('static', filename='img/Logo_udg.png') }}" alt="" width="90" />
-                <div class="my-3">
-                    <p class="p">CENTRO UNIVERSITARIO DE TONALÁ</p>
-                    <p class="p">Av. Nuevo Periférico No. 555 Ejido San José Tateposco, C.P. 45425, Tonalá Jalisco,
-                        México</p>
-                    <p class="p">Teléfono: +52 (33) 20 00 23 00 Ext. 64007 y 64044</p>
-                    <p class="derechos-autor">Derechos reservados ©1997 - 2023. Universidad de Guadalajara. Sitio
-                        desarrollado por CGTI | Créditos de sitio | Política de privacidad y manejo de datos</p>
-                </div>
+            <div class="col-12 text-center">
+                <p class="mb-0">Derechos reservados ©1997 - 2024. Universidad de Guadalajara.</p>
             </div>
         </div>
     </div>

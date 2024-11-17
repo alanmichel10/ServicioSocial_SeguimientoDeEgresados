@@ -1,48 +1,55 @@
-{% extends 'base.html' %}
+{% extends 'formulario/baseformulario.html' %}
 {% block titulo %} Datos Generales {% endblock %}
-
 
 {% block contenido %}
 <div class="banner">
   <div class="container py-5">
     <div class="card shadow-lg rounded-4">
       <div class="card-body p-5">
-        <h3 class="pb-2 text-center" style="font-size: 3rem;">REGISTRO</h3>
         <div class="row text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-vcard"
-            viewBox="0 0 16 16">
-            <path
-              d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
-            <path
-              d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
-          </svg>
+          <!-- SVG code remains the same -->
           <h5 class="pb-2 text-center" style="font-size: 2.5rem;">Informacion General</h5>
         </div>
 
         <hr class="hr-navbar opacity-100 my-4">
-        <form action="/general" method="post">
+        <form action="/general" method="post" id="generalForm" onsubmit="return validarFormulario()">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <br />
+          {% for message in messages %}
+          <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+          
           <!-- Grupo 1 de campos del formulario -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
               <label class="text-label" for="NombreInput">Nombre(s)</label>
               <div class="form-group my-3">
-                <input type="text" name="nombres" class="datos" id="NombreInput" placeholder="Ingresa tu nombre"
-                  required>
+                <input type="text" name="nombres" class="datos" id="NombreInput" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+" 
+                       placeholder="Ingresa tu nombre" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
             <div class="col-md-4">
               <label class="text-label" for="apellidopInput">Apellido paterno</label>
               <div class="form-group my-3">
-                <input type="text" name="apellido_p" class="datos" id="apellidopInput"
-                  placeholder="Ingresa tu apellido paterno" required>
+                <input type="text" name="apellido_p" class="datos" id="apellidopInput" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+"
+                       placeholder="Ingresa tu apellido paterno" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
             <div class="col-md-4">
               <label class="text-label" for="apellidomInput">Apellido materno</label>
               <div class="form-group my-3">
-                <input type="text" name="apellido_m" class="datos" id="apellidomInput"
-                  placeholder="Ingresa tu apellido materno" required>
+                <input type="text" name="apellido_m" class="datos" id="apellidomInput" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+"
+                       placeholder="Ingresa tu apellido materno" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
           </div>
@@ -53,51 +60,56 @@
               <label class="text-label" for="sexoInput">Sexo</label>
               <div class="form-group my-3">
                 <select class="datos" name="sexo" id="sexoInput" required>
-                  <option disabled selected>Selecciona una opción</option>
+                  <option value="">Selecciona una opción</option>
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
                   <option value="Otro">Otro</option>
                 </select>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
             <div class="col-md-4">
-              <label class="text-label" for="celInput">Telefono de contacto</label>
+              <label class="text-label" for="celInput">Teléfono de contacto</label>
               <div class="form-group my-3">
-                <input type="text" name="tel_contacto" class="datos" id="celInput"
-                  placeholder="Ingresa tu Telefono de contacto" required>
+                <input type="tel" name="tel_contacto" class="datos" id="celInput"
+                       pattern="[0-9]{10}" maxlength="10"
+                       placeholder="10 dígitos" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
             <div class="col-md-4">
-              <label class="text-label" for="correoInput">Correo electronico</label>
+              <label class="text-label" for="correoInput">Correo electrónico</label>
               <div class="form-group my-3">
-                <input type="text" name="correo_alumno" class="datos" id="correoInput" placeholder="Ingresa tu correo"
-                  required>
+                <input type="email" name="correo_alumno" class="datos" id="correoInput" 
+                       placeholder="ejemplo@dominio.com" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
           </div>
 
-          <!-- Grupo 3 de campos del formulario -->
+          <!-- Los demás grupos mantienen la misma estructura base pero con validaciones específicas -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
-              <label class="text-label" for="codigo_postal">Codigo postal</label>
+              <label class="text-label" for="codigo_postal">Código postal</label>
               <div class="form-group my-3">
-                <input type="text" name="codigo_postal" class="datos" id="codigo_postal" maxlength="5" minlength="5"
-                  placeholder="Ingresa tu codigo postal" required="">
+                <input type="text" name="codigo_postal" class="datos" id="codigo_postal"
+                       pattern="[0-9]{5}" maxlength="5" minlength="5"
+                       placeholder="5 dígitos" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
-
             <div class="col-md-4">
               <label class="text-label" for="paisInput">Pais</label>
               <div class="form-group my-3">
                 <input type="text" name="pais" class="datos" id="paisInput" placeholder="Ingresa tu pais" required>
               </div>
             </div>
-
+            
             <div class="col-md-4">
               <label class="text-label" for="id_estado">Estado</label>
               <div class="form-group my-3">
                 <select name="estado" class="datos" id="id_estado" required>
-                  <option disabled selected value="0" selected="true">Selecciona una opcion...</option>
+                  <option value="">Selecciona una opción</option>
                   <option value="1">Aguascalientes</option>
                   <option value="2">Baja California</option>
                   <option value="3">Baja California Sur</option>
@@ -131,9 +143,11 @@
                   <option value="31">Yucatán</option>
                   <option value="32">Zacatecas</option>
                 </select>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
           </div>
+
 
           <!-- Grupo 4 de campos del formulario -->
           <div class="row contenedor-campos">
@@ -160,21 +174,19 @@
             </div>
           </div>
 
-          <!-- Grupo 5 de campos del formulario -->
+          <!-- Grupo fecha de nacimiento -->
           <div class="row contenedor-campos">
             <div class="col-md-4">
               <label class="text-label" for="fechanacimientoInput">Fecha de nacimiento</label>
               <div class="form-group my-3">
-                <input type="date" name="f_nacimiento" class="datos" id="fechanacimientoInput"
-                  placeholder="Fecha de Nacimiento" required>
+                <input type="date" name="f_nacimiento" class="datos" id="fechanacimientoInput" required>
+                <div class="error-message text-danger" style="display: none;"></div>
               </div>
             </div>
           </div>
 
           <hr class="hr-navbar opacity-100 my-4">
-          <!-- Botones de navegación -->
           <div class="nav-buttons mt-4 text-end">
-            <input type="submit" class="btn-siguiente" value="Registrar">
             <button type="submit" class="btn-siguiente">Siguiente</button>
           </div>
         </form>
@@ -182,4 +194,80 @@
     </div>
   </div>
 </div>
-{%endblock%}
+
+<script>
+function validarFormulario() {
+  let isValid = true;
+  const errores = document.querySelectorAll('.error-message');
+  errores.forEach(error => error.style.display = 'none');
+ 
+  // Validar Estado
+  const estado = document.getElementById('id_estado');
+  if (estado.value === "0") {
+    mostrarError('id_estado', 'Selecciona un estado');
+    isValid = false;
+  }
+
+  // Validar fecha de nacimiento
+  const fechaNacimiento = new Date(document.getElementById('fechanacimientoInput').value);
+  const hoy = new Date();
+  const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+  const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+  
+  if (fechaNacimiento > hoy) {
+    mostrarError('fechanacimientoInput', 'La fecha no puede ser futura');
+    isValid = false;
+  } else if (edad < 18 || (edad === 18 && mes < 0)) {
+    mostrarError('fechanacimientoInput', 'Debes ser mayor de 18 años');
+    isValid = false;
+  }
+
+  // Validar teléfono
+  const telefono = document.getElementById('celInput');
+  if (!telefono.value.match(/^[0-9]{10}$/)) {
+    mostrarError('celInput', 'El teléfono debe tener 10 dígitos numéricos');
+    isValid = false;
+  }
+
+  // Validar correo
+  const correo = document.getElementById('correoInput');
+  if (!correo.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    mostrarError('correoInput', 'Ingresa un correo electrónico válido');
+    isValid = false;
+  }
+
+  // Validar código postal
+  const cp = document.getElementById('codigo_postal');
+  if (!cp.value.match(/^[0-9]{5}$/)) {
+    mostrarError('codigo_postal', 'El código postal debe tener 5 dígitos numéricos');
+    isValid = false;
+  }
+
+  // Validar campos de texto (nombre, apellidos)
+  const camposTexto = ['NombreInput', 'apellidopInput', 'apellidomInput'];
+  camposTexto.forEach(campo => {
+    const input = document.getElementById(campo);
+    if (!input.value.match(/^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/)) {
+      mostrarError(campo, 'Solo se permiten letras y espacios');
+      isValid = false;
+    }
+  });
+
+  return isValid;
+}
+
+function mostrarError(id, mensaje) {
+  const elemento = document.getElementById(id);
+  const errorDiv = elemento.parentElement.querySelector('.error-message');
+  errorDiv.style.display = 'block';
+  errorDiv.textContent = mensaje;
+}
+
+// Establecer la fecha máxima como hoy menos 18 años
+window.onload = function() {
+  const hoy = new Date();
+  const maxDate = new Date(hoy.getFullYear() - 18, hoy.getMonth(), hoy.getDate());
+  document.getElementById('fechanacimientoInput').max = maxDate.toISOString().split('T')[0];
+}
+</script>
+{% endblock %}

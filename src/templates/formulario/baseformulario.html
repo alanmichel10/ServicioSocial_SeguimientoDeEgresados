@@ -17,34 +17,15 @@
 </head>
 
 <body>
-<!-- Actualización del header -->
-<header>
-  <nav class="navbar py-2">
-      <div class="container-fluid mx-4">
-          <div class="d-flex align-items-center">
-              <img class="navbar-img me-3" src="{{ url_for('static', filename='img/CUT.png') }}" alt="CUT Logo" style="max-height: 60px;" />
-          </div>
-          <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle d-flex align-items-center text-dark text-decoration-none" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="d-flex align-items-center">
-                    <div class="coordinador-info me-3 text-end">
-                      <span class="d-block fw-bold carrera-nombre">{{ nombre_carrera }}</span>
-                      <small class="coordinador-titulo">Coordinador</small>
-                  </div>
-                      <img src="{{ url_for('static', filename='img/perfil2.jpeg') }}" alt="Imagen coordinador" 
-                           class="rounded-circle" width="45" height="45" 
-                           style="object-fit: cover; border: 2px solid #dee2e6;">
-                  </div>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item py-2" href="{{ url_for('logout') }}">
-                      <i class="fas fa-sign-out-alt me-2"></i>Cerrar sesión
-                  </a></li>
-              </ul>
-          </div>
-      </div>
-  </nav>
-</header>
+    <header>
+        <nav class="navbar">
+            <div class="container-fluid mx-5">
+                <div class="row col-10">
+                        <img class="navbar-img" src="{{ url_for('static', filename='img/CUT.png') }}" alt="CUT Logo" />
+                </div>
+            </div>
+        </nav>
+    </header>
 
     <hr class="hr-navbar opacity-100">
     <div>

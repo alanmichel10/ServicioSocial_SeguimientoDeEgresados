@@ -24,14 +24,6 @@
           <label class="custom-file-upload my-3 btn-fotoPerfil col-4 mx-auto"><input type="file"/>Subir archivo</label>
         </div>
       </div>
-      <div class="card shadow p-3 mb-4">
-        <div class="card-body text-center row">
-          <h5 class="card-title mb-3">Estatus de Informacion</h5>
-          <span class="linea-negra"></span>
-          
-        </div>
-      </div>
-      
     </div>
     <div class="col-lg-8 col-sm-12 col-md-12">
       <div class="card shadow p-3 mb-4">
@@ -39,44 +31,31 @@
           <h5 class="card-title mb-3 text-center">Ajustes</h5>
           <span class="linea-negra mb-3"></span>
           <form class="form-general" action="/ajustes" method="POST">
-            {% with messages = get_flashed_messages() %}
-  
-            {% if messages %}
-            <br />
-            {% for message in messages %}
-            <div class="alert alert-primary alert-dismissible" role="alert">
-              <strong>{{ message }}</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-            {% endfor %}
-            {% endif %}
-  
-            {% endwith %}
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-  
             <fieldset>
-              <div class="container ">
-                <div class="col-12 my-5">
-                  <label class="text-start col-lg-3 col-md-3 col-12" for="">Nombre(s): </label>
-                  <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" name="nombre" value="{{ current_user.nombre }}" />
+              <div class="container">
+                <div class="row my-4 justify-content-between align-items-center">
+                  <label class="text-label col-lg-3 col-md-3 col-12" for="nombre">Nombre(s): </label>
+                  <input class="campo-datos col-lg-9 col-md-9 col-12" type="text" name="nombre" id="nombre" readonly 
+                         value="{% if form and form.nombre %}{{ form.nombre }}{% endif %}" />
                 </div>
-                <div class="col-12 my-5">
-                  <label class="text-start col-lg-3 col-md-3 col-12" for="">Apellido paterno: </label>
-                  <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" name="apellidoP" value="{{ current_user.apellidoP}}" />
+                <div class="row my-4 justify-content-between align-items-center">
+                  <label class="text-label col-lg-3 col-md-3 col-12" for="apellidoP">Apellido paterno: </label>
+                  <input class="campo-datos col-lg-9 col-md-9 col-12" type="text" name="apellidoP" id="apellidoP" readonly 
+                         value="{% if form and form.apellidoP %}{{ form.apellidoP }}{% endif %}" />
                 </div>
-                <div class="col-12 my-5">
-                  <label class="text-start col-lg-3 col-md-3 col-12" for="">Apellido materno: </label>
-                  <input class="campo-datos col-lg-8 col-md-8 col-12" type="text" name="apellidoM" value="{{ current_user.apellidoM }}" />
+                <div class="row my-4 justify-content-between align-items-center">
+                  <label class="text-label col-lg-3 col-md-3 col-12" for="apellidoM">Apellido materno: </label>
+                  <input class="campo-datos col-lg-9 col-md-9 col-12" type="text" name="apellidoM" id="apellidoM" readonly 
+                         value="{% if form and form.apellidoM %}{{ form.apellidoM }}{% endif %}" />
                 </div>
-                <div class="col-12 my-5">
-                  <label class="text-start col-lg-3 col-md-3 col-12" for="">Correo: </label>
-                  <input class="campo-datos col-lg-8 col-md-8 col-12" name="correo" type="email" value="{{ current_user.correo }}" />
+                <div class="row my-4 justify-content-between align-items-center">
+                  <label class="text-label col-lg-3 col-md-3 col-12" for="correo">Correo: </label>
+                  <input class="campo-datos col-lg-9 col-md-9 col-12" name="correo" type="email" id="correo" readonly 
+                         value="{% if form and form.correo %}{{ form.correo }}{% endif %}" />
                 </div>
               </div>
-              <div class="text-center">
-                <input class="btn-actualizar" type="submit" value="Actualizar" />
-              </div>
-            </fieldset>
+            </fieldset>            
           </form>
         </div>
       </div>

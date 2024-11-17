@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_file, session
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file, session, flash
 from flask_mysqldb import MySQL
 
 from flask_wtf.csrf import CSRFProtect
-
+from datetime import datetime
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
 from config import config
 import tempfile
 import hashlib
+import re
 
 # Modulos
 from models.ModelUser import ModelUser
@@ -96,33 +97,92 @@ def fseleccion():
 # Página de Datos Generales
 @app.route('/general', methods=['GET', 'POST'])
 def fgeneral():
-    if request.method == 'POST':
-        nombre_gen = request.form['nombres']
-        apellido_p = request.form['apellido_p']
-        apellido_m = request.form['apellido_m']
-        sexo = request.form['sexo']
-        telefono = request.form['tel_contacto']
-        correo = request.form['correo_alumno']
-        c_postal = request.form['codigo_postal']
-        pais = request.form['pais']
-        estado = request.form['estado']
-        ciudad = request.form['ciudad']
-        colonia = request.form['colonia']
-        nacionalidad = request.form['nacionalidad']
-        f_nacimiento = request.form['f_nacimiento']
+    if request.method == 'GET':
+        return render_template('formulario/Generales.html')
 
-        # Obtener las carreras de interés y el tipo de posgrado de la sesión
+    try:
+        # Obtener los datos del formulario
+        nombre_gen = request.form.get('nombres', '').strip()
+        apellido_p = request.form.get('apellido_p', '').strip()
+        apellido_m = request.form.get('apellido_m', '').strip()
+        sexo = request.form.get('sexo', '')
+        telefono = request.form.get('tel_contacto', '').strip()
+        correo = request.form.get('correo_alumno', '').strip()
+        c_postal = request.form.get('codigo_postal', '').strip()
+        pais = request.form.get('pais', '').strip()
+        estado = request.form.get('estado', '')
+        ciudad = request.form.get('ciudad', '').strip()
+        colonia = request.form.get('colonia', '').strip()
+        nacionalidad = request.form.get('nacionalidad', '').strip()
+        f_nacimiento = request.form.get('f_nacimiento', '')
+
+        # Validaciones del backend
+        errores = []
+
+        # Validar campos de texto
+        if not re.match(r'^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$', nombre_gen):
+            errores.append('El nombre solo debe contener letras')
+        if not re.match(r'^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$', apellido_p):
+            errores.append('El apellido paterno solo debe contener letras')
+        if not re.match(r'^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$', apellido_m):
+            errores.append('El apellido materno solo debe contener letras')
+
+        # Validar teléfono
+        if not re.match(r'^[0-9]{10}$', telefono):
+            errores.append('El teléfono debe tener 10 dígitos numéricos')
+
+        # Validar correo
+        if not re.match(r'^[^\s@]+@[^\s@]+\.[^\s@]+$', correo):
+            errores.append('El correo electrónico no es válido')
+
+        # Validar código postal
+        if not re.match(r'^[0-9]{5}$', c_postal):
+            errores.append('El código postal debe tener 5 dígitos numéricos')
+
+        # Validar fecha de nacimiento
+        try:
+            fecha_nac = datetime.strptime(f_nacimiento, '%Y-%m-%d')
+            hoy = datetime.now()
+            edad = hoy.year - fecha_nac.year - ((hoy.month, hoy.day) < (fecha_nac.month, fecha_nac.day))
+
+            if fecha_nac > hoy:
+                errores.append('La fecha de nacimiento no puede ser futura')
+            elif edad < 18:
+                errores.append('Debes ser mayor de 18 años')
+        except ValueError:
+            errores.append('Fecha de nacimiento inválida')
+
+        if errores:
+            for error in errores:
+                flash(error, 'error')
+            return render_template('formulario/Generales.html')
+
+        # Obtener datos de la sesión
         carreras_interes = session.get('carreras_interes', [])
         tipo_posgrado = session.get('tipo_posgrado', '')
 
-        # Guardamos el correo en la variable global para usarlo después
-        session['correo'] = correo
+        try:
+            # Intentar insertar los datos
+            insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, correo,
+                          c_postal, pais, estado, ciudad, colonia, nacionalidad,
+                          f_nacimiento, carreras_interes, tipo_posgrado)
 
-        insertGeneral(nombre_gen, apellido_p, apellido_m, sexo, telefono, correo, c_postal, pais, estado, ciudad, colonia, nacionalidad, f_nacimiento, carreras_interes, tipo_posgrado)
-        return redirect(url_for('festudios'))
+            # Si llegamos aquí, la inserción fue exitosa
+            session['correo'] = correo
+            return redirect(url_for('festudios'))
+
+        except ValueError as e:
+            # Error específico para correo duplicado
+            flash(str(e), 'error')
+            return render_template('formulario/Generales.html')
+
+    except Exception as e:
+        # Cualquier otro error no manejado
+        flash('Ocurrió un error al procesar tu registro. Por favor, intenta de nuevo.', 'error')
+        print(f"Error inesperado: {str(e)}")  # Para debugging
+        return render_template('formulario/Generales.html')
+
     
-    return render_template('formulario/Generales.html')
-
 # Página de Datos de Estudios
 @app.route('/estudios', methods=['GET', 'POST'])
 def festudios():
@@ -255,49 +315,48 @@ def ajustes():
 #Paginas
 #Inicio
 @app.route('/inicio')  
-# @login_required ---------------------------------------------------
-
+@login_required
 def inicio():
     if current_user.rol == 1:
         return redirect(url_for('admin'))
-    else:    
-        return render_template('panelPrincipal/inicio.html')
-#InformacionPersonal
-@app.route('/informacion')  
+    else:
+        # Supongamos que ModelGeneral almacena los datos que necesitas para el form
+        correo_user = current_user.correo
+        general = ModelGeneral.get_by_id(db, correo_user)
+        
+        return render_template('panelPrincipal/inicio.html', current_user=current_user, form=general)
+
+@app.route('/informacion', methods=['GET', 'POST'])  
 @login_required  
 def informacion():
-    return render_template('panelPrincipal/informacion/general.html',informacion_active="active")
+    return render_template('panelPrincipal/informacion/general.html', current_user=current_user, informacion_active="active")
 
-@app.route('/informacion/general',methods=['GET','POST'])  
+@app.route('/informacion/general', methods=['GET', 'POST'])  
 @login_required  
 def general():
     correo_user = current_user.correo
-    general = (ModelGeneral.get_by_id(db,correo_user))
+    general = ModelGeneral.get_by_id(db, correo_user)
+    return render_template('panelPrincipal/informacion/general.html', current_user=current_user, form=general)
     
-    return render_template('panelPrincipal/informacion/general.html', form=general)
-    
-        
-    
-@app.route('/informacion/estudios',methods=['GET','POST'])
+@app.route('/informacion/estudios', methods=['GET', 'POST'])
 @login_required
 def estudios():
     correo_user = current_user.correo
-    estudios = (ModelEstudios.get_by_id(db,correo_user))
-    
-    return render_template('panelPrincipal/informacion/estudios.html',form = estudios)
+    estudios = ModelEstudios.get_by_id(db, correo_user)
+    return render_template('panelPrincipal/informacion/estudios.html', current_user=current_user, form=estudios)
 
-@app.route('/informacion/laboral',methods=['GET','POST'])
+@app.route('/informacion/laboral', methods=['GET', 'POST'])
 @login_required
 def laboral():
     correo_user = current_user.correo
-    trabajo = (ModelTrabajo.get_by_id(db,correo_user))
-    
-    return render_template('panelPrincipal/informacion/laboral.html',form = trabajo)
+    trabajo = ModelTrabajo.get_by_id(db, correo_user)
+    return render_template('panelPrincipal/informacion/laboral.html', current_user=current_user, form=trabajo)
         
 @app.route('/tablon')
 @login_required
 def tablon():
-    return render_template('panelPrincipal/tablon/tablon.html',general_active="active")
+    return render_template('panelPrincipal/tablon/tablon.html', current_user=current_user, general_active="active")
+
 
 #---------------------------                 Dashboard                      -----------------------------------##
 #DASHBOARD COORDINADORES
@@ -306,29 +365,34 @@ def tablon():
 @role_required(1) 
 def admin():
     coordinador_correo = current_user.correo
-    carreras = ModelAdmin.getCarrerasCoordinador(db, coordinador_correo)
-
-    aspirantes = ModelAdmin.getAspirantesCarreras(db, carreras)
+    # Obtenemos las carreras completas (con ID)
+    carreras_completas = ModelAdmin.getCarrerasCoordinador(db, coordinador_correo)
+    
+    # Extraemos solo los nombres de las carreras para el header
+    nombres_carreras = [carrera[1] for carrera in carreras_completas]  # Esto dará solo los nombres
+    
+    aspirantes = ModelAdmin.getAspirantesCarreras(db, carreras_completas)  # Mantenemos la tupla completa para las consultas
     cantidad = ModelAdmin.cuentaTitulados(db)
     
     # Obtener el filtro de la solicitud
     filtro_titulado = request.args.get('filtro_titulado')
     
     # Obtener todos los datos de aspirantes
-    datosaspirantes = ModelAdmin.getAllAspirantesData(db, carreras)
+    datosaspirantes = ModelAdmin.getAllAspirantesData(db, carreras_completas)
     
     # Filtrar los aspirantes según el estado de titulación
     if filtro_titulado == "titulados":
-        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'Si']  # Asumiendo que 'Sí' indica titulado
+        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'Si']
     elif filtro_titulado == "no_titulados":
-        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'No']  # Asumiendo que 'No' indica no titulado
+        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'No']
     elif filtro_titulado == "en_proceso":
-        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'En Proceso']  # Ajusta según tu lógica
+        datosaspirantes = [aspirante for aspirante in datosaspirantes if aspirante[22] == 'En Proceso']
 
     return render_template('panelPrincipal/panelAdmin/dashboard/crud.html', 
                            aspirantes=aspirantes, 
                            titulados=cantidad, 
-                           carreras=carreras,
+                           carreras=carreras_completas,  # Mantenemos la tupla completa para otras funcionalidades
+                           nombre_carrera=nombres_carreras[0],  # Enviamos solo el nombre de la primera carrera para el header
                            datosaspirantes=datosaspirantes)
 
 @app.route('/panelAdmin/vermas/<string:id>')

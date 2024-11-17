@@ -4,12 +4,7 @@
 {% block contenido %}
 
 <div class="container">
-    <div class="container mx-auto my-5 row text-center introduccion shadow p-3 mb-5 rounded">
-        <img src="{{ url_for('static', filename='img/hoja.png') }}" alt="" class="hoja col-2 mx-0 my-auto">
-        <h4 class="col-8 mx-0 my-auto" style="font-size: 1.8rem; color: white;">¡Te estamos esperando! Explora
-            nuevas oportunidades para el crecimiento académico y profesional. </h4>
-        <img src="{{ url_for('static', filename='img/hoja.png') }}" alt="" class="hoja2 col-2 mx-0 my-auto">
-    </div>
+
 
     <div id="carouselExampleRide" class="carousel slide shadow p-3 mb-5 rounded" data-bs-ride="true">
         <div class="carousel-inner">
@@ -35,29 +30,42 @@
         </button>
     </div>
 
-    <div class="container text-center p-5 shadow mb-5 rounded">
-        <h5 class="py-4" style="font-size: 2.5rem;">Convocatorias Actuales</h5>
-        <div id="convocatorias">
-            {% for convocatoria in convocatorias %}
-                <div class="convocatoria my-3 p-3 border rounded">
-                    <h6>{{ convocatoria.carrera }}</h6>
-                    {% set hoy = date.today() %}
-                    {% if convocatoria.fecha_apertura > hoy %}
-                        <span class="badge bg-success">Abierta desde {{ convocatoria.fecha_apertura }}</span>
-                    {% elif convocatoria.fecha_cierre < hoy %}
-                        <span class="badge bg-danger">Cerrada desde {{ convocatoria.fecha_cierre }}</span>
-                    {% else %}
-                        <span class="badge bg-warning">En curso hasta {{ convocatoria.fecha_cierre }}</span>
-                    {% endif %}
-                    <p>Fecha de apertura: {{ convocatoria.fecha_apertura }}</p>
-                    <p>Fecha de cierre: {{ convocatoria.fecha_cierre }}</p>
-                </div>
-            {% endfor %}    
+
+ 
+    <div class="card text-center p-5 shadow mb-5 rounded" style="background-color: #002d6318;">
+        <div class="card-body">
+            <h5 class="card-title py-4">¡Bienvenido a la convocatoria de Maestrías y Doctorados del Centro Universitario de Tonalá!</h5>
+            <p class="py-2">En el CUT, nos enorgullecemos de ofrecer programas de posgrado de alta calidad diseñados para preparar a nuestros estudiantes para carreras exitosas en sus campos de interés. Nuestros programas de maestría y doctorado son impartidos por destacados profesores e investigadores que están a la vanguardia de sus disciplinas.</p>
+            <hr class="my-4">
+            <p class="text-muted">Únete a nosotros y sé parte de una comunidad académica innovadora y en constante crecimiento.</p>
+        </div>
+    </div>
+    
+
+
+    <div class="container text-center p-5 shadow mb-5 bg-body-tertiary rounded">
+        <div class="row">
+            <h5 class="py-4" style="font-size: 2.5rem;">¡Convocatorias Actuales!</h5>
+            <p class="py-4">
+                ¡No te pierdas nuestras próximas convocatorias! Aquí están las fechas de apertura para cada carrera:
+            </p>
+            <ul class="list-unstyled">
+                <li><strong>Maestría en Movilidad Urbana, Transporte y Territorio:</strong> 1 de marzo - 31 de marzo</li>
+                <li><strong>Maestría en Ingeniería del Agua y la Energía (Profesionalizante):</strong> 1 de abril - 30 de abril</li>
+                <li><strong>Maestría en Gestión de Gobiernos Locales:</strong> 1 de mayo - 31 de mayo</li>
+            </ul>
+            <p class="py-4">
+                Si te interesa alguna de nuestras carreras, <strong>regístrate aquí</strong> para recibir más información y estar al tanto de las últimas noticias.
+            </p>
+            <form action="/seleccion" method="get">
+                <button type="submit" class="btn-registro mx-auto my-0 py-3 col-2">REGÍSTRATE</button>
+            </form>
         </div>
     </div>
 
     <div class="container text-center p-5 shadow mb-5 rounded" style="background-color: #002d6318;">
-        <h2 class="text-start mb-5 " style="font-size: 2.5rem;">Maestrias</h2>
+        <h2 class="text-start mb-3 " style="font-size: 2.5rem;">Maestrias</h2>
+        <p class="text-start mb-5 " style="font-size: 2rem; text-align: justify;">Explora nuestras maestrías diseñadas para potenciar tu futuro profesional y académico. Cada programa combina teoría y práctica, impartido por expertos en sus respectivos campos.</p>
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -231,7 +239,8 @@
     </div>
 
     <div class="container text-center p-5 shadow mb-5 rounded" style="background-color: #002d6318;">
-        <h2 class="text-start mb-5 " style="font-size: 2.5rem;">Doctorados</h2>
+        <h2 class="text-start mb-3" style="font-size: 2.5rem;">Doctorados</h2>
+        <p class="text-start mb-5" style="font-size: 2rem; text-align: justify;">Nuestros programas de doctorado están orientados a la investigación y la innovación. Únete a una comunidad académica comprometida con el avance del conocimiento y el desarrollo de soluciones a los retos globales.</p>
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -342,51 +351,36 @@
             </div>
         </div>
     </div>
- 
-    <div class="card text-center p-5 shadow mb-5 rounded" style="background-color: #002d6318;">
-        <div class="card-body">
-            <h5 class="card-title py-4">Programa de Régistro de Maestrías y Doctorados</h5>
-            <img class="py-5" src="{{ url_for('static', filename='img/registro.png') }}" alt="">
-            <p class="py-2">¡Bienvenido a la convocatoria de Maestrías y Doctorados del Centro Universitario de
-                Tonala!</p>
-            <p class="py-2">En el CUT, nos enorgullecemos de ofrecer programas de posgrado de alta calidad que están
-                diseñados para preparar a nuestros estudiantes para carreras exitosas en sus campos de interés.
-                Nuestros
-                programas de maestría y doctorado son impartidos por destacados profesores e investigadores que
-                están a la vanguardia de sus disciplinas.</p>
-        </div>
-    </div>
-
-    <div class="card text-center p-5 shadow mb-5 bg-body-tertiary rounded">
-        <div class="card-body">
-            <h5 class="card-title py-4">¿Por qué elegir estudiar nuestros Posgrádos?</h5>
-        </div>
-    </div>
 
     <div class="row p-5 justify-content-evenly shadow mb-5 rounded objetivo">
+        <div class="card text-center p-5 shadow mb-5 bg-body-tertiary rounded">
+            <div class="card-body">
+                <h5 class="card-title py-4">¿Por qué elegir estudiar nuestros Posgrádos?</h5>
+            </div>
+        </div>
         <div class="card col-3 p-0 shadow mb-5 bg-body-tertiary rounded">
             <img src="{{ url_for('static', filename='img/card1.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title py-2 px-2">Excelencia Académica</h5>
-                <p class="card-text py-2 px-2">Nuestros programas de posgrado están diseñados para brindar una
+                <p class="card-text py-2 px-2" style="text-align: justify;">Nuestros programas de posgrado están diseñados para brindar una
                     educación de clase mundial, que te preparará para destacarte en tu campo profesional.</p>
             </div>
         </div>
-
+    
         <div class="card col-3 p-0 shadow mb-5 bg-body-tertiary rounded">
             <img src="{{ url_for('static', filename='img/card2.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title py-2 px-2">Investigación Innovadora</h5>
-                <p class="card-text py-2 px-2">Únete a una comunidad académica que impulsa la investigación
+                <p class="card-text py-2 px-2" style="text-align: justify;">Únete a una comunidad académica que impulsa la investigación
                     innovadora en una amplia variedad de disciplinas.</p>
             </div>
         </div>
-
+    
         <div class="card col-3 p-0 shadow mb-5 bg-body-tertiary rounded">
             <img src="{{ url_for('static', filename='img/card3.jpg') }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title py-2 px-2">Oportunidades Profesionales</h5>
-                <p class="card-text py-2 px-2">Nuestros graduados están muy solicitados en el mercado laboral,
+                <p class="card-text py-2 px-2" style="text-align: justify;">Nuestros graduados están muy solicitados en el mercado laboral,
                     gracias a la formación de alta calidad que reciben.</p>
             </div>
         </div>
@@ -395,28 +389,30 @@
     <div class="card text-center p-5 shadow bg-body-tertiary mb-5 rounded">
         <div class="card-body">
             <h5 class="card-title py-4">Lo que Ofrecemos</h5>
-            <p>Echa un vistazo a nuestros programas de maestrías y doctorados y encuentra la mejor opción que se
-                alinea mejor con tus objetivos profesionales y académicos: </p>
+            <p>
+                Descubre nuestros programas de maestrías y doctorados que están diseñados para ayudarte a alcanzar tus metas profesionales y académicas. Desde la Ingeniería del Agua y la Energía hasta la Bioética, nuestros programas combinan excelencia académica y enfoque práctico.
+            </p>
+            <p>
+                Ya sea que estés buscando avanzar en tu carrera o embarcarte en una nueva dirección, tenemos el programa adecuado para ti. Conoce más sobre lo que ofrecemos y encuentra la opción que mejor se alinea con tus objetivos.
+            </p>
             <div class="row">
-                <img class="w-50" src="{{ url_for('static', filename='img/maestrias.jpg') }}" alt="">
-                <img class="w-50 rounded-3" src="{{ url_for('static', filename='img/doctorado.jpg') }}" alt="">
+                <div class="col-md-6">
+                    <img class="w-100 mb-3" src="{{ url_for('static', filename='img/maestrias.jpg') }}" alt="Programas de Maestría">
+                    <h6 class="fw-bold">Programas de Maestría</h6>
+                    <p>Profundiza en conocimientos avanzados y desarrolla habilidades especializadas con nuestros programas de maestría.</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="w-100 mb-3 rounded-3" src="{{ url_for('static', filename='img/doctorado.jpg') }}" alt="Programas de Doctorado">
+                    <h6 class="fw-bold">Programas de Doctorado</h6>
+                    <p>Contribuye al avance del conocimiento a través de la investigación de vanguardia en nuestros programas de doctorado.</p>
+                </div>
             </div>
+            <form action="http://www.cutonala.udg.mx/oferta-academica/posgrados" method="get">
+                <button type="submit" class="btn-registro mx-auto my-0 py-3 col-2">Explorar Programas</button>
+            </form>
         </div>
     </div>
-
-    <div class="container text-center p-5 shadow mb-5 bg-body-tertiary rounded">
-        <div class="row">
-            <h5 class="py-4" style="font-size: 2.5rem;">¡Próximas Convocatorias!</h5>
-            <p class="py-4">Mantente atento a nuestras próximas convocatorias para los programas de
-                maestría y doctorado.
-                Estamos ansiosos por recibir a estudiantes apasionados que estén listos para embarcarse en un viaje
-                educativo y
-                de investigación en nuestra comunidad académica.</p>
-                <form action="/seleccion" method="get">
-                    <button type="submit" class="btn-registro mx-auto my-0 py-3 col-2">REGISTRATE</button>
-                </form>
-        </div>
-    </div>
+    
     
 </div>
 
